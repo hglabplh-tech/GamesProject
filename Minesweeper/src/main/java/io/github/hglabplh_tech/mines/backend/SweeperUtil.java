@@ -4,10 +4,9 @@
 
 package io.github.hglabplh_tech.mines.backend;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 public class SweeperUtil {
 
@@ -17,7 +16,9 @@ public class SweeperUtil {
     private final Integer numMines;
     private final List<List<ButtDescr>> fieldsList = new ArrayList<>();
     private final Boolean[] shadowArray;
+
     private Integer negativeHits;
+    private Labyrinth labyrinth;
 
     public SweeperUtil(Integer cx, Integer cy, Integer numMines) {
         this.numFields = cx * cy;
@@ -36,7 +37,8 @@ public class SweeperUtil {
         for (int cyInd = 0; cyInd < this.cy; cyInd++) {
             this.fieldsList.add(new ArrayList<>());
             for (int cxInd = 0; cxInd < this.cx; cxInd++) {
-                this.fieldsList.get(cyInd).add(cxInd, new ButtDescr(Boolean.FALSE, Boolean.FALSE));
+                this.fieldsList.get(cyInd).add(cxInd, new ButtDescr(Boolean.FALSE, Boolean.FALSE,
+                        SweepPointType.NORMALPOINT));
                 this.shadowArray[arrIndex] = Boolean.FALSE;
                 arrIndex++;
             }
@@ -50,7 +52,8 @@ public class SweeperUtil {
         for (int cyInd = 0; cyInd < this.cy; cyInd++) {
             for (int cxInd = 0; cxInd < this.cx; cxInd++) {
                 Boolean temp = this.shadowArray[arrIndex];
-                this.fieldsList.get(cyInd).add(cxInd, new ButtDescr(Boolean.FALSE, temp));
+                this.fieldsList.get(cyInd).add(cxInd, new ButtDescr(Boolean.FALSE, temp,
+                        SweepPointType.NORMALPOINT));
                 arrIndex++;
             }
         }
@@ -75,7 +78,7 @@ public class SweeperUtil {
         if (!temp.isProcessed() && !mineHit) {
             this.negativeHits++;
         }
-        this.fieldsList.get(y).add(x, new ButtDescr(Boolean.TRUE, temp.isMine));
+        this.fieldsList.get(y).add(x, new ButtDescr(Boolean.TRUE, temp.isMine, SweepPointType.NORMALPOINT));
         return Boolean.valueOf(mineHit);
     }
 
@@ -125,9 +128,38 @@ public class SweeperUtil {
 
         private final boolean isProcessed;
         private final boolean isMine;
-        public ButtDescr(boolean isProcessed, boolean isMine) {
+        private final SweepPointType pointType;
+        public ButtDescr(boolean isProcessed, boolean isMine, SweepPointType type) {
             this.isProcessed = isProcessed;
             this.isMine = isMine;
+            this.pointType = type;
+        }
+
+        public static class ButtonPoint {
+            private final Point myPoint;
+
+            private final ButtDescr buttonDescr;
+
+            public ButtonPoint(Point myPoint, ButtDescr buttonDescr) {
+                this.myPoint = myPoint;
+                this.buttonDescr = buttonDescr;
+            }
+
+            public Point getMyPoint() {
+                return myPoint;
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (o == null || getClass() != o.getClass()) return false;
+                ButtonPoint that = (ButtonPoint) o;
+                return Objects.equals(getMyPoint(), that.getMyPoint()) && Objects.equals(buttonDescr, that.buttonDescr);
+            }
+
+            @Override
+            public int hashCode() {
+                return Objects.hash(getMyPoint(), buttonDescr);
+            }
         }
 
         public boolean isProcessed() {
@@ -137,5 +169,7 @@ public class SweeperUtil {
         public boolean isMine() {
             return isMine;
         }
+
     }
+
 }

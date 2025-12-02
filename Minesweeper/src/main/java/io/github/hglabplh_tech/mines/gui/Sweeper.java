@@ -31,6 +31,7 @@
 
 package io.github.hglabplh_tech.mines.gui;
 
+import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 import io.github.hglabplh_tech.mines.backend.SweeperUtil;
 
 import javax.swing.*;
@@ -40,9 +41,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.io.*;
-import javax.sound.sampled.*;
 
 /* 
  * ButtonDemo.java requires the following files:
@@ -58,15 +56,21 @@ public class Sweeper extends JPanel
     private final ImageIcon waterIcon;
     private final ImageIcon questionIcon;
     private final List<JButton> buttonList = new ArrayList<>();
-    public Sweeper() {
-        this.mineIcon = createIcon("mine.png");
-        this.bangIcon = createIcon("bang.gif");
-        this.questionIcon = createIcon("question.jpeg");
-        this.waterIcon = createIcon("water.png");
+    private final PlayModes playMode;
+
+    public Sweeper(PlayModes mode) {
+        this.playMode = mode;
+        this.mineIcon = GUILogics.createIcon("mine.png");
+        this.bangIcon = GUILogics.createIcon("bang.gif");
+        this.questionIcon = GUILogics.createIcon("question.jpeg");
+        this.waterIcon = GUILogics.createIcon("water.png");
         this.util = new SweeperUtil(15, 15, 30);
         List<List<SweeperUtil.ButtDescr>> array = util.calculateMines();
         GridLayout grid = new GridLayout();
-        grid.setRows(this.util.getCy());
+        grid.setVgap(3);
+        grid.setHgap(3);
+
+        grid.setRows(this.util.getCy()+ 1);
         grid.setColumns(this.util.getCx());
         this.setLayout(grid);
         for (int y = 0; y < this.util.getCy() ;y++) {
@@ -94,13 +98,13 @@ public class Sweeper extends JPanel
                 butt.setIcon(this.waterIcon);
             }
         });
-        playSound("the-explosion.wav");
+        GUILogics.playSound("the-explosion.wav");
     }
 
     private void positiveEnd() {
         this.buttonList.forEach(butt ->
                 butt.setIcon(this.waterIcon));
-        playSound("winning-bell.wav");
+        GUILogics.playSound("winning-bell.wav");
     }
 
     /**
@@ -117,65 +121,6 @@ public class Sweeper extends JPanel
         this.buttonList.add(button);
     }
 
-    /**
-     * Create the GUI and show it.  For thread safety, 
-     * this method should be invoked from the 
-     * event-dispatching thread.
-     */
-    private static void createAndShowGUI() {
-
-        //Create and set up the window.
-        JFrame frame = new JFrame("Mine Sweeper");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 800);
-
-        //Create and set up the content pane.
-        Sweeper newContentPane = new Sweeper();
-        newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane);
-
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    /** Returns an ImageIcon, or null if the path was invalid. */
-    protected static ImageIcon createIcon(String fname) {
-        java.net.URL imgURL = SweeperUtil.class.getResource("/images/" + fname);
-        if (imgURL != null) {
-            ImageIcon icon = new ImageIcon(imgURL);
-            return icon;
-        } else {
-            System.err.println("Couldn't find file: " + "/images/" +fname);
-            return null;
-        }
-    }
-
-    public static void playSound(String fname) {
-        // Source - https://stackoverflow.com/a
-// Posted by tschwab, modified by community. See post 'Timeline' for change history
-// Retrieved 2025-11-29, License - CC BY-SA 3.0
-        try {
-            java.net.URL wavURL = SweeperUtil.class.getResource("/sounds/" + fname);
-            File yourFile = new File(wavURL.toURI());
-            AudioInputStream stream;
-            AudioFormat format;
-            DataLine.Info info;
-            Clip clip;
-
-            stream = AudioSystem.getAudioInputStream(yourFile);
-            format = stream.getFormat();
-            info = new DataLine.Info(Clip.class, format);
-            clip = (Clip) AudioSystem.getLine(info);
-            clip.open(stream);
-            clip.start();
-        }
-        catch (Exception e) {
-            //whatevers
-        }
-
-    }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -186,21 +131,13 @@ public class Sweeper extends JPanel
             source.setIcon(this.mineIcon);
             negativeEnd(source.getName());
         } else {
+
             source.setIcon(this.waterIcon);
-            playSound("the-bell.wav");
+            GUILogics.playSound("the-bell.wav");
         }
         if (util.isPositiveEnd()) {
             positiveEnd();
         }
     }
 
-    public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
-    }
 }
