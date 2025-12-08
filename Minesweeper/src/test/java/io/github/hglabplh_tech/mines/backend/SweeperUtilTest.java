@@ -4,6 +4,7 @@
 
 package io.github.hglabplh_tech.mines.backend;
 
+import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,7 @@ class SweeperUtilTest {
      */
     @BeforeEach
     public void before() {
-        util= new SweeperUtil(20,20,15);
+        util= new SweeperUtil(PlayModes.NORMAL, 20,20,15);
     }
 
     /**
@@ -36,7 +37,7 @@ class SweeperUtilTest {
     void calculateMines() {
         List<List<SweeperUtil.ButtDescr>> thisList = util.calculateMines();
         Boolean[] shadow = util.getShadowArray();
-        SweeperUtil util2 = new SweeperUtil(20,20,15);
+        SweeperUtil util2 = new SweeperUtil(PlayModes.NORMAL, 20,20,15);
         List<List<SweeperUtil.ButtDescr>> thisList2 = util2.calculateMines();
         Boolean[] shadow2 = util2.getShadowArray();
         Boolean equal = (Arrays.compare(shadow2, shadow) == 0);

@@ -4,6 +4,8 @@
 
 package io.github.hglabplh_tech.mines.backend;
 
+import io.github.hglabplh_tech.mines.backend.config.PlayModes;
+
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -16,18 +18,22 @@ public class SweeperUtil {
     private final Integer numMines;
     private final List<List<ButtDescr>> fieldsList = new ArrayList<>();
     private final Boolean[] shadowArray;
+    private final Boolean[] labArray;
 
     private Integer negativeHits;
-    private Labyrinth labyrinth;
+    private Optional<Labyrinth> labyrinth;
+    private PlayModes playMode;
 
-    public SweeperUtil(Integer cx, Integer cy, Integer numMines) {
+    public SweeperUtil(PlayModes playMode, Integer cx, Integer cy, Integer numMines) {
         this.numFields = cx * cy;
         this.numMines = numMines;
         this.cx = cx;
         this.cy = cy;
 
+        this.playMode = playMode;
         this.negativeHits = 0;
         this.shadowArray = new Boolean[this.numFields];
+        this.labArray = new Boolean[this.numFields];
 
     }
 
@@ -40,6 +46,7 @@ public class SweeperUtil {
                 this.fieldsList.get(cyInd).add(cxInd, new ButtDescr(Boolean.FALSE, Boolean.FALSE,
                         SweepPointType.NORMALPOINT));
                 this.shadowArray[arrIndex] = Boolean.FALSE;
+                this.labArray[arrIndex] = Boolean.FALSE;
                 arrIndex++;
             }
         }
@@ -48,14 +55,36 @@ public class SweeperUtil {
             this.shadowArray[mineIndex] = Boolean.TRUE;
         }
 
+        for (int index = 0; index < 4; index++) {
+            Integer nextIndex = rand.nextInt(this.numFields - 1);
+            while (shadowArray[nextIndex]) {
+                nextIndex = rand.nextInt(this.numFields - 1);
+            }
+            this.labArray[nextIndex] = Boolean.TRUE;
+        }
+
+        this.labyrinth = Optional.empty();
         arrIndex = 0;
+        Point[] labPoints = new Point[4];
+        int labIndex = 0;
         for (int cyInd = 0; cyInd < this.cy; cyInd++) {
+
+
             for (int cxInd = 0; cxInd < this.cx; cxInd++) {
                 Boolean temp = this.shadowArray[arrIndex];
+                Boolean lab = this.labArray[arrIndex];
+                if (lab) {
+                    labPoints[labIndex] = new Point(cxInd, cyInd);
+                    labIndex++;
+                }
                 this.fieldsList.get(cyInd).add(cxInd, new ButtDescr(Boolean.FALSE, temp,
                         SweepPointType.NORMALPOINT));
                 arrIndex++;
+
             }
+        }
+        if (this.playMode.equals(PlayModes.LABYRINTH)) {
+            this.labyrinth = Optional.of(new Labyrinth(labPoints[0], labPoints[1], labPoints[2], labPoints[3]));
         }
         return getFieldsList();
     }
@@ -122,6 +151,22 @@ public class SweeperUtil {
 
     public List<List<ButtDescr>> getFieldsList() {
         return Collections.unmodifiableList(this.fieldsList);
+    }
+
+    public Boolean[] getLabArray() {
+        return labArray;
+    }
+
+    public Integer getNegativeHits() {
+        return negativeHits;
+    }
+
+    public Optional<Labyrinth> getLabyrinth() {
+        return labyrinth;
+    }
+
+    public PlayModes getPlayMode() {
+        return playMode;
     }
 
     public static class ButtDescr  {

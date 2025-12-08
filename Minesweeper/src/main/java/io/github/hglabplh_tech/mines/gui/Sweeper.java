@@ -64,7 +64,7 @@ public class Sweeper extends JPanel
         this.bangIcon = GUILogics.createIcon("bang.gif");
         this.questionIcon = GUILogics.createIcon("question.jpeg");
         this.waterIcon = GUILogics.createIcon("water.png");
-        this.util = new SweeperUtil(15, 15, 30);
+        this.util = new SweeperUtil(mode, 15, 15, 30);
         List<List<SweeperUtil.ButtDescr>> array = util.calculateMines();
         GridLayout grid = new GridLayout();
         grid.setVgap(3);

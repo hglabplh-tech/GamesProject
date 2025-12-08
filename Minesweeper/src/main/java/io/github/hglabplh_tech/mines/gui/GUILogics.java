@@ -23,7 +23,7 @@ public class GUILogics {
         // Create status Pane
         StatusPanel status = new StatusPanel(mode);
         //Create and set up the content pane.
-        Sweeper playPane = new Sweeper(status.playModeSelection());
+        Sweeper playPane = new Sweeper(mode);
 
         GameSplitPane gamePane = new GameSplitPane(JSplitPane.VERTICAL_SPLIT, status, playPane);
         JSplitPane mainPane =gamePane.getSplitPane();
