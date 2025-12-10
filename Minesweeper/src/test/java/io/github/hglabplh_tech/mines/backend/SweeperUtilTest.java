@@ -13,21 +13,20 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Class to test the backend of the Minesweeper
  */
 class SweeperUtilTest {
 
-    private SweeperUtil util;
+    private SweeperLogic util;
 
     /**
      * Before each tesst we createe a new instance of the util
      */
     @BeforeEach
     public void before() {
-        util= new SweeperUtil(PlayModes.NORMAL, 20,20,15);
+        util= new SweeperLogic(PlayModes.NORMAL, 20,20,15);
     }
 
     /**
@@ -35,10 +34,10 @@ class SweeperUtilTest {
      */
     @Test
     void calculateMines() {
-        List<List<SweeperUtil.ButtDescr>> thisList = util.calculateMines();
+        List<List<SweeperLogic.ButtDescr>> thisList = util.calculateMines();
         Boolean[] shadow = util.getShadowArray();
-        SweeperUtil util2 = new SweeperUtil(PlayModes.NORMAL, 20,20,15);
-        List<List<SweeperUtil.ButtDescr>> thisList2 = util2.calculateMines();
+        SweeperLogic util2 = new SweeperLogic(PlayModes.NORMAL, 20,20,15);
+        List<List<SweeperLogic.ButtDescr>> thisList2 = util2.calculateMines();
         Boolean[] shadow2 = util2.getShadowArray();
         Boolean equal = (Arrays.compare(shadow2, shadow) == 0);
         assertThat("Arrays are equal allthough random filled", equal, is(false));
@@ -64,7 +63,7 @@ class SweeperUtilTest {
      */
     @Test
     void isMineHit() {
-        List<List<SweeperUtil.ButtDescr>> thisList = util.calculateMines();
+        List<List<SweeperLogic.ButtDescr>> thisList = util.calculateMines();
         String name = this.util.makeButtonName(5,7, true);
         assertThat("there should be a hit", util.isMineHit(name), is(true));
         name = this.util.makeButtonName(5,7, false);
@@ -77,8 +76,6 @@ class SweeperUtilTest {
      */
     @Test
     void isPositiveEnd() {
-        List<List<SweeperUtil.ButtDescr>> thisList = util.calculateMines();
-
         int x = 0;
         int y = 0;
         for (int index = 0; index < (util.getNumFields() - this.util.getNumMines() ); index++) {

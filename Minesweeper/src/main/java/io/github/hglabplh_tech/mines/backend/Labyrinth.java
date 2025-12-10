@@ -1,6 +1,6 @@
 package io.github.hglabplh_tech.mines.backend;
 
-import java.awt.*;
+import io.github.hglabplh_tech.mines.backend.util.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -14,7 +14,7 @@ public class Labyrinth {
     private final java.util.List<Point> path = new ArrayList<>();
     private final List<Point> pointsOrder;
     private List<Point> pathToNext = new ArrayList<>();
-    private int nextIndex = 0;
+    private int nextIndex = 1;
     private Point nextPoint;
 
     public Labyrinth(Point startPoint, Point firstBase, Point secondBase, Point endPoint) {
@@ -24,6 +24,10 @@ public class Labyrinth {
         this.endPoint = endPoint;
         this.pointsOrder = Arrays.asList(startPoint, firstBase, secondBase, endPoint);
         this.nextPoint = pointsOrder.get(this.nextIndex);
+    }
+
+    public void addXYToPath(Integer x, Integer y) {
+        this.addToPath(new Point(x, y));
     }
 
     public void addToPath(Point point) {
@@ -46,34 +50,11 @@ public class Labyrinth {
             Point actualPoint = this.pathToNext.get(index);
             Point nextPoint = iterator.next();
             index++;
-            success = checkPoints(actualPoint, nextPoint);
+            success = actualPoint.checkPointIsNeighbor(nextPoint);
         }
         return success;
     }
 
-    public boolean checkPoints(Point one, Point two) {
-        boolean success = false;
-        if ((one.y + 1) == two.y) {
-            success = checkXCoord(one.getX(), two.getX());
-        } else if ((one.y - 1) == two.y) {
-            success = checkXCoord(one.getX(), two.getX());
-        } else if (one.y == two.y) {
-            success = checkXCoord(one.getX(), two.getX());
-        }
-        return success;
-    }
-
-    public boolean checkXCoord(double xOne, double xTwo) {
-        boolean success = false;
-        if ((xOne + 1) == xTwo) {
-            success = true;
-        } else if ((xOne - 1) == xTwo) {
-            success = true;
-        } else if (xOne == xTwo) {
-            success = true;
-        }
-        return success;
-    }
 
     public Point getNextPoint() {
         return this.nextPoint;

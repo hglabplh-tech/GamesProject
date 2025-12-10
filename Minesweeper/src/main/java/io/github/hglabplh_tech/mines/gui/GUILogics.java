@@ -1,7 +1,7 @@
 package io.github.hglabplh_tech.mines.gui;
 
 import io.github.hglabplh_tech.mines.backend.config.PlayModes;
-import io.github.hglabplh_tech.mines.backend.SweeperUtil;
+import io.github.hglabplh_tech.mines.backend.SweeperLogic;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -40,7 +40,7 @@ public class GUILogics {
 
     /** Returns an ImageIcon, or null if the path was invalid. */
     public static ImageIcon createIcon(String fname) {
-        java.net.URL imgURL = SweeperUtil.class.getResource("/images/" + fname);
+        java.net.URL imgURL = SweeperLogic.class.getResource("/images/" + fname);
         if (imgURL != null) {
             ImageIcon icon = new ImageIcon(imgURL);
             return icon;
@@ -55,7 +55,7 @@ public class GUILogics {
 // Posted by tschwab, modified by community. See post 'Timeline' for change history
 // Retrieved 2025-11-29, License - CC BY-SA 3.0
         try {
-            java.net.URL wavURL = SweeperUtil.class.getResource("/sounds/" + fname);
+            java.net.URL wavURL = SweeperLogic.class.getResource("/sounds/" + fname);
             File yourFile = new File(wavURL.toURI());
             AudioInputStream stream;
             AudioFormat format;

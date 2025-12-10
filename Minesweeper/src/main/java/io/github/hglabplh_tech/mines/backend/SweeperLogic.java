@@ -6,11 +6,12 @@ package io.github.hglabplh_tech.mines.backend;
 
 import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 
-import java.awt.*;
+import io.github.hglabplh_tech.mines.backend.util.Point;
+
 import java.util.*;
 import java.util.List;
 
-public class SweeperUtil {
+public class SweeperLogic {
 
     private final Integer numFields;
     private final Integer cx;
@@ -24,7 +25,7 @@ public class SweeperUtil {
     private Optional<Labyrinth> labyrinth;
     private PlayModes playMode;
 
-    public SweeperUtil(PlayModes playMode, Integer cx, Integer cy, Integer numMines) {
+    public SweeperLogic(PlayModes playMode, Integer cx, Integer cy, Integer numMines) {
         this.numFields = cx * cy;
         this.numMines = numMines;
         this.cx = cx;
@@ -43,7 +44,7 @@ public class SweeperUtil {
         for (int cyInd = 0; cyInd < this.cy; cyInd++) {
             this.fieldsList.add(new ArrayList<>());
             for (int cxInd = 0; cxInd < this.cx; cxInd++) {
-                this.fieldsList.get(cyInd).add(cxInd, new ButtDescr(Boolean.FALSE, Boolean.FALSE,
+                this.fieldsList.get(cyInd).add(cxInd, new ButtDescr(Boolean.FALSE,
                         SweepPointType.NORMALPOINT));
                 this.shadowArray[arrIndex] = Boolean.FALSE;
                 this.labArray[arrIndex] = Boolean.FALSE;
@@ -68,17 +69,24 @@ public class SweeperUtil {
         Point[] labPoints = new Point[4];
         int labIndex = 0;
         for (int cyInd = 0; cyInd < this.cy; cyInd++) {
-
-
             for (int cxInd = 0; cxInd < this.cx; cxInd++) {
+                SweepPointType pointType = SweepPointType.NORMALPOINT;
                 Boolean temp = this.shadowArray[arrIndex];
                 Boolean lab = this.labArray[arrIndex];
-                if (lab) {
+                if (lab && this.playMode.equals(PlayModes.LABYRINTH)) {
                     labPoints[labIndex] = new Point(cxInd, cyInd);
+                    pointType = switch (labIndex) {
+                        case 0 -> SweepPointType.STARTPOINT;
+                        case 1 -> SweepPointType.FIRST_BASE;
+                        case 2 -> SweepPointType.SECOND_BASE;
+                        case 3 -> SweepPointType.ENDPOINT;
+                        default -> SweepPointType.NORMALPOINT;
+                    };
                     labIndex++;
                 }
-                this.fieldsList.get(cyInd).add(cxInd, new ButtDescr(Boolean.FALSE, temp,
-                        SweepPointType.NORMALPOINT));
+                pointType = temp ? SweepPointType.MINEPOINT : pointType;
+                this.fieldsList.get(cyInd).add(cxInd, new ButtDescr(Boolean.FALSE,
+                        pointType));
                 arrIndex++;
 
             }
@@ -107,7 +115,7 @@ public class SweeperUtil {
         if (!temp.isProcessed() && !mineHit) {
             this.negativeHits++;
         }
-        this.fieldsList.get(y).add(x, new ButtDescr(Boolean.TRUE, temp.isMine, SweepPointType.NORMALPOINT));
+        this.fieldsList.get(y).add(x, new ButtDescr(Boolean.TRUE, temp.getPointType()));
         return Boolean.valueOf(mineHit);
     }
 
@@ -119,7 +127,7 @@ public class SweeperUtil {
         Integer cox = Integer.valueOf(compValues[0]);
         Integer coy = Integer.valueOf(compValues[1]);
         if (cox.equals(x) && coy.equals(y)) {
-           return true;
+            return true;
         }
 
         return false;
@@ -169,14 +177,13 @@ public class SweeperUtil {
         return playMode;
     }
 
-    public static class ButtDescr  {
+    public static class ButtDescr {
 
         private final boolean isProcessed;
-        private final boolean isMine;
         private final SweepPointType pointType;
-        public ButtDescr(boolean isProcessed, boolean isMine, SweepPointType type) {
+
+        public ButtDescr(boolean isProcessed, SweepPointType type) {
             this.isProcessed = isProcessed;
-            this.isMine = isMine;
             this.pointType = type;
         }
 
@@ -211,8 +218,12 @@ public class SweeperUtil {
             return isProcessed;
         }
 
+        public SweepPointType getPointType() {
+            return this.pointType;
+        }
+
         public boolean isMine() {
-            return isMine;
+            return getPointType().equals(SweepPointType.MINEPOINT);
         }
 
     }

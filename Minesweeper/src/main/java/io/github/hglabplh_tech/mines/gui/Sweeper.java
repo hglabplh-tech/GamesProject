@@ -32,7 +32,7 @@
 package io.github.hglabplh_tech.mines.gui;
 
 import io.github.hglabplh_tech.mines.backend.config.PlayModes;
-import io.github.hglabplh_tech.mines.backend.SweeperUtil;
+import io.github.hglabplh_tech.mines.backend.SweeperLogic;
 
 import javax.swing.*;
 
@@ -50,11 +50,15 @@ import java.util.List;
  */
 public class Sweeper extends JPanel
                         implements ActionListener {
-    private final SweeperUtil util;
+    private final SweeperLogic util;
     private final ImageIcon mineIcon;
     private final ImageIcon bangIcon;
     private final ImageIcon waterIcon;
     private final ImageIcon questionIcon;
+    private final ImageIcon startIcon;
+    private final ImageIcon endIcon;
+    private final ImageIcon baseoneIcon;
+    private final ImageIcon basetwoIcon;
     private final List<JButton> buttonList = new ArrayList<>();
     private final PlayModes playMode;
 
@@ -64,8 +68,12 @@ public class Sweeper extends JPanel
         this.bangIcon = GUILogics.createIcon("bang.gif");
         this.questionIcon = GUILogics.createIcon("question.jpeg");
         this.waterIcon = GUILogics.createIcon("water.png");
-        this.util = new SweeperUtil(mode, 15, 15, 30);
-        List<List<SweeperUtil.ButtDescr>> array = util.calculateMines();
+        this.startIcon = GUILogics.createIcon("start.jpg");
+        this.baseoneIcon = GUILogics.createIcon("base1.jpg");
+        this.basetwoIcon = GUILogics.createIcon("base2.jpg");
+        this.endIcon = GUILogics.createIcon("end.jpg");
+        this.util = new SweeperLogic(mode, 15, 15, 30);
+        List<List<SweeperLogic.ButtDescr>> array = util.calculateMines();
         GridLayout grid = new GridLayout();
         grid.setVgap(3);
         grid.setHgap(3);
@@ -75,7 +83,7 @@ public class Sweeper extends JPanel
         this.setLayout(grid);
         for (int y = 0; y < this.util.getCy() ;y++) {
             for (int x = 0; x < this.util.getCx() ;x++) {
-                SweeperUtil.ButtDescr bDescr = array.get(y).get(x);
+                SweeperLogic.ButtDescr bDescr = array.get(y).get(x);
                 makeAndAddButton(x, y, bDescr);
             }
         }
@@ -110,8 +118,19 @@ public class Sweeper extends JPanel
     /**
      * Returns an ImageIcon, or null if the path was invalid.
      */
-    private void makeAndAddButton(Integer x, Integer y, SweeperUtil.ButtDescr bDescr) {
-        JButton button = new JButton(this.questionIcon);
+    private void makeAndAddButton(Integer x, Integer y, SweeperLogic.ButtDescr bDescr) {
+        JButton button = null;
+        if (playMode.equals(PlayModes.LABYRINTH)) {
+          button = switch(bDescr.getPointType()) {
+              case ENDPOINT ->  new JButton(this.endIcon);
+              case FIRST_BASE -> new JButton(this.baseoneIcon);
+              case SECOND_BASE -> new JButton(this.basetwoIcon);
+              case STARTPOINT -> new JButton(this.endIcon);
+              default -> new JButton(this.questionIcon);
+          };
+        } else {
+            button = new JButton(this.questionIcon);
+        }
         button.setName(this.util.makeButtonName(x,y, bDescr.isMine()));
         button.setLocation(x, y);
         button.setSize(5,5);

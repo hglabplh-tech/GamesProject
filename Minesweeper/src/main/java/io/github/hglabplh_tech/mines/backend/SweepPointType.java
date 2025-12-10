@@ -6,5 +6,6 @@ public enum SweepPointType {
     FIRST_BASE,
     SECOND_BASE,
     ENDPOINT,
+    MINEPOINT,
     ;
 }
