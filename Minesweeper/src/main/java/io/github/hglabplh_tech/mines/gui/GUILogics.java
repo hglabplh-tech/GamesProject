@@ -76,10 +76,9 @@ public class GUILogics {
 
     }
 
-    public static void waitSeconds(int seconsds) {
+    public static void waitSeconds(long seconds) {
         try {
-            Duration duration = Duration.ofSeconds(seconsds);
-            Thread.sleep(duration);
+            Thread.sleep(seconds * 1000L);
         } catch (Exception e) {
 
         }

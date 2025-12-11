@@ -184,7 +184,7 @@ public class Sweeper extends JPanel
                 if(!lastFromPath.checkPointIsNeighbor(compare)) {
                     GUILogics.playSound("alarm.wav");
                     GUILogics.playSound("the-explosion.wav");
-                    GUILogics.waitSeconds(5);
+                    GUILogics.waitSeconds(5L);
                     negativeEnd(name);
                 }
                 this.labyrinth
