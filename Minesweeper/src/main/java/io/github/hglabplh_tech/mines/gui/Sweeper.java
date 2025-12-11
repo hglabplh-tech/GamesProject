@@ -63,6 +63,7 @@ public class Sweeper extends JPanel
     private final ImageIcon endIcon;
     private final ImageIcon baseoneIcon;
     private final ImageIcon basetwoIcon;
+    private final ImageIcon purpleIcon;
     private final List<JButton> buttonList = new ArrayList<>();
     private final PlayModes playMode;
 
@@ -78,6 +79,7 @@ public class Sweeper extends JPanel
         this.baseoneIcon = GUILogics.createIcon("baseone.jpg");
         this.basetwoIcon = GUILogics.createIcon("basetwo.jpg");
         this.endIcon = GUILogics.createIcon("end.jpg");
+        this.purpleIcon = GUILogics.createIcon("purple.jpg");
         this.util = new SweeperLogic(mode, 15, 15, 30);
 
         List<List<SweeperLogic.ButtDescr>> array = util.calculateMines();
@@ -125,8 +127,15 @@ public class Sweeper extends JPanel
                         case ENDPOINT -> butt.setIcon(this.endIcon);
                         case FIRST_BASE -> butt.setIcon(this.baseoneIcon);
                         case SECOND_BASE -> butt.setIcon(this.basetwoIcon);
-                        default -> butt.setIcon(this.waterIcon);
+                        default -> {
+                            if (util.compNamesXY(origName, theName)) {
+                                butt.setIcon(this.purpleIcon);
+                            } else {
+                                butt.setIcon(this.waterIcon);
+                            }
+                        }
                     }
+
                 } else {
                     butt.setIcon(this.waterIcon);
                 }
@@ -182,16 +191,21 @@ public class Sweeper extends JPanel
                         .get(this.labyrinth.getPathToNext().size() -1);
                 Point compare = this.util.extractPointFromName(name);
                 if(!lastFromPath.checkPointIsNeighbor(compare)) {
+                    source.setIcon(this.purpleIcon);
+                    source.invalidate();
                     GUILogics.playSound("alarm.wav");
                     GUILogics.playSound("the-explosion.wav");
                     GUILogics.waitSeconds(5L);
                     negativeEnd(name);
+                } else {
+                    source.setIcon(this.waterIcon);
                 }
                 this.labyrinth
                         .addToPath(
                                 this.util.extractPointFromName(name));
+            } else {
+                source.setIcon(this.waterIcon);
             }
-            source.setIcon(this.waterIcon);
             GUILogics.playSound("the-bell.wav");
         }
         boolean positiveEnd = false;
