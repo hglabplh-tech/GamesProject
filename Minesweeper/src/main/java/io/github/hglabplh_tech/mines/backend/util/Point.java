@@ -16,7 +16,7 @@ public record Point(Integer x, Integer y) {
         return success;
     }
 
-    public boolean checkXCoord(double xOne, double xTwo) {
+    public boolean checkXCoord(Integer xOne, Integer xTwo) {
         boolean success = false;
         if ((xOne + 1) == xTwo) {
             success = true;
@@ -41,5 +41,11 @@ public record Point(Integer x, Integer y) {
         return Objects.hash(x(), y());
     }
 
-
+    @Override
+    public String toString() {
+        return "Point{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

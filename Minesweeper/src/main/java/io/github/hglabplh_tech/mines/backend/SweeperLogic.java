@@ -119,6 +119,21 @@ public class SweeperLogic {
         return Boolean.valueOf(mineHit);
     }
 
+    public Point extractPointFromName(String buttonName) {
+        String[] buttonValues = buttonName.split("#");
+        Integer x = Integer.valueOf(buttonValues[0]);
+        Integer y = Integer.valueOf(buttonValues[1]);
+        return new Point(x, y);
+    }
+
+    public SweepPointType extractPointType(String buttonName) {
+        String[] buttonValues = buttonName.split("#");
+        Integer x = Integer.valueOf(buttonValues[0]);
+        Integer y = Integer.valueOf(buttonValues[1]);
+        return this.fieldsList.get(y).get(x).getPointType();
+    }
+
+
     public Boolean compNamesXY(String buttonName, String compName) {
         String[] buttonValues = buttonName.split("#");
         Integer x = Integer.valueOf(buttonValues[0]);

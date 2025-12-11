@@ -55,6 +55,34 @@ public class Labyrinth {
         return success;
     }
 
+    public boolean isPositiveEnd() {
+        boolean ok = false;
+        if (checkCorrectPath()) {
+            return this.pathToNext.contains(this.endPoint)
+                    && this.pathToNext.contains(this.firstBase)
+                    && this.pathToNext.contains(this.secondBase);
+        } else {
+            return false;
+        }
+    }
+
+    public Integer countBasesReached() {
+       Integer result = 0;
+        if (checkCorrectPath()) {
+
+            if (this.pathToNext.contains(this.firstBase)) {
+                result++;
+            }
+            if (this.pathToNext.contains(this.secondBase)) {
+                result++;
+            }
+            if (this.pathToNext.contains(this.endPoint)) {
+                result++;
+            }
+        }
+        return result;
+    }
+
 
     public Point getNextPoint() {
         return this.nextPoint;

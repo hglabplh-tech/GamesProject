@@ -6,6 +6,7 @@ import io.github.hglabplh_tech.mines.backend.SweeperLogic;
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.io.File;
+import java.time.Duration;
 
 public class GUILogics {
     /**
@@ -73,5 +74,14 @@ public class GUILogics {
             //whatevers
         }
 
+    }
+
+    public static void waitSeconds(int seconsds) {
+        try {
+            Duration duration = Duration.ofSeconds(seconsds);
+            Thread.sleep(duration);
+        } catch (Exception e) {
+
+        }
     }
 }

@@ -27,29 +27,33 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */ 
+ */
 
 package io.github.hglabplh_tech.mines.gui;
 
-import io.github.hglabplh_tech.mines.backend.config.PlayModes;
-import io.github.hglabplh_tech.mines.backend.SweeperLogic;
+
 
 import javax.swing.*;
 
-import java.awt.*;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import io.github.hglabplh_tech.mines.backend.Labyrinth;
+import io.github.hglabplh_tech.mines.backend.config.PlayModes;
+import io.github.hglabplh_tech.mines.backend.SweeperLogic;
+import io.github.hglabplh_tech.mines.backend.util.Point;
 
-/* 
+/*
  * ButtonDemo.java requires the following files:
  *   images/right.gif
  *   images/middle.gif
  *   images/left.gif
  */
 public class Sweeper extends JPanel
-                        implements ActionListener {
+        implements ActionListener {
     private final SweeperLogic util;
     private final ImageIcon mineIcon;
     private final ImageIcon bangIcon;
@@ -62,6 +66,8 @@ public class Sweeper extends JPanel
     private final List<JButton> buttonList = new ArrayList<>();
     private final PlayModes playMode;
 
+    private Labyrinth labyrinth;
+
     public Sweeper(PlayModes mode) {
         this.playMode = mode;
         this.mineIcon = GUILogics.createIcon("mine.png");
@@ -73,16 +79,26 @@ public class Sweeper extends JPanel
         this.basetwoIcon = GUILogics.createIcon("basetwo.jpg");
         this.endIcon = GUILogics.createIcon("end.jpg");
         this.util = new SweeperLogic(mode, 15, 15, 30);
+
         List<List<SweeperLogic.ButtDescr>> array = util.calculateMines();
+        if (this.playMode.equals(PlayModes.LABYRINTH)) {
+            Optional<Labyrinth> labyrinthOpt = this.util.getLabyrinth();
+            if (labyrinthOpt.isPresent()) {
+                this.labyrinth = labyrinthOpt.get();
+            } else {
+                throw new IllegalStateException("Labyrinth object should be there");
+            }
+            this.labyrinth.addToPath(this.labyrinth.getStart());
+        }
         GridLayout grid = new GridLayout();
         grid.setVgap(3);
         grid.setHgap(3);
 
-        grid.setRows(this.util.getCy()+ 1);
+        grid.setRows(this.util.getCy() + 1);
         grid.setColumns(this.util.getCx());
         this.setLayout(grid);
-        for (int y = 0; y < this.util.getCy() ;y++) {
-            for (int x = 0; x < this.util.getCx() ;x++) {
+        for (int y = 0; y < this.util.getCy(); y++) {
+            for (int x = 0; x < this.util.getCx(); x++) {
                 SweeperLogic.ButtDescr bDescr = array.get(y).get(x);
                 makeAndAddButton(x, y, bDescr);
             }
@@ -103,7 +119,17 @@ public class Sweeper extends JPanel
                     butt.setIcon(this.mineIcon);
                 }
             } else {
-                butt.setIcon(this.waterIcon);
+                if (this.playMode.equals(PlayModes.LABYRINTH)) {
+                    switch(this.util.extractPointType(theName)) {
+                        case STARTPOINT -> butt.setIcon(this.startIcon);
+                        case ENDPOINT -> butt.setIcon(this.endIcon);
+                        case FIRST_BASE -> butt.setIcon(this.baseoneIcon);
+                        case SECOND_BASE -> butt.setIcon(this.basetwoIcon);
+                        default -> butt.setIcon(this.waterIcon);
+                    }
+                } else {
+                    butt.setIcon(this.waterIcon);
+                }
             }
         });
         GUILogics.playSound("the-explosion.wav");
@@ -121,19 +147,19 @@ public class Sweeper extends JPanel
     private void makeAndAddButton(Integer x, Integer y, SweeperLogic.ButtDescr bDescr) {
         JButton button = null;
         if (playMode.equals(PlayModes.LABYRINTH)) {
-          button = switch(bDescr.getPointType()) {
-              case ENDPOINT ->  new JButton(this.endIcon);
-              case FIRST_BASE -> new JButton(this.baseoneIcon);
-              case SECOND_BASE -> new JButton(this.basetwoIcon);
-              case STARTPOINT -> new JButton(this.startIcon);
-              default -> new JButton(this.questionIcon);
-          };
+            button = switch (bDescr.getPointType()) {
+                case ENDPOINT -> new JButton(this.endIcon);
+                case FIRST_BASE -> new JButton(this.baseoneIcon);
+                case SECOND_BASE -> new JButton(this.basetwoIcon);
+                case STARTPOINT -> new JButton(this.startIcon);
+                default -> new JButton(this.questionIcon);
+            };
         } else {
             button = new JButton(this.questionIcon);
         }
-        button.setName(this.util.makeButtonName(x,y, bDescr.isMine()));
+        button.setName(this.util.makeButtonName(x, y, bDescr.isMine()));
         button.setLocation(x, y);
-        button.setSize(5,5);
+        button.setSize(5, 5);
         button.setVisible(true);
         button.addActionListener(this);
         this.add(button);
@@ -143,18 +169,40 @@ public class Sweeper extends JPanel
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton source = (JButton)e.getSource();
+        JButton source = (JButton) e.getSource();
         String name = source.getName();
+
         //source.setEnabled(false);
         if (this.util.isMineHit(name)) {
             source.setIcon(this.mineIcon);
             negativeEnd(source.getName());
         } else {
-
+            if (this.playMode.equals(PlayModes.LABYRINTH)) {
+                Point lastFromPath = this.labyrinth.getPathToNext()
+                        .get(this.labyrinth.getPathToNext().size() -1);
+                Point compare = this.util.extractPointFromName(name);
+                if(!lastFromPath.checkPointIsNeighbor(compare)) {
+                    GUILogics.playSound("alarm.wav");
+                    GUILogics.playSound("the-explosion.wav");
+                    GUILogics.waitSeconds(5);
+                    negativeEnd(name);
+                }
+                this.labyrinth
+                        .addToPath(
+                                this.util.extractPointFromName(name));
+            }
             source.setIcon(this.waterIcon);
             GUILogics.playSound("the-bell.wav");
         }
-        if (util.isPositiveEnd()) {
+        boolean positiveEnd = false;
+        if (this.playMode.equals(PlayModes.NORMAL)) {
+            positiveEnd = this.util.isPositiveEnd();
+        } else if (this.playMode.equals(PlayModes.LABYRINTH)) {
+            positiveEnd = labyrinth.isPositiveEnd();
+        } else {
+            positiveEnd = false;
+        }
+        if (positiveEnd) {
             positiveEnd();
         }
     }
