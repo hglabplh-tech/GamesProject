@@ -69,8 +69,8 @@ public class Sweeper extends JPanel
         this.questionIcon = GUILogics.createIcon("question.jpeg");
         this.waterIcon = GUILogics.createIcon("water.png");
         this.startIcon = GUILogics.createIcon("start.jpg");
-        this.baseoneIcon = GUILogics.createIcon("base1.jpg");
-        this.basetwoIcon = GUILogics.createIcon("base2.jpg");
+        this.baseoneIcon = GUILogics.createIcon("baseone.jpg");
+        this.basetwoIcon = GUILogics.createIcon("basetwo.jpg");
         this.endIcon = GUILogics.createIcon("end.jpg");
         this.util = new SweeperLogic(mode, 15, 15, 30);
         List<List<SweeperLogic.ButtDescr>> array = util.calculateMines();
@@ -125,7 +125,7 @@ public class Sweeper extends JPanel
               case ENDPOINT ->  new JButton(this.endIcon);
               case FIRST_BASE -> new JButton(this.baseoneIcon);
               case SECOND_BASE -> new JButton(this.basetwoIcon);
-              case STARTPOINT -> new JButton(this.endIcon);
+              case STARTPOINT -> new JButton(this.startIcon);
               default -> new JButton(this.questionIcon);
           };
         } else {
