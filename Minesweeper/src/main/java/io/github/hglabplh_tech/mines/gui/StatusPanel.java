@@ -3,6 +3,7 @@ package io.github.hglabplh_tech.mines.gui;
 import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,13 +18,15 @@ public class StatusPanel extends JPanel implements ActionListener {
     private final JRadioButton radioButtNorm;
     private final JRadioButton radioButtLab;
     private final JRadioButton radioButtEnhanced;
+    private static Thread timerThread;
 
     public StatusPanel(PlayModes playMode) {
+
 
         this.playMode = playMode;
 
         JLabel timerLabel = new JLabel("Time elapsed: ");
-        this.timeValue = new JLabel("00:00");
+        this.timeValue = new JLabel("00");
         JLabel counterLabel = new JLabel("Counter: ");
         this.counterValue = new JLabel("0");
 
@@ -45,7 +48,21 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.add(this.radioButtNorm);
         this.add(this.radioButtLab);
         this.add(this.radioButtEnhanced);
+        timerThread = new Thread(new TimerThread(this));
+        timerThread.start();
 
+    }
+    
+    public JLabel getTimerLabel() {
+        return this.timeValue;
+    }
+
+    public JLabel getCounterLabel() {
+        return this.counterValue;
+    }
+
+    public static Thread getTimerThread() {
+        return timerThread;
     }
 
     @Override

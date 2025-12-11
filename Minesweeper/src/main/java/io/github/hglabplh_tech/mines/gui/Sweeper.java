@@ -66,11 +66,13 @@ public class Sweeper extends JPanel
     private final ImageIcon purpleIcon;
     private final List<JButton> buttonList = new ArrayList<>();
     private final PlayModes playMode;
+    private final StatusPanel statusPanel;
 
     private Labyrinth labyrinth;
 
-    public Sweeper(PlayModes mode) {
+    public Sweeper(PlayModes mode, StatusPanel panel) {
         this.playMode = mode;
+        this.statusPanel = panel;
         this.mineIcon = GUILogics.createIcon("mine.png");
         this.bangIcon = GUILogics.createIcon("bang.gif");
         this.questionIcon = GUILogics.createIcon("question.jpeg");
@@ -109,6 +111,7 @@ public class Sweeper extends JPanel
     }
 
     private void negativeEnd(String origName) {
+        StatusPanel.getTimerThread().stop();
         String[] origValues = origName.split("#");
 
         this.buttonList.forEach(butt -> {
@@ -144,7 +147,16 @@ public class Sweeper extends JPanel
         GUILogics.playSound("the-explosion.wav");
     }
 
+    private void labTimerOutThread(JButton source) {
+        if (this.playMode.equals(PlayModes.LABYRINTH)) {
+            if (TimerThread.getTheSeconds() <= 0) {
+                negativeEnd(source.getName());
+            }
+        }
+    }
+
     private void positiveEnd() {
+        StatusPanel.getTimerThread().stop();
         this.buttonList.forEach(butt ->
                 butt.setIcon(this.waterIcon));
         GUILogics.playSound("winning-bell.wav");
@@ -179,6 +191,7 @@ public class Sweeper extends JPanel
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton source = (JButton) e.getSource();
+        labTimerOutThread(source);
         String name = source.getName();
 
         //source.setEnabled(false);
@@ -219,6 +232,8 @@ public class Sweeper extends JPanel
         if (positiveEnd) {
             positiveEnd();
         }
+        this.statusPanel.incrementCounterValue();
+
     }
 
 }
