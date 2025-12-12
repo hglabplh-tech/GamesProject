@@ -140,8 +140,10 @@ public class GUILogics {
         submenu = new JMenu("Save Actions");
         menu.add(submenu);
         JMenuItem saveItem = new JMenuItem("Make a Save", 1);
+        saveItem.setActionCommand("msave");
         submenu.add(saveItem);
         JMenuItem loadItem = new JMenuItem("Load a Save", 1);
+        loadItem.setActionCommand("lsave");
         submenu.add(loadItem);
         menuBar.add(menu);
         return menuBar;
@@ -161,12 +163,14 @@ public class GUILogics {
         menu.add(submenu);
 
         MenuActionListener actionListener = new MenuActionListener();
-        JMenuItem saveItem = new JMenuItem("Save", VK_S);
+        JMenuItem saveItem = new JMenuItem("Make a Save", VK_S);
+        saveItem.setActionCommand("msave");
         saveItem.setMnemonic(VK_S);
         saveItem.addActionListener(actionListener);
         saveItem.setAccelerator(KeyStroke.getKeyStroke(VK_S, ALT_DOWN_MASK));
         submenu.add(saveItem);
-        JMenuItem loadItem = new JMenuItem("Load", VK_L);
+        JMenuItem loadItem = new JMenuItem("Load a Save", VK_L);
+        loadItem.setActionCommand("lsave");
         loadItem.addActionListener(actionListener);
         submenu.add(loadItem);
         menuBar.add(menu);

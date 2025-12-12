@@ -59,10 +59,15 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.radioButtEnhanced = new JRadioButton("Enhanced", false);
 
         this.radioGroup.add(this.radioButtNorm);
+        this.radioButtNorm.setActionCommand("nor");
         this.radioButtNorm.addActionListener(this);
+
         this.radioGroup.add(this.radioButtLab);
+        this.radioButtLab.setActionCommand("lab");
         this.radioButtLab.addActionListener(this);
+
         this.radioGroup.add(this.radioButtEnhanced);
+        this.radioButtEnhanced.setActionCommand("enh");
         this.radioButtEnhanced.addActionListener(this);
 
         this.add(timerLabel);
@@ -108,11 +113,11 @@ public class StatusPanel extends JPanel implements ActionListener {
             String command = e.getActionCommand();
             System.out.println(command);
             Sweeper sweeper = null;
-            if (command.equals("Normal")) {
+            if (command.equals("nor")) {
                 sweeper = Sweeper.getSweeper(PlayModes.NORMAL);
-            } else if (command.equals("Labyrinth")) {
+            } else if (command.equals("lab")) {
                 sweeper = Sweeper.getSweeper(PlayModes.LABYRINTH);
-            } else if (command.equals("Enhanced")) {
+            } else if (command.equals("enh")) {
                 sweeper = Sweeper.getSweeper(PlayModes.NORMAL); //TODO: change this
                 System.err.println("Enhanced has to be implemented");
             }

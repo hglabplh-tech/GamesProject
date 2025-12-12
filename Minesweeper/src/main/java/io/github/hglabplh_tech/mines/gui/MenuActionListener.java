@@ -13,9 +13,9 @@ public class MenuActionListener implements ActionListener,
     public void actionPerformed(ActionEvent e) {
         JMenuItem src = (JMenuItem)e.getSource();
         String command = e.getActionCommand();
-        if (command.equals("Save")) {
+        if (command.equals("msave")) {
             System.out.println("Save Something");
-        } else if (command.equals("Load")) {
+        } else if (command.equals("lsave")) {
             System.out.println("Load Something");
         }
     }
