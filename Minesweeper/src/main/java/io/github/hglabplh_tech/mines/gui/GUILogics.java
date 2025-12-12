@@ -34,6 +34,7 @@ public class GUILogics {
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from the
      * event-dispatching thread.
+     * @param mode the play mode either LABYRINTH - NORMAL or ENHANCED
      */
     public static void createAndShowGUI(final PlayModes mode) {
 
@@ -60,7 +61,11 @@ public class GUILogics {
         frame.setVisible(true);
     }
 
-    /** Returns an ImageIcon, or null if the path was invalid. */
+    /**
+     * This method creates an ImageIcon out of a given valid graphics file like PNG,JPG,GIF
+     * @param fname the filename of the icon to load
+     * @return returns the loaded image-icon
+     */
     public static ImageIcon createIcon(String fname) {
         java.net.URL imgURL = SweeperLogic.class.getResource("/images/" + fname);
         if (imgURL != null) {
@@ -72,10 +77,14 @@ public class GUILogics {
         }
     }
 
-    public static void playSound(String fname) {
+    /**
+     * This procedure / method plays a sound from a given source at the moment only WAV I will change this
+     * @param fname the filename of the WAV file
+     */
+    public static Clip playSound(String fname) {
         // Source - https://stackoverflow.com/a
-// Posted by tschwab, modified by community. See post 'Timeline' for change history
-// Retrieved 2025-11-29, License - CC BY-SA 3.0
+        // Posted by tschwab, modified by community. See post 'Timeline' for change history
+        // Retrieved 2025-11-29, License - CC BY-SA 3.0 - used with changes
         try {
             java.net.URL wavURL = SweeperLogic.class.getResource("/sounds/" + fname);
             File yourFile = new File(wavURL.toURI());
@@ -90,13 +99,18 @@ public class GUILogics {
             clip = (Clip) AudioSystem.getLine(info);
             clip.open(stream);
             clip.start();
+            return clip;
         }
         catch (Exception e) {
-            //whatevers
+            throw new IllegalStateException("clip cannot be played exception occurred");
         }
 
     }
 
+    /**
+     * This method simply waits for the given count of seconds
+     * @param seconds seconds to wait
+     */
     public static void waitSeconds(long seconds) {
         try {
             Thread.sleep(seconds * 1000L);

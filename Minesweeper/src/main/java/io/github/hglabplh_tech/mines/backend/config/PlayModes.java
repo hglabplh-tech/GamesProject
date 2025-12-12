@@ -21,8 +21,12 @@ SOFTWARE.
  */
 package io.github.hglabplh_tech.mines.backend.config;
 
+
+/**
+ * Enum for the possible play-modes
+ */
 public enum PlayModes {
-    NORMAL,
-    LABYRINTH,
-    ENHANCED
+    NORMAL, // the classic mode
+    LABYRINTH, // the labyrinth mode cudo's to Joshua Glab for the idea
+    ENHANCED // the mode enhanced here we have to look where it ends
 }

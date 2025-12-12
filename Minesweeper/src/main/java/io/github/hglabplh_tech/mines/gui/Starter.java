@@ -27,6 +27,10 @@ import javax.swing.*;
 
 public class Starter {
 
+    /**
+     * This is the starter class
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         PlayModes mode = PlayModes.NORMAL;
         if (args.length == 1) {

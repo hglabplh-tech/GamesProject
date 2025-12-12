@@ -33,6 +33,12 @@ public class GameSplitPane {
     private final JSplitPane splitPane;
 
 
+    /**
+     * This is the split window definition in the client area
+     * @param splitMode split mode is either horizontal or vertical
+     * @param statusPanel the status panel contains timer / counter values and radio buttons
+     * @param playPanel this panel contains the play board for mine-sweeper
+     */
     public GameSplitPane(Integer splitMode, JPanel statusPanel, JPanel playPanel) {
         this.splitMode = splitMode;
         this.statusPanel = statusPanel;
