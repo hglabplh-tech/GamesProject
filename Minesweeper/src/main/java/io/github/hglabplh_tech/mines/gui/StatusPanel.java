@@ -26,8 +26,9 @@ import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+
+import static io.github.hglabplh_tech.mines.gui.GUILogics.createPopupMenu;
 
 public class StatusPanel extends JPanel implements ActionListener {
 
@@ -85,6 +86,41 @@ public class StatusPanel extends JPanel implements ActionListener {
             case ENHANCED -> this.radioButtEnhanced.setSelected(true);
             default ->  this.radioButtNorm.setSelected(true);
         }
+        JPopupMenu popupMenu = createPopupMenu();
+        this.add(popupMenu);
+        this.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent event) {
+                if (event.isPopupTrigger()) {
+                    popupMenu.show(event.getComponent(), event.getX(),
+                            event.getY());
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent event) {
+                if (event.isPopupTrigger()) {
+                    popupMenu.show(event.getComponent(), event.getX(),
+                            event.getY());
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
     }
     

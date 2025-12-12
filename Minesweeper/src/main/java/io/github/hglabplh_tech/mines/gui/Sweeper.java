@@ -28,6 +28,8 @@ import javax.swing.*;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +40,8 @@ import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 import io.github.hglabplh_tech.mines.backend.SweeperLogic;
 import io.github.hglabplh_tech.mines.backend.util.Point;
 
+import static io.github.hglabplh_tech.mines.gui.GUILogics.createPopupMenu;
+
 /*
  * ButtonDemo.java requires the following files:
  *   images/right.gif
@@ -46,7 +50,7 @@ import io.github.hglabplh_tech.mines.backend.util.Point;
  */
 public class Sweeper extends JPanel
         implements ActionListener {
-    private  SweeperLogic util;
+    private SweeperLogic util;
     private final ImageIcon mineIcon;
     private final ImageIcon bangIcon;
     private final ImageIcon waterIcon;
@@ -77,8 +81,41 @@ public class Sweeper extends JPanel
         this.basetwoIcon = GUILogics.createIcon("basetwo.jpg");
         this.endIcon = GUILogics.createIcon("end.jpg");
         this.purpleIcon = GUILogics.createIcon("purple.jpg");
+        JPopupMenu popupMenu = createPopupMenu();
+        this.add(popupMenu);
+        this.addMouseListener(new MouseListener() {
 
+            @Override
+            public void mouseClicked(MouseEvent event) {
+                if (event.isPopupTrigger()) {
+                    popupMenu.show(event.getComponent(), event.getX(),
+                            event.getY());
+                }
+            }
 
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent event) {
+                if (event.isPopupTrigger()) {
+                    popupMenu.show(event.getComponent(), event.getX(),
+                            event.getY());
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
         initButtons(configBean);
 
@@ -110,7 +147,7 @@ public class Sweeper extends JPanel
         }
     }
 
-    public  List<List<SweeperLogic.ButtDescr>> buildFieldsArray() {
+    public List<List<SweeperLogic.ButtDescr>> buildFieldsArray() {
         List<List<SweeperLogic.ButtDescr>> array = util.calculateMines();
         if (this.playMode.equals(PlayModes.LABYRINTH)) {
             buildLabyrinth();

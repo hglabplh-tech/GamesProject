@@ -30,6 +30,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.time.Duration;
@@ -47,7 +49,18 @@ public class GUILogics {
 
         //Create and set up the window.
         JFrame frame = new JFrame("Mine Sweeper");
-        frame.add(createPopupMenu());
+        JPopupMenu popupMenu = createPopupMenu();
+        frame.add(popupMenu);
+        frame.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseReleased(MouseEvent event) {
+                if (event.isPopupTrigger()) {
+                    popupMenu.show(event.getComponent(), event.getX(),
+                            event.getY());
+                }
+            }
+        });
         frame.setJMenuBar(createMenu());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);
@@ -134,16 +147,18 @@ public class GUILogics {
 
         JRadioButtonMenuItem rbMenuItem;
         JCheckBoxMenuItem cbMenuItem;
-
+        MenuActionListener actionListener = new MenuActionListener();
         menuBar = new JPopupMenu();
         menu = new JMenu("Game Actions");
         submenu = new JMenu("Save Actions");
         menu.add(submenu);
         JMenuItem saveItem = new JMenuItem("Make a Save", 1);
         saveItem.setActionCommand("msave");
+        saveItem.addActionListener(actionListener);
         submenu.add(saveItem);
         JMenuItem loadItem = new JMenuItem("Load a Save", 1);
         loadItem.setActionCommand("lsave");
+        loadItem.addActionListener(actionListener);
         submenu.add(loadItem);
         menuBar.add(menu);
         return menuBar;
@@ -170,6 +185,8 @@ public class GUILogics {
         saveItem.setAccelerator(KeyStroke.getKeyStroke(VK_S, ALT_DOWN_MASK));
         submenu.add(saveItem);
         JMenuItem loadItem = new JMenuItem("Load a Save", VK_L);
+        loadItem.setAccelerator(KeyStroke.getKeyStroke(VK_L, ALT_DOWN_MASK));
+        loadItem.setMnemonic(VK_L);
         loadItem.setActionCommand("lsave");
         loadItem.addActionListener(actionListener);
         submenu.add(loadItem);
