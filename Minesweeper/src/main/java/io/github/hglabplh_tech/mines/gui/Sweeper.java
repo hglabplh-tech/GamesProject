@@ -23,7 +23,6 @@ SOFTWARE.
 package io.github.hglabplh_tech.mines.gui;
 
 
-
 import javax.swing.*;
 
 import java.awt.GridLayout;
@@ -32,7 +31,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import io.github.hglabplh_tech.mines.backend.Labyrinth;
+import io.github.hglabplh_tech.mines.backend.config.Configuration;
 import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 import io.github.hglabplh_tech.mines.backend.SweeperLogic;
 import io.github.hglabplh_tech.mines.backend.util.Point;
@@ -56,13 +57,16 @@ public class Sweeper extends JPanel
     private final ImageIcon basetwoIcon;
     private final ImageIcon purpleIcon;
     private final List<JButton> buttonList = new ArrayList<>();
-    private final PlayModes playMode;
+    private PlayModes playMode;
     private final StatusPanel statusPanel;
 
+
+    public static Sweeper instance;
     private Labyrinth labyrinth;
 
-    public Sweeper(PlayModes mode, StatusPanel panel) {
-        this.playMode = mode;
+    public Sweeper(Configuration.ConfigBean configBean, StatusPanel panel) {
+        instance = this;
+        this.playMode = configBean.getMineConfig().getPlayMode();
         this.statusPanel = panel;
         this.mineIcon = GUILogics.createIcon("mine.png");
         this.bangIcon = GUILogics.createIcon("bang.gif");
@@ -73,18 +77,23 @@ public class Sweeper extends JPanel
         this.basetwoIcon = GUILogics.createIcon("basetwo.jpg");
         this.endIcon = GUILogics.createIcon("end.jpg");
         this.purpleIcon = GUILogics.createIcon("purple.jpg");
-        this.util = new SweeperLogic(mode, 15, 15, 30);
+        this.util = new SweeperLogic(this.statusPanel.getPlayMode(),
+                configBean.getMineConfig().getGridCX(),
+                configBean.getMineConfig().getGridCY(),
+                configBean.getMineConfig().getMinesCount());
 
-        List<List<SweeperLogic.ButtDescr>> array = util.calculateMines();
-        if (this.playMode.equals(PlayModes.LABYRINTH)) {
-            Optional<Labyrinth> labyrinthOpt = this.util.getLabyrinth();
-            if (labyrinthOpt.isPresent()) {
-                this.labyrinth = labyrinthOpt.get();
-            } else {
-                throw new IllegalStateException("Labyrinth object should be there");
-            }
-            this.labyrinth.addToPath(this.labyrinth.getStart());
-        }
+
+        initButtons();
+
+    }
+
+    public static Sweeper getSweeper(PlayModes mode) {
+        instance.playMode = mode;
+        return instance;
+    }
+
+    public void initButtons() {
+        List<List<SweeperLogic.ButtDescr>> fieldsArray = buildFieldsArray();
         GridLayout grid = new GridLayout();
         grid.setVgap(3);
         grid.setHgap(3);
@@ -94,10 +103,28 @@ public class Sweeper extends JPanel
         this.setLayout(grid);
         for (int y = 0; y < this.util.getCy(); y++) {
             for (int x = 0; x < this.util.getCx(); x++) {
-                SweeperLogic.ButtDescr bDescr = array.get(y).get(x);
+                SweeperLogic.ButtDescr bDescr = fieldsArray.get(y).get(x);
                 makeAndAddButton(x, y, bDescr);
             }
         }
+    }
+
+    public  List<List<SweeperLogic.ButtDescr>> buildFieldsArray() {
+        List<List<SweeperLogic.ButtDescr>> array = util.calculateMines();
+        if (this.playMode.equals(PlayModes.LABYRINTH)) {
+            buildLabyrinth();
+        }
+        return array;
+    }
+
+    private void buildLabyrinth() {
+        Optional<Labyrinth> labyrinthOpt = this.util.getLabyrinth();
+        if (labyrinthOpt.isPresent()) {
+            this.labyrinth = labyrinthOpt.get();
+        } else {
+            throw new IllegalStateException("Labyrinth object should be there");
+        }
+        this.labyrinth.addToPath(this.labyrinth.getStart());
 
     }
 
@@ -116,7 +143,7 @@ public class Sweeper extends JPanel
                 }
             } else {
                 if (this.playMode.equals(PlayModes.LABYRINTH)) {
-                    switch(this.util.extractPointType(theName)) {
+                    switch (this.util.extractPointType(theName)) {
                         case STARTPOINT -> butt.setIcon(this.startIcon);
                         case ENDPOINT -> butt.setIcon(this.endIcon);
                         case FIRST_BASE -> butt.setIcon(this.baseoneIcon);
@@ -192,9 +219,9 @@ public class Sweeper extends JPanel
         } else {
             if (this.playMode.equals(PlayModes.LABYRINTH)) {
                 Point lastFromPath = this.labyrinth.getPathToNext()
-                        .get(this.labyrinth.getPathToNext().size() -1);
+                        .get(this.labyrinth.getPathToNext().size() - 1);
                 Point compare = this.util.extractPointFromName(name);
-                if(!lastFromPath.checkPointIsNeighbor(compare)) {
+                if (!lastFromPath.checkPointIsNeighbor(compare)) {
                     source.setIcon(this.purpleIcon);
                     source.invalidate();
                     GUILogics.playSound("alarm.wav");

@@ -26,7 +26,27 @@ package io.github.hglabplh_tech.mines.backend.config;
  * Enum for the possible play-modes
  */
 public enum PlayModes {
-    NORMAL, // the classic mode
-    LABYRINTH, // the labyrinth mode cudo's to Joshua Glab for the idea
-    ENHANCED // the mode enhanced here we have to look where it ends
+    NONE("none"),
+    NORMAL("normal"), // the classic mode
+    LABYRINTH("labyrinth"), // the labyrinth mode cudo's to Joshua Glab for the idea
+    ENHANCED("enhanced"), // the mode enhanced here we have to look where it ends
+    ;
+
+    final String playModeName;
+    PlayModes(String playModeName) {
+        this.playModeName = playModeName;
+    }
+
+    public String getPlayModeName() {
+        return this.playModeName;
+    }
+
+    public static PlayModes getPlayModeByName(String playModeName) {
+        for (PlayModes mode  : PlayModes.values()) {
+            if (mode.getPlayModeName().equals(playModeName)) {
+                return mode;
+            }
+        }
+        return PlayModes.NONE;
+    }
 }

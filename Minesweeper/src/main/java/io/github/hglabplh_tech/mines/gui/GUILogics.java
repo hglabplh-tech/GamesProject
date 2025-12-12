@@ -21,13 +21,20 @@ SOFTWARE.
  */
 package io.github.hglabplh_tech.mines.gui;
 
+import io.github.hglabplh_tech.mines.backend.config.Configuration;
 import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 import io.github.hglabplh_tech.mines.backend.SweeperLogic;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.time.Duration;
+
+import static java.awt.event.KeyEvent.*;
 
 public class GUILogics {
     /**
@@ -44,11 +51,11 @@ public class GUILogics {
         frame.setJMenuBar(createMenu());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);
-
+        Configuration.ConfigBean configBean = Configuration.getConfigBeanInstance();
         // Create status Pane
-        StatusPanel status = new StatusPanel(mode);
+        StatusPanel status = new StatusPanel(configBean);
         //Create and set up the content pane.
-        Sweeper playPane = new Sweeper(mode, status);
+        Sweeper playPane = new Sweeper(configBean, status);
 
         GameSplitPane gamePane = new GameSplitPane(JSplitPane.VERTICAL_SPLIT, status, playPane);
         JSplitPane mainPane =gamePane.getSplitPane();
@@ -85,7 +92,7 @@ public class GUILogics {
      */
     public static Clip playSound(String fname) {
         // Source - https://stackoverflow.com/a
-        // Posted by tschwab, modified by community. See post 'Timeline' for change history
+        // Po0sted by tschwab, modified by community. See post 'Timeline' for change history
         // Retrieved 2025-11-29, License - CC BY-SA 3.0 - used with changes
         try {
             java.net.URL wavURL = SweeperLogic.class.getResource("/sounds/" + fname);
@@ -148,12 +155,19 @@ public class GUILogics {
         JCheckBoxMenuItem cbMenuItem;
 
         menuBar = new JMenuBar();
+
         menu = new JMenu("Game Actions");
         submenu = new JMenu("Save Actions");
         menu.add(submenu);
-        JMenuItem saveItem = new JMenuItem("Make a Save", 1);
+
+        MenuActionListener actionListener = new MenuActionListener();
+        JMenuItem saveItem = new JMenuItem("Save", VK_S);
+        saveItem.setMnemonic(VK_S);
+        saveItem.addActionListener(actionListener);
+        saveItem.setAccelerator(KeyStroke.getKeyStroke(VK_S, ALT_DOWN_MASK));
         submenu.add(saveItem);
-        JMenuItem loadItem = new JMenuItem("Load a Save", 1);
+        JMenuItem loadItem = new JMenuItem("Load", VK_L);
+        loadItem.addActionListener(actionListener);
         submenu.add(loadItem);
         menuBar.add(menu);
         return menuBar;

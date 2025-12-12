@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package io.github.hglabplh_tech.mines.gui;
 
+import io.github.hglabplh_tech.mines.backend.config.Configuration;
 import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 
 import javax.swing.*;
@@ -41,9 +42,9 @@ public class StatusPanel extends JPanel implements ActionListener {
     private final JRadioButton radioButtEnhanced;
     private static Thread timerThread;
 
-    public StatusPanel(PlayModes playMode) {
+    public StatusPanel(Configuration.ConfigBean configBean) {
 
-
+        PlayModes playMode = configBean.getMineConfig().getPlayMode();
         this.playMode = playMode;
 
         JLabel timerLabel = new JLabel("Time elapsed: ");
@@ -58,8 +59,11 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.radioButtEnhanced = new JRadioButton("Enhanced", false);
 
         this.radioGroup.add(this.radioButtNorm);
+        this.radioButtNorm.addActionListener(this);
         this.radioGroup.add(this.radioButtLab);
+        this.radioButtLab.addActionListener(this);
         this.radioGroup.add(this.radioButtEnhanced);
+        this.radioButtEnhanced.addActionListener(this);
 
         this.add(timerLabel);
         this.add(this.timeValue);
@@ -71,6 +75,11 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.add(this.radioButtEnhanced);
         timerThread = new Thread(new TimerThread(this));
         timerThread.start();
+        switch(this.playMode) {
+            case LABYRINTH -> this.radioButtLab.setSelected(true);
+            case ENHANCED -> this.radioButtEnhanced.setSelected(true);
+            default ->  this.radioButtNorm.setSelected(true);
+        }
 
     }
     
@@ -88,7 +97,31 @@ public class StatusPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() instanceof JRadioButton) {
+            JRadioButton button = (JRadioButton) e.getSource();
+            this.getCounterValue().setText("100");
+            timerThread.stop();
+            timerThread = new Thread(new TimerThread(this));
+            GUILogics.waitSeconds(1);
+            timerThread.start();
+            String command = e.getActionCommand();
+            System.out.println(command);
+            Sweeper sweeper = null;
+            if (command.equals("Normal")) {
+                sweeper = Sweeper.getSweeper(PlayModes.NORMAL);
+                sweeper.invalidate();
+                sweeper.removeAll();
+                sweeper.initButtons();
+            } else if (command.equals("Labyrinth")) {
+                sweeper = Sweeper.getSweeper(PlayModes.LABYRINTH);
+                sweeper.invalidate();
+                sweeper.removeAll();
+                sweeper.initButtons();
+            } else if (command.equals("Enhanced")) {
+                System.err.println("Enhanced has to be implemented");
+            }
 
+        }
     }
 
     public JLabel getCounterValue() {
