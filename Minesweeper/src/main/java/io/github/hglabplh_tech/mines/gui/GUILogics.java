@@ -40,6 +40,8 @@ public class GUILogics {
 
         //Create and set up the window.
         JFrame frame = new JFrame("Mine Sweeper");
+        frame.add(createPopupMenu());
+        frame.setJMenuBar(createMenu());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);
 
@@ -117,5 +119,44 @@ public class GUILogics {
         } catch (Exception e) {
 
         }
+    }
+
+    public static JPopupMenu createPopupMenu() {
+        JPopupMenu menuBar;
+        JMenu menu, submenu;
+
+        JRadioButtonMenuItem rbMenuItem;
+        JCheckBoxMenuItem cbMenuItem;
+
+        menuBar = new JPopupMenu();
+        menu = new JMenu("Game Actions");
+        submenu = new JMenu("Save Actions");
+        menu.add(submenu);
+        JMenuItem saveItem = new JMenuItem("Make a Save", 1);
+        submenu.add(saveItem);
+        JMenuItem loadItem = new JMenuItem("Load a Save", 1);
+        submenu.add(loadItem);
+        menuBar.add(menu);
+        return menuBar;
+
+    }
+    public static JMenuBar createMenu() {
+        JMenuBar menuBar;
+        JMenu menu, submenu;
+
+        JRadioButtonMenuItem rbMenuItem;
+        JCheckBoxMenuItem cbMenuItem;
+
+        menuBar = new JMenuBar();
+        menu = new JMenu("Game Actions");
+        submenu = new JMenu("Save Actions");
+        menu.add(submenu);
+        JMenuItem saveItem = new JMenuItem("Make a Save", 1);
+        submenu.add(saveItem);
+        JMenuItem loadItem = new JMenuItem("Load a Save", 1);
+        submenu.add(loadItem);
+        menuBar.add(menu);
+        return menuBar;
+
     }
 }
