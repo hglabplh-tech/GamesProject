@@ -51,16 +51,8 @@ public class GUILogics {
         JFrame frame = new JFrame("Mine Sweeper");
         JPopupMenu popupMenu = createPopupMenu();
         frame.add(popupMenu);
-        frame.addMouseListener(new MouseAdapter() {
+        frame.addMouseListener(new GameMouseListener(popupMenu));
 
-            @Override
-            public void mouseReleased(MouseEvent event) {
-                if (event.isPopupTrigger()) {
-                    popupMenu.show(event.getComponent(), event.getX(),
-                            event.getY());
-                }
-            }
-        });
         frame.setJMenuBar(createMenu());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);

@@ -88,39 +88,7 @@ public class StatusPanel extends JPanel implements ActionListener {
         }
         JPopupMenu popupMenu = createPopupMenu();
         this.add(popupMenu);
-        this.addMouseListener(new MouseListener() {
-
-            @Override
-            public void mouseClicked(MouseEvent event) {
-                if (event.isPopupTrigger()) {
-                    popupMenu.show(event.getComponent(), event.getX(),
-                            event.getY());
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent event) {
-                if (event.isPopupTrigger()) {
-                    popupMenu.show(event.getComponent(), event.getX(),
-                            event.getY());
-                }
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
+        this.addMouseListener(new GameMouseListener(popupMenu));
 
     }
     
