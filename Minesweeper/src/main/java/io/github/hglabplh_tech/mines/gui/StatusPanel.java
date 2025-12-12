@@ -99,28 +99,27 @@ public class StatusPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() instanceof JRadioButton) {
             JRadioButton button = (JRadioButton) e.getSource();
-            this.getCounterValue().setText("100");
+            this.getCounterValue().setText("0");
             timerThread.stop();
             timerThread = new Thread(new TimerThread(this));
             GUILogics.waitSeconds(1);
+            TimerThread.resetTimer();
             timerThread.start();
             String command = e.getActionCommand();
             System.out.println(command);
             Sweeper sweeper = null;
             if (command.equals("Normal")) {
                 sweeper = Sweeper.getSweeper(PlayModes.NORMAL);
-                sweeper.invalidate();
-                sweeper.removeAll();
-                sweeper.initButtons();
             } else if (command.equals("Labyrinth")) {
                 sweeper = Sweeper.getSweeper(PlayModes.LABYRINTH);
-                sweeper.invalidate();
-                sweeper.removeAll();
-                sweeper.initButtons();
             } else if (command.equals("Enhanced")) {
+                sweeper = Sweeper.getSweeper(PlayModes.NORMAL); //TODO: change this
                 System.err.println("Enhanced has to be implemented");
             }
-
+            sweeper.invalidate();
+            sweeper.removeAll();
+            sweeper.initButtons(Configuration.getConfigBeanInstance());
+            sweeper.repaint();
         }
     }
 

@@ -38,6 +38,9 @@ public class TimerThread implements Runnable {
         }
     }
 
+    public static  void resetTimer() {
+        TimerThread.seconds = 115;
+    }
     public static long getTheSeconds() {
         return TimerThread.seconds;
     }

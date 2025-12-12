@@ -46,7 +46,7 @@ import io.github.hglabplh_tech.mines.backend.util.Point;
  */
 public class Sweeper extends JPanel
         implements ActionListener {
-    private final SweeperLogic util;
+    private  SweeperLogic util;
     private final ImageIcon mineIcon;
     private final ImageIcon bangIcon;
     private final ImageIcon waterIcon;
@@ -77,13 +77,10 @@ public class Sweeper extends JPanel
         this.basetwoIcon = GUILogics.createIcon("basetwo.jpg");
         this.endIcon = GUILogics.createIcon("end.jpg");
         this.purpleIcon = GUILogics.createIcon("purple.jpg");
-        this.util = new SweeperLogic(this.statusPanel.getPlayMode(),
-                configBean.getMineConfig().getGridCX(),
-                configBean.getMineConfig().getGridCY(),
-                configBean.getMineConfig().getMinesCount());
 
 
-        initButtons();
+
+        initButtons(configBean);
 
     }
 
@@ -92,7 +89,11 @@ public class Sweeper extends JPanel
         return instance;
     }
 
-    public void initButtons() {
+    public void initButtons(Configuration.ConfigBean configBean) {
+        this.util = new SweeperLogic(this.statusPanel.getPlayMode(),
+                configBean.getMineConfig().getGridCX(),
+                configBean.getMineConfig().getGridCY(),
+                configBean.getMineConfig().getMinesCount());
         List<List<SweeperLogic.ButtDescr>> fieldsArray = buildFieldsArray();
         GridLayout grid = new GridLayout();
         grid.setVgap(3);
