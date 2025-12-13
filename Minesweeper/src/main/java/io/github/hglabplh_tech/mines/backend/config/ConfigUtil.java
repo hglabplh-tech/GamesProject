@@ -30,6 +30,9 @@ import java.util.Properties;
 
 public class ConfigUtil {
 
+    public static final String VER_KEY = "GPROP_VERKEY";
+    public static final String VER_VAL = "0.99";
+
     public static String USER_DIR;
     public static String USER_PROPS;
 
@@ -41,7 +44,7 @@ public class ConfigUtil {
 
     static {
         USER_DIR = new StringBuilder()
-                .append(System.getProperty("user.dir"))
+                .append(System.getProperty("user.home"))
                 .append('/')
                 .append(".hgpgames/").toString();
         USER_PROPS = new StringBuilder()
@@ -106,6 +109,34 @@ public class ConfigUtil {
 
     public static Boolean getUserPropertiesLoaded () {
         return userPropsLoaded;
+    }
+
+    public static void saveUserPropsIfVerChanged(Properties props) {
+        if (PROP_FILE.exists()) {
+            Optional<Properties> loaded = loadUserProps();
+            Properties toSave = loaded.orElse(props);
+            String version = toSave.getProperty(VER_KEY);
+            boolean store = false;
+            if (version != null) {
+                if (!version.equals(VER_VAL)) {
+                    store = true;
+                    toSave.putAll(props);
+                    toSave.setProperty(VER_KEY, VER_VAL);
+
+                }
+            } else {
+                store = true;
+                toSave.putAll(props);
+                toSave.setProperty(VER_KEY, VER_VAL);
+            }
+            if (store) {
+                saveUserProps(toSave);
+            }
+        } else {
+            props.setProperty(VER_KEY, VER_VAL);
+            saveUserProps(props);
+        }
+
     }
 
     public static void saveUserProps(Properties props) {

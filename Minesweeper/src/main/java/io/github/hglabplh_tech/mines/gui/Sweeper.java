@@ -73,13 +73,13 @@ public class Sweeper extends JPanel
         this.playMode = configBean.getMineConfig().getPlayMode();
         this.statusPanel = panel;
         this.mineIcon = GUILogics.createIcon("mine.png");
-        this.bangIcon = GUILogics.createIcon("bang.gif");
+        this.bangIcon = GUILogics.createIcon("bang.png");
         this.questionIcon = GUILogics.createIcon("question.jpeg");
         this.waterIcon = GUILogics.createIcon("water.png");
-        this.startIcon = GUILogics.createIcon("start.jpg");
-        this.baseoneIcon = GUILogics.createIcon("baseone.jpg");
-        this.basetwoIcon = GUILogics.createIcon("basetwo.jpg");
-        this.endIcon = GUILogics.createIcon("end.jpg");
+        this.startIcon = GUILogics.createIcon("start.png");
+        this.baseoneIcon = GUILogics.createIcon("baseone.png");
+        this.basetwoIcon = GUILogics.createIcon("basetwo.png");
+        this.endIcon = GUILogics.createIcon("finish.png");
         this.purpleIcon = GUILogics.createIcon("purple.jpg");
         JPopupMenu popupMenu = createPopupMenu();
         this.add(popupMenu);
@@ -94,6 +94,8 @@ public class Sweeper extends JPanel
     }
 
     public void initButtons(Configuration.ConfigBean configBean) {
+        this.invalidate();
+        this.removeAll();
         this.util = new SweeperLogic(this.statusPanel.getPlayMode(),
                 configBean.getMineConfig().getGridCX(),
                 configBean.getMineConfig().getGridCY(),
@@ -112,6 +114,7 @@ public class Sweeper extends JPanel
                 makeAndAddButton(x, y, bDescr);
             }
         }
+        this.repaint();
     }
 
     public List<List<SweeperLogic.ButtDescr>> buildFieldsArray() {

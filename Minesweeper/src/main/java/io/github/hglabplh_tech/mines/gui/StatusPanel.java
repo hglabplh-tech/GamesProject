@@ -24,6 +24,7 @@ package io.github.hglabplh_tech.mines.gui;
 import io.github.hglabplh_tech.mines.backend.config.Configuration;
 import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 
+import javax.print.attribute.standard.JobName;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -41,6 +42,8 @@ public class StatusPanel extends JPanel implements ActionListener {
     private final JRadioButton radioButtNorm;
     private final JRadioButton radioButtLab;
     private final JRadioButton radioButtEnhanced;
+
+    private final JButton restartButton;
     private static Thread timerThread;
 
     public StatusPanel(Configuration.ConfigBean configBean) {
@@ -52,6 +55,10 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.timeValue = new JLabel("00");
         JLabel counterLabel = new JLabel("Counter: ");
         this.counterValue = new JLabel("0");
+        this.restartButton = new JButton("Restart Game");
+        this.restartButton.setBackground(Color.green);
+        this.restartButton.setActionCommand("restart");
+        this.restartButton.addActionListener(this);
 
         this.radioGroup = new ButtonGroup();
 
@@ -79,6 +86,8 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.add(this.radioButtNorm);
         this.add(this.radioButtLab);
         this.add(this.radioButtEnhanced);
+
+        this.add(restartButton);
         timerThread = new Thread(new TimerThread(this));
         timerThread.start();
         switch(this.playMode) {
@@ -106,8 +115,7 @@ public class StatusPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() instanceof JRadioButton) {
-            JRadioButton button = (JRadioButton) e.getSource();
+        if (e.getSource() instanceof JRadioButton || e.getSource() instanceof JButton) {
             this.getCounterValue().setText("0");
             timerThread.stop();
             timerThread = new Thread(new TimerThread(this));
@@ -119,16 +127,19 @@ public class StatusPanel extends JPanel implements ActionListener {
             Sweeper sweeper = null;
             if (command.equals("nor")) {
                 sweeper = Sweeper.getSweeper(PlayModes.NORMAL);
+                this.playMode = PlayModes.NORMAL;
             } else if (command.equals("lab")) {
                 sweeper = Sweeper.getSweeper(PlayModes.LABYRINTH);
+                this.playMode = PlayModes.LABYRINTH;
             } else if (command.equals("enh")) {
-                sweeper = Sweeper.getSweeper(PlayModes.NORMAL); //TODO: change this
+                sweeper = Sweeper.getSweeper(PlayModes.NORMAL); // See todo ->
+                this.playMode = PlayModes.NORMAL;//TODO: change this
                 System.err.println("Enhanced has to be implemented");
+            } else if (command.equals("restart")) {
+                sweeper = Sweeper.getSweeper(this.playMode); //TODO: change this
             }
-            sweeper.invalidate();
-            sweeper.removeAll();
             sweeper.initButtons(Configuration.getConfigBeanInstance());
-            sweeper.repaint();
+
         }
     }
 

@@ -57,18 +57,27 @@ public class Configuration {
 
 
     public static class MineConfig {
-        private final PlayModes playMode;
+        private PlayModes playMode;
 
-        private final Integer gridCX;
+        private Integer gridCX;
 
-        private final Integer gridCY;
+        private Integer gridCY;
 
-        private final Integer minesCount;
+        private Integer minesCount;
 
-        private final Boolean levelUp;
+        private Boolean levelUp;
 
-        private final Boolean stopAterPercent;
+        private Boolean stopAterPercent;
 
+        public MineConfig(final PlayModes playMode,final Integer gridCX,final Integer gridCY,
+                          final Integer minesCount, final Boolean levelUp, final Boolean stopAterPercent) {
+            this.playMode = playMode;
+            this.gridCX = gridCX;
+            this.gridCY = gridCY;
+            this.minesCount = minesCount;
+            this.levelUp = levelUp;
+            this.stopAterPercent = stopAterPercent;
+        }
         public MineConfig() {
             Optional<Properties> props = ConfigUtil.loadUserProps();
             Optional<String> optValue = ConfigUtil.getConfigValue(MINES_PLAYMODE_KEY, MINES_PLAYMODE_VAL);
@@ -103,7 +112,7 @@ public class Configuration {
 
             toSave.setProperty(MINES_LEVELUP_KEY, String.valueOf(this.stopAterPercent));
 
-            ConfigUtil.saveUserProps(toSave);
+            ConfigUtil.saveUserPropsIfVerChanged(toSave);
         }
 
         public PlayModes getPlayMode() {
@@ -128,6 +137,55 @@ public class Configuration {
 
         public Boolean getStopAterPercent() {
             return stopAterPercent;
+        }
+
+        public MineConfigBuilder copyBuilder() {
+            return new MineConfigBuilder(this);
+        }
+
+        public static class MineConfigBuilder {
+
+            private MineConfig mineConfig;
+            public MineConfigBuilder(MineConfig config) {
+                this.mineConfig = new MineConfig(config.getPlayMode(), config.getGridCX(),
+                        config.getGridCY(), config.getMinesCount(), config.getLevelUp(),
+                        config.getStopAterPercent());
+
+            }
+
+            public MineConfigBuilder playMode(PlayModes mode) {
+                mineConfig.playMode = mode;
+                return this;
+            }
+
+            public MineConfigBuilder gridCX(Integer cx) {
+                mineConfig.gridCX = cx;
+                return this;
+            }
+
+            public MineConfigBuilder gridCY(Integer cy) {
+                mineConfig.gridCY = cy;
+                return this;
+            }
+
+            public MineConfigBuilder minesCount(Integer minesCount) {
+                mineConfig.minesCount = minesCount;
+                return this;
+            }
+
+            public MineConfigBuilder levelUp(Boolean levelUp) {
+                mineConfig.levelUp = levelUp;
+                return this;
+            }
+
+            public MineConfigBuilder stopAfterPercent(Boolean stopAfterPercent) {
+                mineConfig.stopAterPercent = stopAfterPercent;
+                return this;
+            }
+
+            public MineConfig build() {
+                return this.mineConfig;
+            }
         }
     }
 
