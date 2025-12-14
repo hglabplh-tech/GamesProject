@@ -34,6 +34,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.net.URL;
 import java.time.Duration;
 
 import static java.awt.event.KeyEvent.*;
@@ -81,7 +82,7 @@ public class GUILogics {
      * @return returns the loaded image-icon
      */
     public static ImageIcon createIcon(String fname) {
-        java.net.URL imgURL = SweeperLogic.class.getResource("/images/" + fname);
+        URL imgURL = SweeperLogic.class.getResource("/images/" + fname);
         if (imgURL != null) {
             ImageIcon icon = new ImageIcon(imgURL);
             return icon;
@@ -100,7 +101,7 @@ public class GUILogics {
         // Po0sted by tschwab, modified by community. See post 'Timeline' for change history
         // Retrieved 2025-11-29, License - CC BY-SA 3.0 - used with changes
         try {
-            java.net.URL wavURL = SweeperLogic.class.getResource("/sounds/" + fname);
+            URL wavURL = SweeperLogic.class.getResource("/sounds/" + fname);
             File yourFile = new File(wavURL.toURI());
             AudioInputStream stream;
             AudioFormat format;
@@ -134,37 +135,30 @@ public class GUILogics {
     }
 
     public static JPopupMenu createPopupMenu() {
-        JPopupMenu menuBar;
-        JMenu menu, submenu;
+        JPopupMenu popupMenu = new JPopupMenu();
 
-        JRadioButtonMenuItem rbMenuItem;
-        JCheckBoxMenuItem cbMenuItem;
-        MenuActionListener actionListener = new MenuActionListener();
-        menuBar = new JPopupMenu();
-        menu = new JMenu("Game Actions");
-        submenu = new JMenu("Save Actions");
-        menu.add(submenu);
-        JMenuItem saveItem = new JMenuItem("Make a Save", 1);
-        saveItem.setActionCommand("msave");
-        saveItem.addActionListener(actionListener);
-        submenu.add(saveItem);
-        JMenuItem loadItem = new JMenuItem("Load a Save", 1);
-        loadItem.setActionCommand("lsave");
-        loadItem.addActionListener(actionListener);
-        submenu.add(loadItem);
-        menuBar.add(menu);
-        return menuBar;
+        JMenu menu = createSubMenus();
+        popupMenu.add(menu);
+        return popupMenu;
 
     }
     public static JMenuBar createMenu() {
         JMenuBar menuBar;
-        JMenu menu, submenu;
 
         JRadioButtonMenuItem rbMenuItem;
         JCheckBoxMenuItem cbMenuItem;
 
         menuBar = new JMenuBar();
 
+        JMenu menu = createSubMenus();
+        menuBar.add(menu);
+        return menuBar;
+
+    }
+
+    private static JMenu createSubMenus() {
+        JMenu menu;
+        JMenu submenu;
         menu = new JMenu("Game Actions");
         submenu = new JMenu("Save Actions");
         menu.add(submenu);
@@ -182,8 +176,6 @@ public class GUILogics {
         loadItem.setActionCommand("lsave");
         loadItem.addActionListener(actionListener);
         submenu.add(loadItem);
-        menuBar.add(menu);
-        return menuBar;
-
+        return menu;
     }
 }
