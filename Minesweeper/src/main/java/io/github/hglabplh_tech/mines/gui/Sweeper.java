@@ -74,7 +74,7 @@ public class Sweeper extends JPanel
         this.statusPanel = panel;
         this.mineIcon = GUILogics.createIcon("mine.png");
         this.bangIcon = GUILogics.createIcon("bang.png");
-        this.questionIcon = GUILogics.createIcon("question.jpeg");
+        this.questionIcon = GUILogics.createIcon("question.png");
         this.waterIcon = GUILogics.createIcon("ok.png");
         this.startIcon = GUILogics.createIcon("start.png");
         this.baseoneIcon = GUILogics.createIcon("baseone.png");
