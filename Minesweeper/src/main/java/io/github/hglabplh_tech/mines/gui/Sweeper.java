@@ -75,12 +75,12 @@ public class Sweeper extends JPanel
         this.mineIcon = GUILogics.createIcon("mine.png");
         this.bangIcon = GUILogics.createIcon("bang.png");
         this.questionIcon = GUILogics.createIcon("question.jpeg");
-        this.waterIcon = GUILogics.createIcon("water.png");
+        this.waterIcon = GUILogics.createIcon("ok.png");
         this.startIcon = GUILogics.createIcon("start.png");
         this.baseoneIcon = GUILogics.createIcon("baseone.png");
         this.basetwoIcon = GUILogics.createIcon("basetwo.png");
         this.endIcon = GUILogics.createIcon("finish.png");
-        this.purpleIcon = GUILogics.createIcon("purple.jpg");
+        this.purpleIcon = GUILogics.createIcon("crazy.png");
         JPopupMenu popupMenu = createPopupMenu();
         this.add(popupMenu);
         this.addMouseListener(new GameMouseListener(popupMenu));
