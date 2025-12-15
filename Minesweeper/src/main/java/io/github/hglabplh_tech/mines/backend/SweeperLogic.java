@@ -35,12 +35,12 @@ public class SweeperLogic {
     private final Integer cx;
     private final Integer cy;
     private final Integer numMines;
-    private final List<List<ButtDescr>> fieldsList = new ArrayList<>();
+    private final List<List<ButtonDescription>> fieldsList = new ArrayList<>();
     private final Boolean[] shadowArray;
     private final Boolean[] labArray;
 
     private Integer negativeHits;
-    private Optional<Labyrinth> labyrinth;
+    private Optional<Labyrinth> labyrinthOpt;
     private PlayModes playMode;
 
     public SweeperLogic(PlayModes playMode, Integer cx, Integer cy, Integer numMines) {
@@ -56,13 +56,13 @@ public class SweeperLogic {
 
     }
 
-    public List<List<ButtDescr>> calculateMines() {
+    public List<List<ButtonDescription>> calculateMines() {
         Random rand = new Random();
         int arrIndex = 0;
         for (int cyInd = 0; cyInd < this.cy; cyInd++) {
             this.fieldsList.add(new ArrayList<>());
             for (int cxInd = 0; cxInd < this.cx; cxInd++) {
-                this.fieldsList.get(cyInd).add(cxInd, new ButtDescr(Boolean.FALSE,
+                this.fieldsList.get(cyInd).add(cxInd, new ButtonDescription(Boolean.FALSE,
                         SweepPointType.NORMALPOINT));
                 this.shadowArray[arrIndex] = Boolean.FALSE;
                 this.labArray[arrIndex] = Boolean.FALSE;
@@ -82,9 +82,9 @@ public class SweeperLogic {
             this.labArray[nextIndex] = Boolean.TRUE;
         }
 
-        this.labyrinth = Optional.empty();
+        this.labyrinthOpt = Optional.empty();
         arrIndex = 0;
-        Point[] labPoints = new Point[4];
+        ButtonPoint[] labPoints = new ButtonPoint[4];
         int labIndex = 0;
         for (int cyInd = 0; cyInd < this.cy; cyInd++) {
             for (int cxInd = 0; cxInd < this.cx; cxInd++) {
@@ -92,7 +92,7 @@ public class SweeperLogic {
                 Boolean temp = this.shadowArray[arrIndex];
                 Boolean lab = this.labArray[arrIndex];
                 if (lab && this.playMode.equals(PlayModes.LABYRINTH)) {
-                    labPoints[labIndex] = new Point(cxInd, cyInd);
+
                     pointType = switch (labIndex) {
                         case 0 -> SweepPointType.STARTPOINT;
                         case 1 -> SweepPointType.FIRST_BASE;
@@ -100,19 +100,30 @@ public class SweeperLogic {
                         case 3 -> SweepPointType.ENDPOINT;
                         default -> SweepPointType.NORMALPOINT;
                     };
+                    pointType = temp ? SweepPointType.MINEPOINT : pointType;
+                    labPoints[labIndex] = new ButtonPoint(new Point(cxInd, cyInd),
+                            new ButtonDescription(Boolean.FALSE, pointType));
                     labIndex++;
                 }
                 pointType = temp ? SweepPointType.MINEPOINT : pointType;
-                this.fieldsList.get(cyInd).add(cxInd, new ButtDescr(Boolean.FALSE,
+                this.fieldsList.get(cyInd).add(cxInd, new ButtonDescription(Boolean.FALSE,
                         pointType));
                 arrIndex++;
 
             }
         }
         if (this.playMode.equals(PlayModes.LABYRINTH)) {
-            this.labyrinth = Optional.of(new Labyrinth(labPoints[0], labPoints[1], labPoints[2], labPoints[3]));
+            this.labyrinthOpt = Optional.of(new Labyrinth(labPoints[0], labPoints[1], labPoints[2], labPoints[3]));
         }
         return getFieldsList();
+    }
+
+    public void addToXYLabPath(Integer x, Integer y, ButtonDescription buttDescr) {
+        labyrinthOpt.ifPresent(labyrinth -> labyrinth.addXYToPath(x, y, buttDescr));
+    }
+
+    public void addToLabPath(ButtonPoint thePoint) {
+        labyrinthOpt.ifPresent(labyrinth -> labyrinth.addToPath(thePoint));
     }
 
     public String makeButtonName(Integer x, Integer y, Boolean isMine) {
@@ -128,27 +139,28 @@ public class SweeperLogic {
         String[] buttonValues = buttonName.split("#");
         Integer x = Integer.valueOf(buttonValues[0]);
         Integer y = Integer.valueOf(buttonValues[1]);
-        ButtDescr temp = this.fieldsList.get(y).get(x);
+        ButtonDescription temp = this.fieldsList.get(y).get(x);
         Boolean mineHit = Boolean.valueOf(buttonValues[2]);
         if (!temp.isProcessed() && !mineHit) {
             this.negativeHits++;
         }
-        this.fieldsList.get(y).add(x, new ButtDescr(Boolean.TRUE, temp.getPointType()));
+        this.fieldsList.get(y).add(x, new ButtonDescription(Boolean.TRUE, temp.pointType()));
         return Boolean.valueOf(mineHit);
     }
 
-    public Point extractPointFromName(String buttonName) {
+    public ButtonPoint extractPointFromName(String buttonName) {
         String[] buttonValues = buttonName.split("#");
         Integer x = Integer.valueOf(buttonValues[0]);
         Integer y = Integer.valueOf(buttonValues[1]);
-        return new Point(x, y);
+        ButtonDescription descr = this.fieldsList.get(y).get(x);
+        return new ButtonPoint(new Point(x, y), descr);
     }
 
     public SweepPointType extractPointType(String buttonName) {
         String[] buttonValues = buttonName.split("#");
         Integer x = Integer.valueOf(buttonValues[0]);
         Integer y = Integer.valueOf(buttonValues[1]);
-        return this.fieldsList.get(y).get(x).getPointType();
+        return this.fieldsList.get(y).get(x).pointType();
     }
 
 
@@ -190,7 +202,7 @@ public class SweeperLogic {
         return shadowArray;
     }
 
-    public List<List<ButtDescr>> getFieldsList() {
+    public List<List<ButtonDescription>> getFieldsList() {
         return Collections.unmodifiableList(this.fieldsList);
     }
 
@@ -202,63 +214,12 @@ public class SweeperLogic {
         return negativeHits;
     }
 
-    public Optional<Labyrinth> getLabyrinth() {
-        return labyrinth;
+    public Optional<Labyrinth> getLabyrinthOpt() {
+        return labyrinthOpt;
     }
 
     public PlayModes getPlayMode() {
         return playMode;
-    }
-
-    public static class ButtDescr {
-
-        private final boolean isProcessed;
-        private final SweepPointType pointType;
-
-        public ButtDescr(boolean isProcessed, SweepPointType type) {
-            this.isProcessed = isProcessed;
-            this.pointType = type;
-        }
-
-        public static class ButtonPoint {
-            private final Point myPoint;
-
-            private final ButtDescr buttonDescr;
-
-            public ButtonPoint(Point myPoint, ButtDescr buttonDescr) {
-                this.myPoint = myPoint;
-                this.buttonDescr = buttonDescr;
-            }
-
-            public Point getMyPoint() {
-                return myPoint;
-            }
-
-            @Override
-            public boolean equals(Object o) {
-                if (o == null || getClass() != o.getClass()) return false;
-                ButtonPoint that = (ButtonPoint) o;
-                return Objects.equals(getMyPoint(), that.getMyPoint()) && Objects.equals(buttonDescr, that.buttonDescr);
-            }
-
-            @Override
-            public int hashCode() {
-                return Objects.hash(getMyPoint(), buttonDescr);
-            }
-        }
-
-        public boolean isProcessed() {
-            return isProcessed;
-        }
-
-        public SweepPointType getPointType() {
-            return this.pointType;
-        }
-
-        public boolean isMine() {
-            return getPointType().equals(SweepPointType.MINEPOINT);
-        }
-
     }
 
 }

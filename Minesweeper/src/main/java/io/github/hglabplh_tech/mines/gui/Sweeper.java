@@ -28,12 +28,12 @@ import javax.swing.*;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import io.github.hglabplh_tech.mines.backend.ButtonDescription;
+import io.github.hglabplh_tech.mines.backend.ButtonPoint;
 import io.github.hglabplh_tech.mines.backend.Labyrinth;
 import io.github.hglabplh_tech.mines.backend.config.Configuration;
 import io.github.hglabplh_tech.mines.backend.config.PlayModes;
@@ -100,7 +100,7 @@ public class Sweeper extends JPanel
                 configBean.getMineConfig().getGridCX(),
                 configBean.getMineConfig().getGridCY(),
                 configBean.getMineConfig().getMinesCount());
-        List<List<SweeperLogic.ButtDescr>> fieldsArray = buildFieldsArray();
+        List<List<ButtonDescription>> fieldsArray = buildFieldsArray();
         GridLayout grid = new GridLayout();
         grid.setVgap(3);
         grid.setHgap(3);
@@ -110,15 +110,15 @@ public class Sweeper extends JPanel
         this.setLayout(grid);
         for (int y = 0; y < this.util.getCy(); y++) {
             for (int x = 0; x < this.util.getCx(); x++) {
-                SweeperLogic.ButtDescr bDescr = fieldsArray.get(y).get(x);
+                ButtonDescription bDescr = fieldsArray.get(y).get(x);
                 makeAndAddButton(x, y, bDescr);
             }
         }
         this.repaint();
     }
 
-    public List<List<SweeperLogic.ButtDescr>> buildFieldsArray() {
-        List<List<SweeperLogic.ButtDescr>> array = util.calculateMines();
+    public List<List<ButtonDescription>> buildFieldsArray() {
+        List<List<ButtonDescription>> array = util.calculateMines();
         if (this.playMode.equals(PlayModes.LABYRINTH)) {
             buildLabyrinth();
         }
@@ -126,7 +126,7 @@ public class Sweeper extends JPanel
     }
 
     private void buildLabyrinth() {
-        Optional<Labyrinth> labyrinthOpt = this.util.getLabyrinth();
+        Optional<Labyrinth> labyrinthOpt = this.util.getLabyrinthOpt();
         if (labyrinthOpt.isPresent()) {
             this.labyrinth = labyrinthOpt.get();
         } else {
@@ -191,10 +191,10 @@ public class Sweeper extends JPanel
     /**
      * Returns an ImageIcon, or null if the path was invalid.
      */
-    private void makeAndAddButton(Integer x, Integer y, SweeperLogic.ButtDescr bDescr) {
+    private void makeAndAddButton(Integer x, Integer y, ButtonDescription bDescr) {
         JButton button = null;
         if (playMode.equals(PlayModes.LABYRINTH)) {
-            button = switch (bDescr.getPointType()) {
+            button = switch (bDescr.pointType()) {
                 case ENDPOINT -> new JButton(this.endIcon);
                 case FIRST_BASE -> new JButton(this.baseoneIcon);
                 case SECOND_BASE -> new JButton(this.basetwoIcon);
@@ -226,9 +226,7 @@ public class Sweeper extends JPanel
             negativeEnd(source.getName());
         } else {
             if (this.playMode.equals(PlayModes.LABYRINTH)) {
-                Point lastFromPath = this.labyrinth.getPathToNext()
-                        .get(this.labyrinth.getPathToNext().size() - 1);
-                Point nextPoint = this.util.extractPointFromName(name);
+                ButtonPoint nextPoint = this.util.extractPointFromName(name);
                 this.labyrinth.addToPath(nextPoint);
                 if (!labyrinth.checkStepOrder()) {
                     source.setIcon(this.purpleIcon);

@@ -34,17 +34,17 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Labyrinth  {
-    private final Point startPoint;
-    private final Point firstBase;
-    private final Point secondBase;
-    private final Point endPoint;
-    private final java.util.List<Point> path = new ArrayList<>();
-    private final List<Point> pointsOrder;
-    private List<Point> pathToNext = new ArrayList<>();
+    private final ButtonPoint startPoint;
+    private final ButtonPoint firstBase;
+    private final ButtonPoint secondBase;
+    private final ButtonPoint endPoint;
+    private final List<ButtonPoint> path = new ArrayList<>();
+    private final List<ButtonPoint> pointsOrder;
+    private List<ButtonPoint> pathToNext = new ArrayList<>();
     private int nextIndex = 1;
-    private Point nextPoint;
+    private ButtonPoint nextPoint;
 
-    public Labyrinth(Point startPoint, Point firstBase, Point secondBase, Point endPoint) {
+    public Labyrinth(ButtonPoint startPoint, ButtonPoint firstBase, ButtonPoint secondBase, ButtonPoint endPoint) {
         this.startPoint = startPoint;
         this.firstBase = firstBase;
         this.secondBase = secondBase;
@@ -53,31 +53,35 @@ public class Labyrinth  {
         this.nextPoint = pointsOrder.get(this.nextIndex);
     }
 
-    public void addXYToPath(Integer x, Integer y) {
-        this.addToPath(new Point(x, y));
+    public void addXYToPath(Integer x, Integer y, ButtonDescription description) {
+        this.addToPath(new ButtonPoint(new Point(x, y), description));
     }
 
-    public void addToPath(Point point) {
+    public void addToPath(ButtonPoint point) {
         this.pathToNext.add(point);
     }
 
     public Point calculateNextPoint() {
         this.nextPoint = this.pointsOrder.get(++this.nextIndex);
-        return this.getNextPoint();
+        return this.getNextPoint().myPoint();
     }
 
     public boolean checkCorrectPath() {
         boolean success = true;
-        Iterator<Point> iterator = this.pathToNext.iterator();
+        Iterator<ButtonPoint> iterator = this.pathToNext.iterator();
         if (iterator.hasNext()) {
             iterator.next();
         }
         int index = 0;
         while (iterator.hasNext() && success) {
-            Point actualPoint = this.pathToNext.get(index);
-            Point nextPoint = iterator.next();
+            ButtonPoint actualPoint = this.pathToNext.get(index);
+            ButtonPoint nextPoint = iterator.next();
             index++;
-            success = actualPoint.checkPointIsNeighbor(nextPoint);
+            if (actualPoint.myPoint().checkPointIsNeighbor(nextPoint.myPoint())) {
+                success = true;
+            } else {
+                success = false;
+            }
         }
         return success;
     }
@@ -132,27 +136,27 @@ public class Labyrinth  {
     }
 
 
-    public Point getNextPoint() {
+    public ButtonPoint getNextPoint() {
         return this.nextPoint;
     }
 
-    public Point getStartPoint() {
+    public ButtonPoint getStartPoint() {
         return startPoint;
     }
 
-    public Point getEndPoint() {
+    public ButtonPoint getEndPoint() {
         return endPoint;
     }
 
-    public List<Point> getPath() {
+    public List<ButtonPoint> getPath() {
         return path;
     }
 
-    public List<Point> getPointsOrder() {
+    public List<ButtonPoint> getPointsOrder() {
         return pointsOrder;
     }
 
-    public List<Point> getPathToNext() {
+    public List<ButtonPoint> getPathToNext() {
         return pathToNext;
     }
 
@@ -160,19 +164,19 @@ public class Labyrinth  {
         return nextIndex;
     }
 
-    public Point getStart() {
+    public ButtonPoint getStart() {
         return startPoint;
     }
 
-    public Point getFirstBase() {
+    public ButtonPoint getFirstBase() {
         return firstBase;
     }
 
-    public Point getSecondBase() {
+    public ButtonPoint getSecondBase() {
         return secondBase;
     }
 
-    public Point getEnd() {
+    public ButtonPoint getEnd() {
         return endPoint;
     }
 
