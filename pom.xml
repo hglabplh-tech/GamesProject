@@ -11,6 +11,7 @@
     <modules>
         <module>Minesweeper</module>
         <module>HTMLControls</module>
+        <module>GamesGUI</module>
     </modules>
 
     <properties>

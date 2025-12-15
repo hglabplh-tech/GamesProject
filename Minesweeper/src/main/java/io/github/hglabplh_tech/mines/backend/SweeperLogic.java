@@ -39,7 +39,7 @@ public class SweeperLogic {
     private final Boolean[] shadowArray;
     private final Boolean[] labArray;
 
-    private Integer negativeHits;
+    private Integer successHits;
     private Optional<Labyrinth> labyrinthOpt;
     private PlayModes playMode;
 
@@ -50,7 +50,7 @@ public class SweeperLogic {
         this.cy = cy;
 
         this.playMode = playMode;
-        this.negativeHits = 0;
+        this.successHits = 0;
         this.shadowArray = new Boolean[this.numFields];
         this.labArray = new Boolean[this.numFields];
 
@@ -142,10 +142,10 @@ public class SweeperLogic {
         ButtonDescription temp = this.fieldsList.get(y).get(x);
         Boolean mineHit = Boolean.valueOf(buttonValues[2]);
         if (!temp.isProcessed() && !mineHit) {
-            this.negativeHits++;
+            this.successHits++;
         }
         this.fieldsList.get(y).add(x, new ButtonDescription(Boolean.TRUE, temp.pointType()));
-        return Boolean.valueOf(mineHit);
+        return mineHit;
     }
 
     public ButtonPoint extractPointFromName(String buttonName) {
@@ -179,7 +179,7 @@ public class SweeperLogic {
     }
 
     public boolean isPositiveEnd() {
-        return (boolean) (this.negativeHits >= (this.numFields - this.numMines));
+        return (this.successHits >= (this.numFields - this.numMines));
     }
 
     public Integer getNumFields() {
@@ -210,8 +210,8 @@ public class SweeperLogic {
         return labArray;
     }
 
-    public Integer getNegativeHits() {
-        return negativeHits;
+    public Integer getSuccessHits() {
+        return successHits;
     }
 
     public Optional<Labyrinth> getLabyrinthOpt() {
