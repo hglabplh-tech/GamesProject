@@ -21,13 +21,19 @@ SOFTWARE.
  */
 package io.github.hglabplh_tech.mines.backend;
 
+import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 import io.github.hglabplh_tech.mines.backend.util.Point;
+import io.github.hglabplh_tech.mines.gui.GUILogics;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class Labyrinth {
+public class Labyrinth  {
     private final Point startPoint;
     private final Point firstBase;
     private final Point secondBase;
@@ -87,8 +93,29 @@ public class Labyrinth {
         }
     }
 
+    public boolean checkStepOrder() {
+        if (checkCorrectPath()) {
+            // the order of the if statements here is essential do not change order
+            if (this.pathToNext.contains(this.endPoint)) {
+                return this.pathToNext.contains(this.startPoint)
+                        && this.pathToNext.contains(this.firstBase)
+                        && this.pathToNext.contains(this.secondBase);
+            }
+            if (this.pathToNext.contains(this.secondBase)) {
+                return this.pathToNext.contains(this.startPoint)
+                        && this.pathToNext.contains(this.firstBase);
+            }
+            if (this.pathToNext.contains(this.firstBase)) {
+                return this.pathToNext.contains(this.startPoint);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public Integer countBasesReached() {
-       Integer result = 0;
+        Integer result = 0;
         if (checkCorrectPath()) {
 
             if (this.pathToNext.contains(this.firstBase)) {
@@ -148,4 +175,6 @@ public class Labyrinth {
     public Point getEnd() {
         return endPoint;
     }
+
+
 }

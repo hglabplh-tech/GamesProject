@@ -228,8 +228,9 @@ public class Sweeper extends JPanel
             if (this.playMode.equals(PlayModes.LABYRINTH)) {
                 Point lastFromPath = this.labyrinth.getPathToNext()
                         .get(this.labyrinth.getPathToNext().size() - 1);
-                Point compare = this.util.extractPointFromName(name);
-                if (!lastFromPath.checkPointIsNeighbor(compare)) {
+                Point nextPoint = this.util.extractPointFromName(name);
+                this.labyrinth.addToPath(nextPoint);
+                if (!labyrinth.checkStepOrder()) {
                     source.setIcon(this.purpleIcon);
                     source.invalidate();
                     GUILogics.playSound("alarm.wav");
@@ -239,9 +240,7 @@ public class Sweeper extends JPanel
                 } else {
                     source.setIcon(this.waterIcon);
                 }
-                this.labyrinth
-                        .addToPath(
-                                this.util.extractPointFromName(name));
+
             } else {
                 source.setIcon(this.waterIcon);
             }
