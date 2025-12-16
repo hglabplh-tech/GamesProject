@@ -24,7 +24,7 @@ package io.github.hglabplh_tech.mines.gui;
 import javax.swing.*;
 
 public class TimerThread implements Runnable {
-    private static long seconds = 115;
+    private static long seconds = resetTimer();
     private final JLabel timerLabel;
 
     public TimerThread(StatusPanel panel) {
@@ -32,14 +32,15 @@ public class TimerThread implements Runnable {
     }
     public void run() {
         while (true) {
-            GUILogics.waitSeconds(2);
+            GUILogics.waitSeconds(1.0f);
             TimerThread.seconds--;
             timerLabel.setText(String.valueOf(getTheSeconds()));
         }
     }
 
-    public static  void resetTimer() {
+    public static long resetTimer() {
         TimerThread.seconds = 115;
+        return TimerThread.seconds;
     }
     public static long getTheSeconds() {
         return TimerThread.seconds;

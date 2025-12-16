@@ -126,9 +126,10 @@ public class GUILogics {
      * This method simply waits for the given count of seconds
      * @param seconds seconds to wait
      */
-    public static void waitSeconds(long seconds) {
+    public static void waitSeconds(float seconds) {
         try {
-            Thread.sleep(seconds * 1000L);
+            long milliSeconds = (long)(seconds * 1000);
+            Thread.sleep(milliSeconds);
         } catch (Exception e) {
 
         }
