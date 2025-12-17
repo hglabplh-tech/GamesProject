@@ -21,8 +21,7 @@ SOFTWARE.
  */
 package io.github.hglabplh_tech.mines.backend;
 
-import com.sun.source.tree.Tree;
-
+import javax.swing.tree.TreeNode;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -76,12 +75,33 @@ public class SpecialTree {
 
     }
 
+    public void setSuccess(TreeElement element, Boolean result) {
+        element.setIsSuccess(result);
+    }
+
+    // have to think about that it is not complete
+    public TreeElement traverse(TreeElement element) {
+        TreeElement result = element;
+        if (element.isSuccess()) {
+            if (element.getLeft() != null) {
+                result = traverse(element.getLeft());
+            }
+            if (element.getRight() != null) {
+                result = traverse(element.getRight());
+            }
+            return result;
+        } else {
+            return element.getParent();
+        }
+    }
+
 
     public static class TreeElement {
         private ButtonPoint thisPoint;
         private TreeElement parent;
         private TreeElement left;
         private TreeElement right;
+        private Boolean success = false;
 
 
         public TreeElement() {
@@ -101,6 +121,14 @@ public class SpecialTree {
 
         public TreeElement getRight() {
             return right;
+        }
+
+        public Boolean isSuccess() {
+            return this.success;
+        }
+
+        public void setIsSuccess(Boolean value) {
+            this.success = value;
         }
 
         public Builder newBuilder() {

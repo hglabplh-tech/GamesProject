@@ -43,6 +43,7 @@ public class Labyrinth  {
     private List<ButtonPoint> pathToNext = new ArrayList<>();
     private int nextIndex = 1;
     private ButtonPoint nextPoint;
+    private ButtonPoint actPoint;
 
     public Labyrinth(ButtonPoint startPoint, ButtonPoint firstBase, ButtonPoint secondBase, ButtonPoint endPoint) {
         this.startPoint = startPoint;
@@ -51,6 +52,7 @@ public class Labyrinth  {
         this.endPoint = endPoint;
         this.pointsOrder = Arrays.asList(startPoint, firstBase, secondBase, endPoint);
         this.nextPoint = pointsOrder.get(this.nextIndex);
+        this.actPoint = pointsOrder.get(0);
     }
 
     public void addXYToPath(Integer x, Integer y, ButtonDescription description) {
@@ -61,9 +63,17 @@ public class Labyrinth  {
         this.pathToNext.add(point);
     }
 
-    public Point calculateNextPoint() {
+    public void calculateNextPoint() {
         this.nextPoint = this.pointsOrder.get(++this.nextIndex);
-        return this.getNextPoint().myPoint();
+    }
+
+    public ButtonPoint switchToNextBase(Integer x, Integer y) {
+        Point actPoint= new Point(x, y);
+        if (this.nextPoint.equalsInPoint(actPoint)) {
+            this.actPoint = this.nextPoint;
+            calculateNextPoint();
+        }
+        return this.nextPoint;
     }
 
     public boolean checkCorrectPath() {

@@ -35,6 +35,7 @@ public class StatusPanel extends JPanel implements ActionListener {
 
     private final JLabel timeValue;
     private final JLabel counterValue;
+    private final JLabel scoreValue;
 
     private  PlayModes playMode;
 
@@ -55,6 +56,8 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.timeValue = new JLabel("00");
         JLabel counterLabel = new JLabel("Counter: ");
         this.counterValue = new JLabel("0");
+        JLabel scoreLabel = new JLabel("Score: ");
+        this.scoreValue = new JLabel("0");
         this.restartButton = new JButton("Restart Game");
         this.restartButton.setBackground(Color.green);
         this.restartButton.setActionCommand("restart");
@@ -82,6 +85,8 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.add(this.timeValue);
         this.add(counterLabel);
         this.add(this.counterValue);
+        this.add(scoreLabel);
+        this.add(this.scoreValue);
 
         this.add(this.radioButtNorm);
         this.add(this.radioButtLab);
@@ -144,13 +149,33 @@ public class StatusPanel extends JPanel implements ActionListener {
     }
 
     public JLabel getCounterValue() {
-        return counterValue;
+        return this.counterValue;
     }
+
+    public JLabel getScoreValue() {
+        return this.scoreValue;
+    }
+
 
     public void incrementCounterValue() {
         Integer value = Integer.valueOf(getCounterValue().getText());
         value++;
         getCounterValue().setText(value.toString());
+    }
+
+    public void incrementScoreValueBy(int increment) {
+        Integer value = Integer.valueOf(getScoreValue().getText());
+        value = value + increment;
+        getScoreValue().setText(value.toString());
+    }
+
+    public void resetCounterValueAndScore(PlayModes mode) {
+        if (mode.equals(PlayModes.LABYRINTH)) {
+            getCounterValue().setText("1500");
+        } else {
+            getCounterValue().setText("0");
+        }
+        getScoreValue().setText("0");
     }
 
     public void decrementCounterValue() {

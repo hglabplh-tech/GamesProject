@@ -26,6 +26,7 @@ import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 
 import io.github.hglabplh_tech.mines.backend.util.Point;
 
+import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -171,11 +172,14 @@ public class SweeperLogic {
         String[] compValues = compName.split("#");
         Integer cox = Integer.valueOf(compValues[0]);
         Integer coy = Integer.valueOf(compValues[1]);
-        if (cox.equals(x) && coy.equals(y)) {
-            return true;
-        }
+        return cox.equals(x) && coy.equals(y);
+    }
 
-        return false;
+    public Point getNamesPoint(String buttonName) {
+        String[] buttonValues = buttonName.split("#");
+        Integer x = Integer.valueOf(buttonValues[0]);
+        Integer y = Integer.valueOf(buttonValues[1]);
+        return new Point(x, y);
     }
 
     public boolean isPositiveEnd() {

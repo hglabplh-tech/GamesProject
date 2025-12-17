@@ -32,6 +32,10 @@ public record ButtonPoint(Point myPoint, ButtonDescription buttonDescr) {
         return buttonDescr;
     }
 
+    public boolean equalsInPoint(Point point) {
+        return Objects.equals(myPoint(), point);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

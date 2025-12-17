@@ -96,6 +96,7 @@ public class Sweeper extends JPanel
     public void initButtons(Configuration.ConfigBean configBean) {
         this.invalidate();
         this.removeAll();
+        this.statusPanel.resetCounterValueAndScore(this.playMode);
         this.util = new SweeperLogic(this.statusPanel.getPlayMode(),
                 configBean.getMineConfig().getGridCX(),
                 configBean.getMineConfig().getGridCY(),
@@ -255,7 +256,19 @@ public class Sweeper extends JPanel
         if (positiveEnd) {
             positiveEnd();
         }
-        this.statusPanel.incrementCounterValue();
+        if (this.playMode.equals(PlayModes.LABYRINTH)) {
+            this.statusPanel.decrementCounterValue();
+            this.statusPanel.incrementScoreValueBy(1);
+            Point actPoint = this.util.getNamesPoint(name);
+            if (labyrinth.getNextPoint().equalsInPoint(actPoint)) {
+                ButtonPoint nextPoint = labyrinth.switchToNextBase(actPoint.x(), actPoint.y());
+                int actScore = Integer.parseInt(statusPanel.getScoreValue().getText());
+                this.statusPanel.incrementScoreValueBy((actScore * 2));
+            }
+        } else {
+            this.statusPanel.incrementCounterValue();
+            this.statusPanel.incrementScoreValueBy(1);
+        }
 
     }
 
