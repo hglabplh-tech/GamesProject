@@ -98,23 +98,29 @@ public class DecisionTree {
 
     }
 
-    public void setSuccess(TreeElement element, Boolean result) {
-        element.setIsSuccess(result);
-    }
 
     // have to think about that it is not complete
     public TreeElement traverse(TreeElement element) {
         TreeElement result = element;
-        if (element.isSuccess()) {
+        if (element.successIndicator().indicator().equals(SuccessIndicator.NOK)) {
+            if (element.getSibling() != null) {
+                result = traverse(element.getSibling());
+            }
+
             if (element.getLeft() != null) {
                 result = traverse(element.getLeft());
             }
+
             if (element.getRight() != null) {
                 result = traverse(element.getRight());
             }
+
+            if (element.getParent() != null) {
+                result = traverse(element.getParent());
+            }
             return result;
         } else {
-            return element.getParent();
+            return element;
         }
     }
 
@@ -129,7 +135,7 @@ public class DecisionTree {
         private TreeElement left;
         private TreeElement right;
         private TreeElement sibling;
-        private Boolean success = false;
+        private SuccessIndicator successIndicator = new SuccessIndicator(false, false, SuccessIndicator.NOK);
 
 
 
@@ -157,12 +163,8 @@ public class DecisionTree {
             return this.sibling;
         }
 
-        public Boolean isSuccess() {
-            return this.success;
-        }
-
-        public void setIsSuccess(Boolean value) {
-            this.success = value;
+        public SuccessIndicator successIndicator() {
+            return this.successIndicator;
         }
 
         public TreeElementType getElementType () {
@@ -170,39 +172,45 @@ public class DecisionTree {
         }
 
         public <T> TreeElement addSuccessor (TreeElement element,
-                                         Predicate<? super T> predicate,
-                                         T value) {
+                                         Predicate<? super ButtonPoint> predicateNext,
+                                             Predicate<? super ButtonPoint> predicateEnd,
+                                         ButtonPoint value) {
             return element
                     .changeBuilder()
-                    .setSuccessor(predicate, value)
+                    .setSuccessor(predicateNext, predicateEnd, value)
                     .build();
         }
 
-        public <T> List<TreeElement> loopAndAddSuccessor (TreeElement element,
-                                                          Predicate<? super T> predicate,
-                                                          T value) {
+        public List<TreeElement> loopAndAddSuccessor (TreeElement element,
+                                                          Predicate<? super ButtonPoint> predicateNext,
+                                                          Predicate<? super ButtonPoint> predicateEnd,
+                                                          ButtonPoint value) {
+            List<TreeElement> result = new ArrayList<>();
             List<TreeElement> allElements = new ArrayList<>();
+            if (element.getSibling() != null) {
+                allElements.add(element.getSibling());
+            }
             if (element.getLeft() != null) {
                 allElements.add(element.getLeft());
             }
             if (element.getRight() != null) {
                 allElements.add(element.getRight());
             }
-            if (element.getSibling() != null) {
-                allElements.add(element.getSibling());
+            if (element.getParent() != null) {
+                allElements.add(element.getParent());
             }
-            List<TreeElement> result = new ArrayList<>();
 
             for (TreeElement item: allElements) {
-                TreeElement changed = item.addSuccessor(item, predicate, value);
-                if (changed.isSuccess()) {
-                    result.add(changed);
+                TreeElement withSuccessor = item.addSuccessor(item, predicateNext, predicateEnd, value);
+                if (withSuccessor.successIndicator().indicator().equals(SuccessIndicator.SUCCESSFUL) ||
+                        withSuccessor.successIndicator().indicator().equals(SuccessIndicator.FIN_SUCCESS)) {
+                    result.add(withSuccessor);
+                } else {
+                    result = loopAndAddSuccessor(item, predicateNext, predicateEnd, value);
                 }
             }
             return result;
         }
-
-
 
         public Builder newBuilder() {
             return new Builder();
@@ -216,29 +224,44 @@ public class DecisionTree {
             return new Builder(this, false);
         }
 
-
         @Override
         public boolean equals(Object o) {
             if (o == null || getClass() != o.getClass()) return false;
             TreeElement that = (TreeElement) o;
             return Objects.equals(getThisPoint(), that.getThisPoint())
-                    && Objects.equals(getElementType(), that.getElementType())
+                    && getElementType() == that.getElementType()
                     && Objects.equals(getParent(), that.getParent())
                     && Objects.equals(getLeft(), that.getLeft())
                     && Objects.equals(getRight(), that.getRight())
                     && Objects.equals(getSibling(), that.getSibling())
-                    && Objects.equals(this.isSuccess(), that.isSuccess());
+                    && Objects.equals(successIndicator(), that.successIndicator());
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(getThisPoint(), getParent(), getLeft(), getRight(), getSibling(), success);
+            return Objects.hash(getThisPoint(),
+                    getElementType(), getParent(),
+                    getLeft(), getRight(),
+                    getSibling(), successIndicator());
+        }
+
+        @Override
+        public String toString() {
+            return "TreeElement{" +
+                    "thisPoint=" + getThisPoint() +
+                    ", elementType=" + getElementType() +
+                    ", parent=" + getParent() +
+                    ", left=" + getLeft() +
+                    ", right=" + getRight() +
+                    ", sibling=" + getSibling() +
+                    ", successIndicator=" + successIndicator() +
+                    '}';
         }
 
         public static class Builder {
             private Optional<ButtonPoint> thisPointOpt = Optional.empty();
             private Optional<TreeElementType> elementTypeOpt = Optional.empty();
-            private Optional<Boolean> successOpt = Optional.empty();
+            private Optional<SuccessIndicator> successOpt = Optional.empty();
             private Optional<TreeElement> parentOpt = Optional.empty();
             private Optional<TreeElement> leftOpt = Optional.empty();
             private Optional<TreeElement> rightOpt = Optional.empty();
@@ -257,7 +280,7 @@ public class DecisionTree {
                 this.leftOpt = Optional.ofNullable(toCopy.getLeft());
                 this.rightOpt = Optional.ofNullable(toCopy.getRight());
                 this.siblingOpt = Optional.ofNullable(toCopy.getSibling());
-                this.successOpt = Optional.ofNullable(toCopy.isSuccess());
+                this.successOpt = Optional.ofNullable(toCopy.successIndicator());
                 if (copy) {
                     this.newElement = new TreeElement();
                 } else {
@@ -297,13 +320,37 @@ public class DecisionTree {
                 return this;
             }
 
-            public <T> Builder setSuccessor(Predicate<? super T> predicate, T value) {
-               if (predicate != null && value != null) {
-                   this.successOpt = Optional.of(predicate.test(value));
+            public  Builder setSuccessor(Predicate<? super ButtonPoint> predicateNext,
+                                            Predicate<? super ButtonPoint> predicateEnd,
+                                            ButtonPoint value) {
+               if (predicateNext != null && predicateEnd != null && value != null) {
+                   Boolean success = predicateNext.test(value);
+                   Boolean finished = predicateEnd.test(value);
+                   Integer indicator = findIndicator(success, finished);
+                   this.successOpt = Optional.of(
+                           new SuccessIndicator(success,
+                                   finished, indicator));
                } else {
-                   this.successOpt = Optional.of(Boolean.FALSE);
+                   this.successOpt = Optional.of(new SuccessIndicator(Boolean.FALSE,
+                           Boolean.FALSE, SuccessIndicator.NOK));
                }
                return this;
+            }
+
+            private Integer findIndicator(Boolean success, Boolean finished) {
+                Integer indicator = SuccessIndicator.NOK;
+                if (!success && finished) {
+                    indicator = SuccessIndicator.FINISHED;
+                } else {
+                    if (success) {
+                        if (finished) {
+                            indicator = SuccessIndicator.FIN_SUCCESS;
+                        } else {
+                            indicator = SuccessIndicator.SUCCESSFUL;
+                        }
+                    }
+                }
+                return indicator;
             }
 
             public TreeElement build() {
@@ -314,7 +361,7 @@ public class DecisionTree {
                 element.left = this.leftOpt.orElse(null);
                 element.right = this.rightOpt.orElse(null);
                 element.sibling = this.siblingOpt.orElse(null);
-                element.success = this.successOpt.orElse(Boolean.FALSE);
+                element.successIndicator = this.successOpt.orElse(null);
                 return element;
             }
 
@@ -337,6 +384,70 @@ public class DecisionTree {
             return typeName;
         }
 
+        @Override
+        public String toString() {
+            return "TreeElementType{" +
+                    "typeName='" + typeName + '\'' +
+                    '}';
+        }
+    }
 
+    public static class SuccessIndicator {
+        private final Boolean success;
+
+        private final Boolean finished;
+
+        private final Integer indicator;
+
+        public static final Integer SUCCESSFUL = 0x01;
+        public static final Integer FINISHED = 0x02;
+        public static final Integer FIN_SUCCESS = SUCCESSFUL + FINISHED;
+        public static final Integer NOK = 0x10;
+
+
+        public SuccessIndicator(Boolean success, Boolean finished, Integer indicator) {
+            this.success = success;
+            this.finished = finished;
+            this.indicator = indicator;
+        }
+
+        public Boolean success() {
+            return this.success;
+        }
+
+        public Integer indicator() {
+            return this.indicator;
+        }
+
+        public Boolean finished() {
+            return this.finished;
+        }
+
+        public Boolean isFinishItem() {
+            return success() && finished();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || getClass() != o.getClass()) return false;
+            SuccessIndicator that = (SuccessIndicator) o;
+            return Objects.equals(success, that.success)
+                    && Objects.equals(finished, that.finished)
+                    && Objects.equals(indicator, that.indicator);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(success, finished, indicator);
+        }
+
+        @Override
+        public String toString() {
+            return "SuccessIndicator{" +
+                    "success=" + success +
+                    ", finished=" + finished +
+                    ", indicator=" + indicator +
+                    '}';
+        }
     }
 }

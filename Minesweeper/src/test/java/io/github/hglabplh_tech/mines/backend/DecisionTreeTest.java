@@ -1,11 +1,9 @@
 package io.github.hglabplh_tech.mines.backend;
 
 import io.github.hglabplh_tech.mines.backend.util.Point;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class DecisionTreeTest {
 
@@ -30,19 +28,18 @@ class DecisionTreeTest {
         DecisionTree.TreeElement leftElement = tree.newTreeElement(rootElement, DecisionTree.TreeElementType.LEFT,
                 new ButtonPoint(leftP, buttDescrLeft));
         tree.insertLeft(rootElement, leftElement);
-        assertEquals(rootElement.getLeft().getThisPoint(), leftElement.getThisPoint());
+        Assertions.assertEquals(rootElement.getLeft().getThisPoint(), leftElement.getThisPoint());
     }
 
     @Test
     public void newTreeElement() {
-        Point rootP = new Point(8,10);
         ButtonDescription buttDescription = new ButtonDescription(Boolean.FALSE,
                 SweepPointType.FIRST_BASE);
         Point point = new Point(17,13);
         ButtonPoint buttonPoint = new ButtonPoint(point, buttDescription);
         DecisionTree.TreeElement newElement = this.theTree
                 .newTreeElement(this.theTree.getRoot(), DecisionTree.TreeElementType.LEFT, buttonPoint);
-        assertEquals(newElement.getThisPoint(), buttonPoint);
+        Assertions.assertEquals(newElement.getThisPoint(), buttonPoint);
     }
 
     @Test
@@ -50,7 +47,7 @@ class DecisionTreeTest {
         DecisionTree.TreeElement newElement = makeNewElement(true, DecisionTree.TreeElementType.LEFT,
                 SweepPointType.MINEPOINT, 10,10);
         this.theTree.insertLeft(this.theTree.getRoot(), newElement);
-        assertEquals(this.theTree.getRoot().getLeft().getThisPoint(), newElement.getThisPoint());
+        Assertions.assertEquals(this.theTree.getRoot().getLeft().getThisPoint(), newElement.getThisPoint());
     }
 
     @Test
@@ -58,7 +55,7 @@ class DecisionTreeTest {
         DecisionTree.TreeElement newElement = makeNewElement(true, DecisionTree.TreeElementType.RIGHT,
                 SweepPointType.MINEPOINT, 10,10);
         this.theTree.insertRight(this.theTree.getRoot(), newElement);
-        assertEquals(this.theTree.getRoot().getRight().getThisPoint(), newElement.getThisPoint());
+        Assertions.assertEquals(this.theTree.getRoot().getRight().getThisPoint(), newElement.getThisPoint());
     }
 
     @Test
@@ -67,7 +64,7 @@ class DecisionTreeTest {
                 SweepPointType.MINEPOINT, 10,10);
         this.theTree.insertSibling(this.theTree.getRoot(),
                 this.theTree.getRoot(), newElement);
-        assertEquals(this.theTree.getRoot().getSibling().getThisPoint(), newElement.getThisPoint());
+        Assertions.assertEquals(this.theTree.getRoot().getSibling().getThisPoint(), newElement.getThisPoint());
     }
 
     @Test
@@ -77,8 +74,8 @@ class DecisionTreeTest {
         DecisionTree.TreeElement rightElement = makeNewElement(true, DecisionTree.TreeElementType.RIGHT,
                 SweepPointType.NORMALPOINT, 15,30);
         this.theTree.insertLeftRight(this.theTree.getRoot(), leftElement, rightElement);
-        assertEquals(this.theTree.getRoot().getLeft().getThisPoint(), leftElement.getThisPoint());
-        assertEquals(this.theTree.getRoot().getRight().getThisPoint(), rightElement.getThisPoint());
+        Assertions.assertEquals(this.theTree.getRoot().getLeft().getThisPoint(), leftElement.getThisPoint());
+        Assertions.assertEquals(this.theTree.getRoot().getRight().getThisPoint(), rightElement.getThisPoint());
     }
 
     @Test
@@ -89,21 +86,65 @@ class DecisionTreeTest {
                 SweepPointType.NORMALPOINT, 15,30);
         DecisionTree.TreeElement siblingElement = makeNewElement(false, DecisionTree.TreeElementType.SIBLING, SweepPointType.SECOND_BASE, 16,35);
         this.theTree.insertLeftRightSibling(this.theTree.getRoot(), leftElement, rightElement, siblingElement);
-        assertEquals(this.theTree.getRoot().getLeft().getThisPoint(), leftElement.getThisPoint());
-        assertEquals(this.theTree.getRoot().getRight().getThisPoint(), rightElement.getThisPoint());
-        assertEquals(this.theTree.getRoot().getSibling().getThisPoint(), siblingElement.getThisPoint());
+        Assertions.assertEquals(this.theTree.getRoot().getLeft().getThisPoint(), leftElement.getThisPoint());
+        Assertions.assertEquals(this.theTree.getRoot().getRight().getThisPoint(), rightElement.getThisPoint());
+        Assertions.assertEquals(this.theTree.getRoot().getSibling().getThisPoint(), siblingElement.getThisPoint());
     }
 
     @Test
     public void addSuccessor () {
-        DecisionTree.TreeElement element = makeNewElement(false, DecisionTree.TreeElementType.LEFT,
+        DecisionTree.TreeElement elementNext = makeNewElement(false, DecisionTree.TreeElementType.LEFT,
                 SweepPointType.NORMALPOINT, 7, 7);
+        DecisionTree.TreeElement elementNoSuccMine = makeNewElement(false, DecisionTree.TreeElementType.RIGHT,
+                SweepPointType.MINEPOINT, 45, 30);
+        DecisionTree.TreeElement elementNoSuccPos = makeNewElement(false, DecisionTree.TreeElementType.LEFT,
+                SweepPointType.NORMALPOINT, 47, 11);
+        DecisionTree.TreeElement elementFinish = makeNewElement(false, DecisionTree.TreeElementType.PARENT,
+                SweepPointType.ENDPOINT, 50, 50);
         Point p = new Point(7,7);
-        element.addSuccessor(element, (e -> e.equalsInPoint(p)), element.getThisPoint());
-        assertTrue(element.isSuccess());
-        Point p2 = new Point(7,0);
-        element.addSuccessor(element, (e -> e.equalsInPoint(p2)), element.getThisPoint());
-        assertFalse(element.isSuccess());
+        Point p1 = new Point(45,30);
+        Point p2 = new Point(50, 50);
+        elementNext.addSuccessor(elementNext,(e -> (e.equalsInPoint(p) && !e.buttonDescr().isMine())) ,
+                (e -> (e.equalsInPoint(p2) && !e.buttonDescr().isMine())),
+                elementNext.getThisPoint());
+        Assertions.assertTrue(elementNext.successIndicator().success());
+        Assertions.assertFalse(elementNext.successIndicator().finished());
+        Assertions.assertEquals(DecisionTree.SuccessIndicator.SUCCESSFUL, elementNext.successIndicator().indicator());
+
+        elementNoSuccMine.addSuccessor(elementNoSuccMine,
+                (e -> (e.equalsInPoint(p1)&& !e.buttonDescr().isMine())),
+                (e -> (e.equalsInPoint(p2)&& !e.buttonDescr().isMine())),
+                elementNoSuccMine.getThisPoint());
+        Assertions.assertFalse(elementNoSuccMine.successIndicator().success());
+        Assertions.assertFalse(elementNoSuccMine.successIndicator().finished());
+        Assertions.assertEquals(DecisionTree.SuccessIndicator.NOK, elementNoSuccMine.successIndicator().indicator());
+
+
+        elementNoSuccPos.addSuccessor(elementNoSuccPos,
+                (e -> (e.equalsInPoint(p1)&& !e.buttonDescr().isMine())),
+                (e -> (e.equalsInPoint(p2)&& !e.buttonDescr().isMine())),
+                elementNoSuccPos.getThisPoint());
+        Assertions.assertFalse(elementNoSuccPos.successIndicator().success());
+        Assertions.assertFalse(elementNoSuccPos.successIndicator().finished());
+        Assertions.assertEquals(DecisionTree.SuccessIndicator.NOK, elementNoSuccPos.successIndicator().indicator());
+
+        elementFinish.addSuccessor(elementFinish,
+                (e -> e.equalsInPoint(p1)),
+                (e -> e.equalsInPoint(p2)),
+                elementFinish.getThisPoint());
+        Assertions.assertFalse(elementFinish.successIndicator().success());
+        Assertions.assertTrue(elementFinish.successIndicator().finished());
+        Assertions.assertFalse(elementFinish.successIndicator().isFinishItem());
+        Assertions.assertEquals(DecisionTree.SuccessIndicator.FINISHED, elementFinish.successIndicator().indicator());
+
+        elementFinish.addSuccessor(elementFinish,
+                (e -> e.equalsInPoint(p2)),
+                (e -> e.equalsInPoint(p2)),
+                elementFinish.getThisPoint());
+        Assertions.assertTrue(elementFinish.successIndicator().success());
+        Assertions.assertTrue(elementFinish.successIndicator().finished());
+        Assertions.assertTrue(elementFinish.successIndicator().isFinishItem());
+        Assertions.assertEquals(DecisionTree.SuccessIndicator.FIN_SUCCESS, elementFinish.successIndicator().indicator());
     }
 
     @Test
