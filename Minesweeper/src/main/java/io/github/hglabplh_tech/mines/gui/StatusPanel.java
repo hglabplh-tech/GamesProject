@@ -45,6 +45,8 @@ public class StatusPanel extends JPanel implements ActionListener {
     private final JRadioButton radioButtEnhanced;
 
     private final JButton restartButton;
+    private final JButton saveButton;
+
     private static Thread timerThread;
 
     public StatusPanel(Configuration.ConfigBean configBean) {
@@ -62,6 +64,10 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.restartButton.setBackground(Color.green);
         this.restartButton.setActionCommand("restart");
         this.restartButton.addActionListener(this);
+        this.saveButton = new JButton("Save Game");
+        this.saveButton.setBackground(Color.green);
+        this.saveButton.setActionCommand("savegame");
+        this.saveButton.addActionListener(this);
 
         this.radioGroup = new ButtonGroup();
 
@@ -93,6 +99,7 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.add(this.radioButtEnhanced);
 
         this.add(restartButton);
+        this.add(saveButton);
         timerThread = new Thread(new TimerThread(this));
         timerThread.start();
         switch(this.playMode) {

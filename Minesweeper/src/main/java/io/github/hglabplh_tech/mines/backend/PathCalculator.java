@@ -21,23 +21,97 @@ SOFTWARE.
  */
 package io.github.hglabplh_tech.mines.backend;
 
+import io.github.hglabplh_tech.mines.backend.util.DecisionTreeUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
+
 public class PathCalculator {
 
     private final SweeperLogic util;
     private final Labyrinth labyrinth;
 
+    private final DecisionTree theTree;
+
     public PathCalculator(SweeperLogic util, Labyrinth labyrinth) {
+        this.theTree = new DecisionTree();
         this.util = util;
         this.labyrinth = labyrinth;
     }
 
+    public List<ButtonPoint> calculatePath(ButtonPoint start, ButtonPoint end) {
+        List<ButtonPoint> path = new ArrayList<>();
+        List<List<ButtonDescription>> field = this.getUtil().getFieldsList();
+        ButtonDescription descriptionStart = field.get(start.myPoint().y()).get(start.myPoint().x());
+        ButtonDescription descriptionEnd = field.get(end.myPoint().y()).get(end.myPoint().x());
+        ButtonPoint startPoint = new ButtonPoint(start.myPoint(), descriptionStart);
+        ButtonPoint endPoint = new ButtonPoint(end.myPoint(), descriptionEnd);
+        if (startPoint.equals(start) && endPoint.equals(end)) {
+            this.getTheTree().initRoot(startPoint);
+            DecisionTree.TreeElement leftElement =
+                    DecisionTreeUtils.insertElementLeftRight(this.getTheTree(),
+                            this.theTree.getRoot(),
+                            DecisionTree.TreeElementType.LEFT,
+                            endPoint);
+            Conditions conds = registerConditions(startPoint, endPoint, startPoint);
+            leftElement = leftElement.addSuccessor(leftElement, conds.nextCond(), conds.endCond(), leftElement.getThisPoint());
 
+        }
+        return path;
+    }
+
+
+    public DecisionTree getTheTree() {
+        return this.theTree;
+    }
 
     public SweeperLogic getUtil() {
-        return util;
+        return this.util;
     }
 
     public Labyrinth getLabyrinth() {
-        return labyrinth;
+        return this.labyrinth;
+    }
+
+    public Conditions registerConditions(ButtonPoint startPoint, ButtonPoint endPoint,
+                                         ButtonPoint actualPoint) {
+        return null;
+    }
+
+    private ButtonPoint calculateNextPoint(DecisionTree.TreeElement node) {
+        return null;
+    }
+
+    public static  class Conditions{
+        private final Predicate<ButtonPoint> nextCond;
+
+        private final Predicate<ButtonPoint> endCond;
+
+        public Conditions(Predicate<ButtonPoint> nextCond, Predicate<ButtonPoint> endCond) {
+            this.nextCond = nextCond;
+            this.endCond = endCond;
+        }
+
+        public Predicate<ButtonPoint> nextCond() {
+            return nextCond;
+        }
+
+        public Predicate<ButtonPoint> endCond() {
+            return endCond;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || getClass() != o.getClass()) return false;
+            Conditions that = (Conditions) o;
+            return Objects.equals(nextCond, that.nextCond) && Objects.equals(endCond, that.endCond);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(nextCond, endCond);
+        }
     }
 }

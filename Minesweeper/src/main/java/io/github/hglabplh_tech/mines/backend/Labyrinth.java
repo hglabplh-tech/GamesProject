@@ -145,17 +145,12 @@ public class Labyrinth  {
         return result;
     }
 
-
     public ButtonPoint getNextPoint() {
         return this.nextPoint;
     }
 
-    public ButtonPoint getStartPoint() {
-        return startPoint;
-    }
-
-    public ButtonPoint getEndPoint() {
-        return endPoint;
+    public ButtonPoint getActPoint () {
+        return this.actPoint;
     }
 
     public List<ButtonPoint> getPath() {

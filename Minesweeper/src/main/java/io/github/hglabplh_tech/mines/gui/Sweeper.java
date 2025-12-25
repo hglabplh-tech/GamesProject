@@ -127,9 +127,9 @@ public class Sweeper extends JPanel
     }
 
     private void buildLabyrinth() {
-        Optional<Labyrinth> labyrinthOpt = this.util.getLabyrinthOpt();
-        if (labyrinthOpt.isPresent()) {
-            this.labyrinth = labyrinthOpt.get();
+        Labyrinth labyrinth = this.util.getLabyrinth();
+        if (labyrinth != null) {
+            this.labyrinth = labyrinth;
         } else {
             throw new IllegalStateException("Labyrinth object should be there");
         }

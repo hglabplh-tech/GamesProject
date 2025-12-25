@@ -26,7 +26,6 @@ import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 
 import io.github.hglabplh_tech.mines.backend.util.Point;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class SweeperLogic {
     private final Boolean[] labArray;
 
     private Integer successHits;
-    private Optional<Labyrinth> labyrinthOpt;
+    private Labyrinth labyrinth;
     private PlayModes playMode;
 
     public SweeperLogic(PlayModes playMode, Integer cx, Integer cy, Integer numMines) {
@@ -54,7 +53,7 @@ public class SweeperLogic {
         this.successHits = 0;
         this.shadowArray = new Boolean[this.numFields];
         this.labArray = new Boolean[this.numFields];
-
+        this.labyrinth = null;
     }
 
     public List<List<ButtonDescription>> calculateMines() {
@@ -83,7 +82,7 @@ public class SweeperLogic {
             this.labArray[nextIndex] = Boolean.TRUE;
         }
 
-        this.labyrinthOpt = Optional.empty();
+        this.labyrinth =null;
         arrIndex = 0;
         ButtonPoint[] labPoints = new ButtonPoint[4];
         int labIndex = 0;
@@ -114,17 +113,21 @@ public class SweeperLogic {
             }
         }
         if (this.playMode.equals(PlayModes.LABYRINTH)) {
-            this.labyrinthOpt = Optional.of(new Labyrinth(labPoints[0], labPoints[1], labPoints[2], labPoints[3]));
+            this.labyrinth = new Labyrinth(labPoints[0], labPoints[1], labPoints[2], labPoints[3]);
         }
         return getFieldsList();
     }
 
     public void addToXYLabPath(Integer x, Integer y, ButtonDescription buttDescr) {
-        labyrinthOpt.ifPresent(labyrinth -> labyrinth.addXYToPath(x, y, buttDescr));
+        if (this.labyrinth != null) {
+            labyrinth.addXYToPath(x, y, buttDescr);
+        }
     }
 
     public void addToLabPath(ButtonPoint thePoint) {
-        labyrinthOpt.ifPresent(labyrinth -> labyrinth.addToPath(thePoint));
+        if (this.labyrinth != null) {
+            labyrinth.addToPath(thePoint);
+        }
     }
 
     public String makeButtonName(Integer x, Integer y, Boolean isMine) {
@@ -183,7 +186,7 @@ public class SweeperLogic {
     }
 
     public boolean isPositiveEnd() {
-        return (this.successHits >= (this.numFields - this.numMines));
+        return (this.getSuccessHits() >= (this.getNumFields() - this.getNumMines()));
     }
 
     public Integer getNumFields() {
@@ -218,8 +221,8 @@ public class SweeperLogic {
         return successHits;
     }
 
-    public Optional<Labyrinth> getLabyrinthOpt() {
-        return labyrinthOpt;
+    public Labyrinth getLabyrinth() {
+        return labyrinth;
     }
 
     public PlayModes getPlayMode() {
