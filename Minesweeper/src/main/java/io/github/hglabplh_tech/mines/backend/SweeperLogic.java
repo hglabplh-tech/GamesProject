@@ -59,11 +59,11 @@ public class SweeperLogic {
     public List<List<ButtonDescription>> calculateMines() {
         Random rand = new Random();
         int arrIndex = 0;
-        for (int cyInd = 0; cyInd < this.cy; cyInd++) {
+      for (int cyInd = 0; cyInd < this.cy; cyInd++) {
             this.fieldsList.add(new ArrayList<>());
             for (int cxInd = 0; cxInd < this.cx; cxInd++) {
-                this.fieldsList.get(cyInd).add(cxInd, new ButtonDescription(Boolean.FALSE,
-                        SweepPointType.NORMALPOINT));
+              /*  this.fieldsList.get(cyInd).add(cxInd, new ButtonDescription(Boolean.FALSE,
+                        SweepPointType.NORMALPOINT)); */
                 this.shadowArray[arrIndex] = Boolean.FALSE;
                 this.labArray[arrIndex] = Boolean.FALSE;
                 arrIndex++;
