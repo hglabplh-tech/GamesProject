@@ -69,9 +69,9 @@ public class DecisionTree {
 
     }
 
-    public TreeElement insertSibling(TreeElement parent, TreeElement element, TreeElement sibling) {
+    public TreeElement
+    insertSibling(TreeElement element, TreeElement sibling) {
         return element.changeBuilder()
-                .parentOpt(parent)
                 .siblingOpt(sibling)
                 .build();
 
@@ -171,12 +171,10 @@ public class DecisionTree {
             return this.elementType;
         }
 
-        public <T> TreeElement addSuccessor (TreeElement element,
-                                         Predicate<? super ButtonPoint> predicateNext,
+        public <T> TreeElement addSuccessor (Predicate<? super ButtonPoint> predicateNext,
                                              Predicate<? super ButtonPoint> predicateEnd,
                                          ButtonPoint value) {
-            return element
-                    .changeBuilder()
+            return  this.changeBuilder()
                     .setSuccessor(predicateNext, predicateEnd, value)
                     .build();
         }
@@ -201,7 +199,7 @@ public class DecisionTree {
             }
 
             for (TreeElement item: allElements) {
-                TreeElement withSuccessor = item.addSuccessor(item, predicateNext, predicateEnd, value);
+                TreeElement withSuccessor = item.addSuccessor(predicateNext, predicateEnd, value);
                 if (withSuccessor.successIndicator().indicator().equals(SuccessIndicator.SUCCESSFUL) ||
                         withSuccessor.successIndicator().indicator().equals(SuccessIndicator.FIN_SUCCESS)) {
                     result.add(withSuccessor);

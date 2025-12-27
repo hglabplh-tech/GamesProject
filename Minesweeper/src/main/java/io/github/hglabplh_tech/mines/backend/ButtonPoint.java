@@ -25,7 +25,9 @@ import io.github.hglabplh_tech.mines.backend.util.Point;
 
 import java.util.Objects;
 
-public record ButtonPoint(Point myPoint, ButtonDescription buttonDescr) {
+import static java.lang.StrictMath.abs;
+
+public record ButtonPoint(Point myPoint, ButtonDescription buttonDescr)  {
 
     @Override
     public ButtonDescription buttonDescr() {

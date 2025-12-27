@@ -87,12 +87,16 @@ class PointTest {
         Point third = new Point(13,13);
         Point fourth = new Point(22,8);
 
-        assertFalse(first.equals(fourth), "has to be different");
-        assertTrue(second.equals(third), "has to be equal");
-        assertFalse(third.equals(fourth), "has to be different");
-
         assertNotEquals(first, fourth, "has to be different");
         assertEquals(second, third, "has to be equal");
         assertNotEquals(third,fourth, "has to be different");
+    }
+
+    @Test
+    void comparePoint() {
+    }
+
+    @Test
+    void compareNearerToEnd() {
     }
 }

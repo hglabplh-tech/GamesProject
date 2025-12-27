@@ -23,7 +23,7 @@ package io.github.hglabplh_tech.mines.backend.util;
 
 import java.util.Objects;
 
-public record Point(Integer x, Integer y) {
+public record Point(Integer x, Integer y) implements PointCompareIfc {
 
     public boolean checkPointIsNeighbor(Point other) {
         boolean success = false;
@@ -68,5 +68,25 @@ public record Point(Integer x, Integer y) {
                 "x=" + x +
                 ", y=" + y +
                 '}';
+    }
+
+    @Override
+    public CompareResult comparePoint(Point other) {
+        return new CompareResult(StrictMath.abs(this.x() - other.x()), StrictMath.abs(this.y() - other.y()),
+                this.x().compareTo(other.x()), this.y().compareTo(other.y()), this.equals(other));
+    }
+
+    @Override
+    public NearerResult compareNearerToEnd(Point other, Point end) {
+        int xDiffThisToEnd = StrictMath.abs(this.x() - end.x());
+        int yDiffThisToEnd = StrictMath.abs(this.y() - end.y());
+        int xDiffOtherToEnd = StrictMath.abs(other.x() - end.x());
+        int yDiffOtherToEnd = StrictMath.abs(other.y() - end.y());
+        boolean xOtherNearer = (xDiffThisToEnd > xDiffOtherToEnd);
+        boolean yOtherNearer = (yDiffThisToEnd > yDiffOtherToEnd);
+        boolean bothNearer = (xOtherNearer && yOtherNearer);
+        return new NearerResult(xDiffThisToEnd, yDiffThisToEnd,
+                xDiffOtherToEnd, yDiffOtherToEnd,
+                xOtherNearer, yOtherNearer, bothNearer);
     }
 }
