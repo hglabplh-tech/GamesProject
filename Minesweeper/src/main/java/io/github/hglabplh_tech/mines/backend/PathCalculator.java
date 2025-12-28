@@ -24,10 +24,7 @@ package io.github.hglabplh_tech.mines.backend;
 import io.github.hglabplh_tech.mines.backend.util.DecisionTreeUtils;
 import io.github.hglabplh_tech.mines.backend.util.Point;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 
@@ -42,6 +39,18 @@ public class PathCalculator {
         this.theTree = new DecisionTree();
         this.util = util;
         this.labyrinth = labyrinth;
+    }
+
+    public List<List<ButtonPoint>> calculateAllPaths() {
+        List<List<ButtonPoint>> allPaths = new ArrayList<>();
+        Iterator<ButtonPoint> iter = this.getLabyrinth().getPointsOrder().iterator();
+        ButtonPoint last = iter.next();
+        while (iter.hasNext()) {
+            ButtonPoint next = iter.next();
+            allPaths.add(calculatePath(last, next));
+            last = next;
+        }
+        return allPaths;
     }
 
     public List<ButtonPoint> calculatePath(ButtonPoint start, ButtonPoint end) {
@@ -62,15 +71,23 @@ public class PathCalculator {
             Conditions conditions = makeConditions(startPoint, endPoint, leftElement);
             if (leftElement != null) {
                 leftElement = leftElement.addSuccessor(conditions.nextCond(), conditions.endCond(), leftElement.getThisPoint());
-                Conditions nextCond = makeConditions(startPoint, endPoint, leftElement);
+                Conditions nextCond;
                 ButtonPoint nextPoint = calculateNextPoint(leftElement, endPoint);
                 DecisionTree.TreeElement newElement = DecisionTreeUtils
                         .insertElementLeftRight(this.getTheTree(), leftElement,
                                 DecisionTree.TreeElementType.RIGHT, nextPoint);
                 if (newElement != null) {
+                    boolean toggler = true;
                     while (!Objects.requireNonNull(newElement).successIndicator().finished()) {
                         nextCond = makeConditions(startPoint, endPoint, newElement);
-                        newElement = newElement.addSuccessor(nextCond.nextCond(), nextCond.endCond(), nextPoint);
+                        if (toggler) {
+                            newElement = newElement.addSuccessor(nextCond.nextCond(), nextCond.endCond(), nextPoint);
+                        } else {
+                            toggler = true;
+                            newElement = newElement.addSuccessor(
+                                    (e -> !e.buttonDescr().pointType().equals(SweepPointType.MINEPOINT)),
+                                    nextCond.endCond(), nextPoint);
+                        }
                         if (newElement.successIndicator().success()) {
                             path.add(newElement.getThisPoint());
                             DecisionTree.TreeElement parent = newElement.getParent();
@@ -79,6 +96,7 @@ public class PathCalculator {
                                     .insertSibling(this.getTheTree(), parent, newElement, nextPoint));
                             newElement = nextElement.get();
                         } else {
+                            toggler = false;
                             nextPoint = calculateNextPossiblePoint(newElement, nextPoint);
                         }
                     }
@@ -118,7 +136,7 @@ public class PathCalculator {
                 (e -> e.equals(endPoint)));
     }
 
-    private ButtonPoint calculateNextPoint(DecisionTree.TreeElement node, ButtonPoint endPoint) {
+    public ButtonPoint calculateNextPoint(DecisionTree.TreeElement node, ButtonPoint endPoint) {
         int nextX = 0;
         int nextY = 0;
         ButtonPoint startPoint = node.getThisPoint();
@@ -141,7 +159,7 @@ public class PathCalculator {
         return new ButtonPoint(new Point(nextX, nextY), description);
     }
 
-    private ButtonPoint calculateNextPossiblePoint(DecisionTree.TreeElement node,
+    public ButtonPoint calculateNextPossiblePoint(DecisionTree.TreeElement node,
                                                    ButtonPoint wrongPoint) {
         ButtonPoint startPoint = node.getThisPoint();
         int nextX = startPoint.myPoint().x() + 1;
