@@ -49,6 +49,7 @@ public class DecisionTreeUtils {
                                             TreeElement sibling,
                                             ButtonPoint newPoint) {
         TreeElement newElement = tree.newTreeElement(parent, TreeElementType.SIBLING, newPoint);
-        return tree.insertSibling(sibling, newElement);
+        tree.insertSibling(sibling, newElement);
+        return newElement;
     }
 }

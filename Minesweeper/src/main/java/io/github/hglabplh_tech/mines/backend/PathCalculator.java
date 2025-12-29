@@ -53,56 +53,46 @@ public class PathCalculator {
         return allPaths;
     }
 
-    public List<ButtonPoint> calculatePath(ButtonPoint start, ButtonPoint end) {
+    public List<ButtonPoint> calculatePath(ButtonPoint startPoint, ButtonPoint endPoint) {
         List<ButtonPoint> path = new ArrayList<>();
-        List<List<ButtonDescription>> field = this.getUtil().getFieldsList();
-        ButtonDescription descriptionStart = field.get(start.myPoint().y()).get(start.myPoint().x());
-        ButtonDescription descriptionEnd = field.get(end.myPoint().y()).get(end.myPoint().x());
-        ButtonPoint startPoint = new ButtonPoint(start.myPoint(), descriptionStart);
-        ButtonPoint endPoint = new ButtonPoint(end.myPoint(), descriptionEnd);
-        if (startPoint.equals(start) && endPoint.equals(end)) {
-            path.add(startPoint);
-            this.getTheTree().initRoot(startPoint);
-            DecisionTree.TreeElement leftElement =
-                    DecisionTreeUtils.insertElementLeftRight(this.getTheTree(),
-                            this.theTree.getRoot(),
-                            DecisionTree.TreeElementType.LEFT,
-                            startPoint);
-            Conditions conditions = makeConditions(startPoint, endPoint, leftElement);
-            if (leftElement != null) {
-                leftElement = leftElement.addSuccessor(conditions.nextCond(), conditions.endCond(), leftElement.getThisPoint());
-                Conditions nextCond;
-                ButtonPoint nextPoint = calculateNextPoint(leftElement, endPoint);
-                DecisionTree.TreeElement newElement = DecisionTreeUtils
-                        .insertElementLeftRight(this.getTheTree(), leftElement,
-                                DecisionTree.TreeElementType.RIGHT, nextPoint);
-                if (newElement != null) {
-                    boolean toggler = true;
-                    while (!Objects.requireNonNull(newElement).successIndicator().finished()) {
-                        nextCond = makeConditions(startPoint, endPoint, newElement);
-                        if (toggler) {
-                            newElement = newElement.addSuccessor(nextCond.nextCond(), nextCond.endCond(), nextPoint);
-                        } else {
-                            toggler = true;
-                            newElement = newElement.addSuccessor(
-                                    (e -> !e.buttonDescr().pointType().equals(SweepPointType.MINEPOINT)),
-                                    nextCond.endCond(), nextPoint);
-                        }
-                        if (newElement.successIndicator().success()) {
-                            path.add(newElement.getThisPoint());
-                            DecisionTree.TreeElement parent = newElement.getParent();
-                            nextPoint = calculateNextPoint(newElement, endPoint);
-                            AtomicReference<DecisionTree.TreeElement> nextElement = new AtomicReference<>(DecisionTreeUtils
-                                    .insertSibling(this.getTheTree(), parent, newElement, nextPoint));
-                            newElement = nextElement.get();
-                        } else {
-                            toggler = false;
-                            nextPoint = calculateNextPossiblePoint(newElement, nextPoint);
-                        }
-                    }
+        this.getTheTree().initRoot(startPoint);
+        DecisionTree.TreeElement newElement =
+                DecisionTreeUtils.insertElementLeftRight(this.getTheTree(),
+                        this.theTree.getRoot(),
+                        DecisionTree.TreeElementType.LEFT,
+                        startPoint);
+
+
+        if (newElement != null) {
+            ButtonPoint nextPoint = startPoint;
+            ButtonPoint lastPoint;
+            Conditions conditions = makeConditions(endPoint, startPoint);
+            newElement.addSuccessor(conditions.nextCond(), conditions.endCond(), startPoint);
+            BPointPlusIndicator result = new BPointPlusIndicator(startPoint, Indicator.FOUND_NEXT);
+            DecisionTree.SuccessIndicator indicator = newElement.successIndicator();
+            while (!indicator.finished()) {
+                if (indicator.success()) {
+                    path.add(newElement.getThisPoint());
                 }
+                newElement = this.getTheTree().newTreeElement(this.getTheTree().getRoot(), DecisionTree.TreeElementType.SIBLING, nextPoint);
+                result = this.calculateNextPoint(newElement, endPoint, result.indicator());
+                lastPoint = nextPoint;
+                nextPoint = result.buttonPoint();
+                conditions = this.makeConditions(endPoint, nextPoint);
+                if (result.indicator().equals(Indicator.FOUND_NEXT)) {
+                    newElement = newElement.addSuccessor(conditions.nextCond(), conditions.endCond(), newElement.getThisPoint());
+                } else {
+                    ButtonPoint finalLastPoint = lastPoint;
+                    newElement = newElement.addSuccessor((e -> !e.buttonDescr().isMine()
+                            && e.myPoint().checkPointIsNeighbor(finalLastPoint.myPoint())), conditions.endCond(), newElement.getThisPoint());
+                }
+                indicator = newElement.successIndicator();
             }
+            path.add(endPoint);
+
+
         }
+
         return path;
     }
 
@@ -119,24 +109,29 @@ public class PathCalculator {
         return this.labyrinth;
     }
 
-    public Conditions makeConditions(ButtonPoint startPoint, ButtonPoint endPoint,
-                                     DecisionTree.TreeElement actualNode) {
-        ButtonPoint pointNext = calculateNextPoint(actualNode, endPoint);
+    public Conditions makeConditions(ButtonPoint endPoint,
+                                     ButtonPoint pointNext) {
         return new Conditions((e ->
                 (!e.buttonDescr().isMine()
-                        && (!(e.myPoint()
-                        .compareNearerToEnd(pointNext.myPoint(),
-                                startPoint.myPoint())
-                        .bothNearer())
                         && (e.myPoint()
                         .compareNearerToEnd(pointNext.myPoint(),
                                 endPoint.myPoint())
-                        .bothNearer())))
+                        .xOtherNearer())
+                        || (e.myPoint()
+                        .compareNearerToEnd(pointNext.myPoint(),
+                                endPoint.myPoint())
+                        .yOtherNearer())
+
+                )
         ),
-                (e -> e.equals(endPoint)));
+                (e -> e.buttonDescr().pointType().equals(endPoint.buttonDescr().pointType())
+                        && e.equals(endPoint)));
     }
 
-    public ButtonPoint calculateNextPoint(DecisionTree.TreeElement node, ButtonPoint endPoint) {
+    public BPointPlusIndicator calculateNextPoint(DecisionTree.TreeElement node,
+                                                  ButtonPoint endPoint,
+                                                  Indicator lastIndicator
+                                                  ) {
         int nextX = 0;
         int nextY = 0;
         ButtonPoint startPoint = node.getThisPoint();
@@ -156,32 +151,31 @@ public class PathCalculator {
             nextY = startPoint.myPoint().y() + 1;
         }
         ButtonDescription description = this.getUtil().getFieldsList().get(nextY).get(nextX);
-        return new ButtonPoint(new Point(nextX, nextY), description);
-    }
-
-    public ButtonPoint calculateNextPossiblePoint(DecisionTree.TreeElement node,
-                                                   ButtonPoint wrongPoint) {
-        ButtonPoint startPoint = node.getThisPoint();
-        int nextX = startPoint.myPoint().x() + 1;
-        int nextY = startPoint.myPoint().y() + 1;
-
-
-        int index = 0;
-
-        if (Objects.equals(wrongPoint, new Point(nextX, nextY))) {
-            if (index == 0) {
-                nextX = startPoint.myPoint().x() - 1;
-                nextY = wrongPoint.myPoint().y() - 1;
-            } else if (index == 1) {
-                nextX = startPoint.myPoint().x() + 1;
-                nextY = wrongPoint.myPoint().y() - 1;
-            } else if (index == 2) {
-                nextX = startPoint.myPoint().x() - 1;
-                nextY = wrongPoint.myPoint().y() + 1;
+        if (description.isMine() || lastIndicator.equals(Indicator.FOUND_AFTER_ERROR)) {
+            for (int index = 0; index <= 7; index++) {
+                Point point = switch (index) {
+                    case 0 -> new Point(startPoint.myPoint().x() + 1, startPoint.myPoint().y());
+                    case 1 -> new Point(startPoint.myPoint().x(), startPoint.myPoint().y() + 1);
+                    case 2 -> new Point(startPoint.myPoint().x() - 1, startPoint.myPoint().y());
+                    case 3 -> new Point(startPoint.myPoint().x(), startPoint.myPoint().y() - 1);
+                    case 4 -> new Point(startPoint.myPoint().x() + 1, startPoint.myPoint().y() + 1);
+                    case 5 -> new Point(startPoint.myPoint().x() - 1, startPoint.myPoint().y() + 1);
+                    case 6 -> new Point(startPoint.myPoint().x() + 1, startPoint.myPoint().y() - 1);
+                    default -> new Point(startPoint.myPoint().x() - 1, startPoint.myPoint().y() - 1);
+                };
+                if (point.x().equals(this.util.getCx())) {
+                    point =  new Point(point.x() - 1, point.y());
+                }
+                if (point.y().equals(this.getUtil().getCy())) {
+                    point = new Point(point.x(), point.y() -1);
+                }
+                description = this.getUtil().getFieldsList().get(point.y()).get(point.x());
+                if (!description.isMine()) {
+                    return new BPointPlusIndicator(new ButtonPoint(new Point(point.x(), point.y()), description), Indicator.FOUND_AFTER_ERROR);
+                }
             }
         }
-        ButtonDescription description = this.getUtil().getFieldsList().get(nextY).get(nextX);
-        return new ButtonPoint(new Point(nextX, nextY), description);
+        return new BPointPlusIndicator(new ButtonPoint(new Point(nextX, nextY), description), Indicator.FOUND_NEXT);
     }
 
     public static class Conditions {
@@ -214,4 +208,14 @@ public class PathCalculator {
             return Objects.hash(nextCond, endCond);
         }
     }
+
+    public enum Indicator {
+        FOUND_NEXT,
+        FOUND_AFTER_ERROR;
+    }
+
+    public record BPointPlusIndicator(ButtonPoint buttonPoint, Indicator indicator) {
+
+    }
+
 }

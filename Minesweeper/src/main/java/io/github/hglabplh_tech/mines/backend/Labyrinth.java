@@ -21,13 +21,9 @@ SOFTWARE.
  */
 package io.github.hglabplh_tech.mines.backend;
 
-import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 import io.github.hglabplh_tech.mines.backend.util.Point;
-import io.github.hglabplh_tech.mines.gui.GUILogics;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
