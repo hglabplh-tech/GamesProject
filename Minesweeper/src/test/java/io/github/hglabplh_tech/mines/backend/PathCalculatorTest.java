@@ -40,7 +40,7 @@ class PathCalculatorTest {
         ButtonPoint rootPoint = new ButtonPoint(new Point(3,3), new ButtonDescription(false, SweepPointType.NORMALPOINT));
         ButtonPoint endPoint = new ButtonPoint(new Point(0,7), new ButtonDescription(false, SweepPointType.NORMALPOINT));
         DecisionTree.TreeElement root = tree.initRoot(rootPoint);
-        PathCalculator.BPointPlusIndicator result = this.pathCalculator.calculateNextPoint(root, endPoint, PathCalculator.Indicator.FOUND_NEXT);
+        PathCalculator.BPointPlusIndicator result = this.pathCalculator.calculateNextPoint(root, endPoint, rootPoint, PathCalculator.Indicator.FOUND_NEXT);
         ButtonPoint nextPoint = result.buttonPoint();
         DecisionTree.TreeElement goOn = tree.newTreeElement(root, DecisionTree.TreeElementType.SIBLING, nextPoint);
         PathCalculator.Conditions conditions = this.pathCalculator.makeConditions(endPoint, nextPoint);
@@ -52,7 +52,7 @@ class PathCalculatorTest {
             indicator = goOn.successIndicator();
             System.out.println(indicator);
             System.out.println(nextPoint);
-            result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.indicator());
+            result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.buttonPoint() ,result.indicator());
             nextPoint = result.buttonPoint();
             goOn = tree.newTreeElement(root, DecisionTree.TreeElementType.SIBLING, nextPoint);
         }
@@ -64,22 +64,22 @@ class PathCalculatorTest {
         ButtonPoint rootPoint = new ButtonPoint(new Point(3,3), new ButtonDescription(false, SweepPointType.NORMALPOINT));
         ButtonPoint endPoint = new ButtonPoint(new Point(0,7), new ButtonDescription(false, SweepPointType.NORMALPOINT));
         DecisionTree.TreeElement root = tree.initRoot(rootPoint);
-        PathCalculator.BPointPlusIndicator result = this.pathCalculator.calculateNextPoint(root, endPoint, PathCalculator.Indicator.FOUND_NEXT);
+        PathCalculator.BPointPlusIndicator result = this.pathCalculator.calculateNextPoint(root, endPoint, rootPoint, PathCalculator.Indicator.FOUND_NEXT);
         ButtonPoint nextPoint = result.buttonPoint();
         DecisionTree.TreeElement goOn = tree.newTreeElement(root, DecisionTree.TreeElementType.SIBLING, nextPoint);
-        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.indicator());
+        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.buttonPoint(),result.indicator());
         ButtonPoint nearerPoint = result.buttonPoint();
         System.out.println(nearerPoint);
         goOn = tree.newTreeElement(root, DecisionTree.TreeElementType.SIBLING, nearerPoint);
-        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.indicator());
+        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.buttonPoint(), result.indicator());
         nearerPoint = result.buttonPoint();
         System.out.println(nearerPoint);
         goOn = tree.newTreeElement(root, DecisionTree.TreeElementType.SIBLING, nearerPoint);
-        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.indicator());
+        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.buttonPoint(), result.indicator());
         nearerPoint = result.buttonPoint();
         System.out.println(nearerPoint);
         goOn = tree.newTreeElement(root, DecisionTree.TreeElementType.SIBLING, nearerPoint);
-        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.indicator());
+        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.buttonPoint(), result.indicator());
         nearerPoint = result.buttonPoint();
         System.out.println(nearerPoint);
     }

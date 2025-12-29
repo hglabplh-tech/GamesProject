@@ -75,7 +75,7 @@ public class PathCalculator {
                     path.add(newElement.getThisPoint());
                 }
                 newElement = this.getTheTree().newTreeElement(this.getTheTree().getRoot(), DecisionTree.TreeElementType.SIBLING, nextPoint);
-                result = this.calculateNextPoint(newElement, endPoint, result.indicator());
+                result = this.calculateNextPoint(newElement, endPoint, result.buttonPoint() ,result.indicator());
                 lastPoint = nextPoint;
                 nextPoint = result.buttonPoint();
                 conditions = this.makeConditions(endPoint, nextPoint);
@@ -128,8 +128,10 @@ public class PathCalculator {
                         && e.equals(endPoint)));
     }
 
+    // TODO: if there was a mine-point the last point must be excluded in the next run change switch to if with swapping - / + for the point calculated
     public BPointPlusIndicator calculateNextPoint(DecisionTree.TreeElement node,
                                                   ButtonPoint endPoint,
+                                                  ButtonPoint lastPoint,
                                                   Indicator lastIndicator
                                                   ) {
         int nextX = 0;
