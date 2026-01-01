@@ -6,7 +6,9 @@ import io.github.hglabplh_tech.mines.backend.util.Point;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,7 +31,7 @@ class PathCalculatorTest {
     void calculatePath() {
         ButtonPoint start = labyrinth.getStart();
         ButtonPoint next = labyrinth.getFirstBase();
-        List<ButtonPoint> result = this.pathCalculator.calculatePath(start, next);
+        Set<ButtonPoint> result = this.pathCalculator.calculatePath(start, next);
         result.forEach( e -> System.out.println(e));
         System.out.println("Size of path: " + result.size());
     }
@@ -40,7 +42,7 @@ class PathCalculatorTest {
         ButtonPoint rootPoint = new ButtonPoint(new Point(3,3), new ButtonDescription(false, SweepPointType.NORMALPOINT));
         ButtonPoint endPoint = new ButtonPoint(new Point(0,7), new ButtonDescription(false, SweepPointType.NORMALPOINT));
         DecisionTree.TreeElement root = tree.initRoot(rootPoint);
-        PathCalculator.BPointPlusIndicator result = this.pathCalculator.calculateNextPoint(root, endPoint, rootPoint, PathCalculator.Indicator.FOUND_NEXT);
+        PathCalculator.BPointPlusIndicator result = this.pathCalculator.calculateNextPoint(root, endPoint, Arrays.asList(rootPoint), PathCalculator.Indicator.FOUND_NEXT);
         ButtonPoint nextPoint = result.buttonPoint();
         DecisionTree.TreeElement goOn = tree.newTreeElement(root, DecisionTree.TreeElementType.SIBLING, nextPoint);
         PathCalculator.Conditions conditions = this.pathCalculator.makeConditions(endPoint, nextPoint);
@@ -52,7 +54,7 @@ class PathCalculatorTest {
             indicator = goOn.successIndicator();
             System.out.println(indicator);
             System.out.println(nextPoint);
-            result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.buttonPoint() ,result.indicator());
+            result = this.pathCalculator.calculateNextPoint(goOn, endPoint, Arrays.asList(result.buttonPoint()) ,result.indicator());
             nextPoint = result.buttonPoint();
             goOn = tree.newTreeElement(root, DecisionTree.TreeElementType.SIBLING, nextPoint);
         }
@@ -64,22 +66,22 @@ class PathCalculatorTest {
         ButtonPoint rootPoint = new ButtonPoint(new Point(3,3), new ButtonDescription(false, SweepPointType.NORMALPOINT));
         ButtonPoint endPoint = new ButtonPoint(new Point(0,7), new ButtonDescription(false, SweepPointType.NORMALPOINT));
         DecisionTree.TreeElement root = tree.initRoot(rootPoint);
-        PathCalculator.BPointPlusIndicator result = this.pathCalculator.calculateNextPoint(root, endPoint, rootPoint, PathCalculator.Indicator.FOUND_NEXT);
+        PathCalculator.BPointPlusIndicator result = this.pathCalculator.calculateNextPoint(root, endPoint, Arrays.asList(rootPoint), PathCalculator.Indicator.FOUND_NEXT);
         ButtonPoint nextPoint = result.buttonPoint();
         DecisionTree.TreeElement goOn = tree.newTreeElement(root, DecisionTree.TreeElementType.SIBLING, nextPoint);
-        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.buttonPoint(),result.indicator());
+        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, Arrays.asList(result.buttonPoint()),result.indicator());
         ButtonPoint nearerPoint = result.buttonPoint();
         System.out.println(nearerPoint);
         goOn = tree.newTreeElement(root, DecisionTree.TreeElementType.SIBLING, nearerPoint);
-        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.buttonPoint(), result.indicator());
+        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, Arrays.asList(result.buttonPoint()), result.indicator());
         nearerPoint = result.buttonPoint();
         System.out.println(nearerPoint);
         goOn = tree.newTreeElement(root, DecisionTree.TreeElementType.SIBLING, nearerPoint);
-        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.buttonPoint(), result.indicator());
+        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, Arrays.asList(result.buttonPoint()), result.indicator());
         nearerPoint = result.buttonPoint();
         System.out.println(nearerPoint);
         goOn = tree.newTreeElement(root, DecisionTree.TreeElementType.SIBLING, nearerPoint);
-        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, result.buttonPoint(), result.indicator());
+        result = this.pathCalculator.calculateNextPoint(goOn, endPoint, Arrays.asList(result.buttonPoint()), result.indicator());
         nearerPoint = result.buttonPoint();
         System.out.println(nearerPoint);
     }
@@ -90,5 +92,8 @@ class PathCalculatorTest {
 
     @Test
     void calculateAllPaths() {
+        List<Set<ButtonPoint>> result = this.pathCalculator.calculateAllPaths();
+        result.forEach( e ->{System.out.println("Next list \n");
+            e.forEach(t -> System.out.println(t));});
     }
 }
