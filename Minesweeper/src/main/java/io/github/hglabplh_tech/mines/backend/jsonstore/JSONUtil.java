@@ -22,6 +22,7 @@ SOFTWARE.
  */
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonWriter;
 import io.github.hglabplh_tech.mines.backend.ButtonDescription;
 import io.github.hglabplh_tech.mines.backend.ButtonPoint;
 import io.github.hglabplh_tech.mines.backend.Labyrinth;
@@ -29,19 +30,22 @@ import io.github.hglabplh_tech.mines.backend.SweeperLogic;
 import io.github.hglabplh_tech.mines.backend.util.Point;
 
 import java.io.Reader;
+import java.io.Writer;
 
 public class JSONUtil {
 
     // TODO: write special customised type adapters for marshall / unmarshall look how this has to be done !!!!!!!
-    public static String storeSweepLogic(SweeperLogic logic) {
-         return storeObject(logic);
+    public static void storeSweepLogic(SweeperLogic logic, Writer writer) {
+        JsonWriter jsonWriter = new JsonWriter(writer);
+        storeObject(logic, SweeperLogic.class, jsonWriter);
     }
 
-    public static String storeLabyrinth(Labyrinth labyrinth) {
-        return storeObject(labyrinth);
+    public static void storeLabyrinth(Labyrinth labyrinth, Writer writer) {
+        JsonWriter jsonWriter = new JsonWriter(writer);
+        storeObject(labyrinth, Labyrinth.class, jsonWriter);
     }
 
-    public static String storeObject(Object source) {
+    public static <T> void storeObject(T source, Class<?> srcType, JsonWriter jsonWriter) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(java.util.Optional.class,
                         new TypeAdaptOptional())
@@ -55,7 +59,7 @@ public class JSONUtil {
                         new TypeAdaptSweepLogic())
                 .registerTypeAdapter(Labyrinth.class,
                         new TypeAdaptLab()).create();
-        return gson.toJson(source);
+        gson.toJson(source, srcType, jsonWriter);
     }
 
     public static SweeperLogic loadSweepLogic(Reader source) {
