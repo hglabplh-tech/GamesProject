@@ -25,8 +25,6 @@ package io.github.hglabplh_tech.mines.backend.config;
 import java.util.Optional;
 import java.util.Properties;
 
-import static io.github.hglabplh_tech.mines.backend.config.ConfigUtil.getConfigValue;
-
 public class Configuration {
     public static final String MINES_PLAYMODE_KEY =   "msweep.game.playmode";
     public static final String MINES_PLAYMODE_VAL = "normal";
@@ -67,16 +65,16 @@ public class Configuration {
 
         private Boolean levelUp;
 
-        private Boolean stopAterPercent;
+        private Boolean stopAfterPercent;
 
         public MineConfig(final PlayModes playMode,final Integer gridCX,final Integer gridCY,
-                          final Integer minesCount, final Boolean levelUp, final Boolean stopAterPercent) {
+                          final Integer minesCount, final Boolean levelUp, final Boolean stopAfterPercent) {
             this.playMode = playMode;
             this.gridCX = gridCX;
             this.gridCY = gridCY;
             this.minesCount = minesCount;
             this.levelUp = levelUp;
-            this.stopAterPercent = stopAterPercent;
+            this.stopAfterPercent = stopAfterPercent;
         }
         public MineConfig() {
             Optional<Properties> props = ConfigUtil.loadUserProps();
@@ -96,7 +94,7 @@ public class Configuration {
             this.levelUp = Boolean.valueOf(optValue.orElse(MINES_LEVELUP_VAL));
 
             optValue = ConfigUtil.getConfigValue(MINES_READY_PERCENT_KEY, MINES_READY_PERCENT_VAL);
-            this.stopAterPercent = Boolean.valueOf(optValue.orElse(MINES_READY_PERCENT_VAL));
+            this.stopAfterPercent = Boolean.valueOf(optValue.orElse(MINES_READY_PERCENT_VAL));
 
             Properties toSave = props.orElse(new Properties());
 
@@ -110,7 +108,7 @@ public class Configuration {
 
             toSave.setProperty(MINES_LEVELUP_KEY, String.valueOf(this.levelUp));
 
-            toSave.setProperty(MINES_LEVELUP_KEY, String.valueOf(this.stopAterPercent));
+            toSave.setProperty(MINES_LEVELUP_KEY, String.valueOf(this.stopAfterPercent));
 
             ConfigUtil.saveUserPropsIfVerChanged(toSave);
         }
@@ -135,8 +133,8 @@ public class Configuration {
             return levelUp;
         }
 
-        public Boolean getStopAterPercent() {
-            return stopAterPercent;
+        public Boolean getStopAfterPercent() {
+            return stopAfterPercent;
         }
 
         public MineConfigBuilder copyBuilder() {
@@ -149,7 +147,7 @@ public class Configuration {
             public MineConfigBuilder(MineConfig config) {
                 this.mineConfig = new MineConfig(config.getPlayMode(), config.getGridCX(),
                         config.getGridCY(), config.getMinesCount(), config.getLevelUp(),
-                        config.getStopAterPercent());
+                        config.getStopAfterPercent());
 
             }
 
@@ -179,7 +177,7 @@ public class Configuration {
             }
 
             public MineConfigBuilder stopAfterPercent(Boolean stopAfterPercent) {
-                mineConfig.stopAterPercent = stopAfterPercent;
+                mineConfig.stopAfterPercent = stopAfterPercent;
                 return this;
             }
 
