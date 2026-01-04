@@ -21,94 +21,92 @@ SOFTWARE.
  */
 package io.github.hglabplh_tech.mines.backend;
 
-import io.github.hglabplh_tech.mines.backend.util.DecisionTreeUtils;
 import io.github.hglabplh_tech.mines.backend.util.Point;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.IntBinaryOperator;
 import java.util.function.Predicate;
 
 public class PathCalculator {
 
+    private static final IntBinaryOperator plus = Integer::sum;
+
+    private static final IntBinaryOperator minus = (a, b) -> a - b;
+
+    private static final IntBinaryOperator mul = (a, b) -> a * b;
+
+    private static final IntBinaryOperator div = (a, b) -> a / b;
+
+    private static final List<FunTuple> combinators = new ArrayList<>();
+
+    private static int combinatorsIndex = 0;
+
     private final SweeperLogic util;
     private final Labyrinth labyrinth;
 
-    private final DecisionTree theTree;
 
     private final Set<ButtonPoint> path = new HashSet<>();
 
     private final Set<ButtonPoint> pathTrials = new HashSet<>();
 
+    private final List<Set<ButtonPoint>> allPaths = new ArrayList<>();
+    private final List<Set<ButtonPoint>> allPathTrials = new ArrayList<>();
+
+    static {
+        combinators.add(new FunTuple(plus, minus));
+        combinators.add(new FunTuple(minus, plus));
+        combinators.add(new FunTuple(plus, plus));
+        combinators.add(new FunTuple(minus, minus));
+        combinators.add(new FunTuple(minus, mul));
+        combinators.add(new FunTuple(mul, minus));
+        combinators.add(new FunTuple(plus, mul));
+        combinators.add(new FunTuple(mul, plus));
+    }
 
 
     public PathCalculator(SweeperLogic util, Labyrinth labyrinth) {
-        this.theTree = new DecisionTree();
         this.util = util;
         this.labyrinth = labyrinth;
     }
 
     public List<Set<ButtonPoint>> calculateAllPaths() {
-        List<Set<ButtonPoint>> allPaths = new ArrayList<>();
-        Iterator<ButtonPoint> iter = this.getLabyrinth().getPointsOrder().iterator();
-        ButtonPoint last = iter.next();
-        while (iter.hasNext()) {
-            ButtonPoint next = iter.next();
-            allPaths.add(calculatePath(last, next));
-            last = next;
+        this.getAllPaths().clear();
+        this.getAllPathTrials().clear();
+        List<ButtonPoint> pointsOrder = this.getLabyrinth().getPointsOrder();
+        ButtonPoint first = pointsOrder.get(0);
+        int index = 1;
+        ButtonPoint next ;
+        while (index < pointsOrder.size()) {
+            next = pointsOrder.get(index);
+            this.getAllPaths().add(calculatePath(first, next));
+            this.getAllPathTrials().add(this.getPathTrials());
+            index++;
+            first = next;
         }
-        return allPaths;
+        return this.getAllPaths();
     }
 
     public Set<ButtonPoint> calculatePath(ButtonPoint startPoint, ButtonPoint endPoint) {
-        List<ButtonPoint> lastPoints = new ArrayList<>();
-        this.path.clear();
-        this.pathTrials.clear();
+        this.getPath().clear();
+        this.getAllPathTrials().clear();
+        ButtonPoint nextPoint = startPoint;
+        BPointPlusIndicator result = new BPointPlusIndicator(startPoint,  Indicator.FOUND_NEXT,
+                new SuccessIndicator(true, false, SuccessIndicator.SUCCESSFUL));
+        boolean finish = false;
+        boolean success = true;
+        while (!finish) {
+            if (success) {
+                addToSet(this.getPath(), result.buttonPoint(), true);
 
-        this.getTheTree().initRoot(startPoint);
-        DecisionTree.TreeElement newElement =
-                DecisionTreeUtils.insertElementLeftRight(this.getTheTree(),
-                        this.theTree.getRoot(),
-                        DecisionTree.TreeElementType.LEFT,
-                        startPoint);
-
-
-        if (newElement != null) {
-            ButtonPoint nextPoint = startPoint;
-            ButtonPoint lastPoint;
-            Conditions conditions = makeConditions(endPoint, startPoint);
-            newElement.addSuccessor(conditions.nextCond(), conditions.endCond(), startPoint);
-            BPointPlusIndicator result = new BPointPlusIndicator(startPoint, Indicator.FOUND_NEXT);
-            DecisionTree.SuccessIndicator indicator = newElement.successIndicator();
-            while (!indicator.finished()) {
-                if (indicator.success()) {
-                    addToSet(this.path, newElement.getThisPoint(), true);
-                }
-                lastPoints.add(result.buttonPoint());
-                result = this.calculateNextPoint(newElement, endPoint, lastPoints, result.indicator());
-                lastPoint = nextPoint;
-                nextPoint = result.buttonPoint();
-                newElement = this.getTheTree().newTreeElement(this.getTheTree().getRoot(), DecisionTree.TreeElementType.SIBLING, nextPoint);
-
-                conditions = this.makeConditions(endPoint, nextPoint);
-                if (result.indicator().equals(Indicator.FOUND_NEXT)) {
-                    newElement = newElement.addSuccessor(conditions.nextCond(), conditions.endCond(), newElement.getThisPoint());
-                } else {
-                    ButtonPoint finalLastPoint = lastPoint;
-                    newElement = newElement.addSuccessor((e -> !e.buttonDescr().isMine()
-                            && e.myPoint().checkPointIsNeighbor(finalLastPoint.myPoint())), conditions.endCond(), newElement.getThisPoint());
-                }
-                indicator = newElement.successIndicator();
             }
-            addToSet(this.path, endPoint, true);
+            result = this.calculateAndSetNextPoint(nextPoint, endPoint);
+            nextPoint = result.buttonPoint();
+            finish = result.successIndicator().finished();
+            success = result.successIndicator().success();
         }
-
-        return this.path;
+        return this.getPath();
     }
 
-
-    public DecisionTree getTheTree() {
-        return this.theTree;
-    }
 
     public SweeperLogic getUtil() {
         return this.util;
@@ -118,35 +116,29 @@ public class PathCalculator {
         return this.labyrinth;
     }
 
-    public Conditions makeConditions(ButtonPoint endPoint,
-                                     ButtonPoint pointNext) {
-        return new Conditions((e ->
-                (!e.buttonDescr().isMine()
-                        && (e.myPoint()
-                        .compareNearerToEnd(pointNext.myPoint(),
-                                endPoint.myPoint())
-                        .xOtherNearer())
-                        || (e.myPoint()
-                        .compareNearerToEnd(pointNext.myPoint(),
-                                endPoint.myPoint())
-                        .yOtherNearer())
+    public Set<ButtonPoint> getPathTrials() {
+        return this.pathTrials;
+    }
 
-                )
-        ),
-                (e -> e.buttonDescr().pointType().equals(endPoint.buttonDescr().pointType())
-                        && e.equals(endPoint)));
+    public Set<ButtonPoint> getPath() {
+        return this.path;
+    }
+
+    public List<Set<ButtonPoint>> getAllPaths() {
+        return allPaths;
+    }
+
+    public List<Set<ButtonPoint>> getAllPathTrials() {
+        return allPathTrials;
     }
 
     // TODO: if there was a mine-point the last point must be excluded in the next run change switch to if with swapping - / + for the point calculated
-    public BPointPlusIndicator calculateNextPoint(DecisionTree.TreeElement node,
-                                                  ButtonPoint endPoint,
-                                                  List<ButtonPoint> lastPoints,
-                                                  Indicator lastIndicator
-                                                  ) {
+    public BPointPlusIndicator calculateAndSetNextPoint(ButtonPoint startPoint,
+                                                        ButtonPoint endPoint) {
         int nextX = 0;
         int nextY = 0;
-        ButtonPoint startPoint = node.getThisPoint();
-
+        addToSet(this.pathTrials, startPoint, false);
+        System.out.println("The next point \n" + startPoint + "\n");
         int stepsX = endPoint.myPoint().x() - startPoint.myPoint().x();
         int stepsY = endPoint.myPoint().y() - startPoint.myPoint().y();
         if (stepsX <= 0) {
@@ -162,116 +154,49 @@ public class PathCalculator {
             nextY = startPoint.myPoint().y() + 1;
         }
         ButtonDescription description = this.getUtil().getFieldsList().get(nextY).get(nextX);
+        ButtonPoint lastButtonPoint = startPoint;
         ButtonPoint resultButton = new ButtonPoint(new Point(nextX, nextY), description);
-        boolean successAddSet = addToSet(this.pathTrials, resultButton,  false);
+        addToSet(this.pathTrials, resultButton, false);
 
-        BPointPlusIndicator indResult;
-        if (description.isMine() || !successAddSet) {
-            indResult = new BPointPlusIndicator(resultButton, Indicator.FOUND_AFTER_ERROR);
-        } else {
-            indResult = new BPointPlusIndicator(resultButton, Indicator.FOUND_NEXT);
+        Conditions conditions = Conditions.instance(endPoint, resultButton, Indicator.FOUND_NEXT);
+        SuccessIndicator indicator = conditions.testConditions(resultButton);
+        BPointPlusIndicator result = new BPointPlusIndicator(resultButton, Indicator.FOUND_NEXT, indicator);
+        while (!indicator.success() || this.getPathTrials().contains(result.buttonPoint())) {
+            if (combinatorsIndex < combinators.size()) {
+                combinatorsIndex++;
+            }
+            if (combinatorsIndex == combinators.size()) {
+                combinatorsIndex = 0;
+            }
+            FunTuple tuple = combinators.get(combinatorsIndex);
+            resultButton = result.buttonPoint();
+            conditions = Conditions.instance(endPoint, resultButton,Indicator.FOUND_AFTER_ERROR);
+            indicator = conditions.testConditions(resultButton);
+            result = new BPointPlusIndicator(calculateNextPointIntern(lastButtonPoint, tuple.first(), tuple.second()),
+                    Indicator.FOUND_AFTER_ERROR, indicator);
+            lastButtonPoint = resultButton;
+            addToSet(this.pathTrials, resultButton, false);
         }
-        lastPoints.add(resultButton);
-        BPointPlusInternal internResult = new BPointPlusInternal(indResult, lastPoints);
+        result = new BPointPlusIndicator(result.buttonPoint(),
+                Indicator.FOUND_AFTER_ERROR, indicator);
 
-        while(resultButton.buttonDescr().isMine() || !successAddSet) {
-            internResult = calculateNextPointIntern(node,
-                    internResult,
-                    false
-                    );
-            resultButton = internResult.buttonPlusInd().buttonPoint();
-            indResult = new BPointPlusIndicator(resultButton, internResult.buttonPlusInd().indicator());
-
-
-        }
-        return indResult;
+        return result;
     }
 
-    private BPointPlusInternal calculateNextPointIntern(DecisionTree.TreeElement node,
-                                                         BPointPlusInternal internalHolder,
-                                                         boolean  recur) {
+    private ButtonPoint calculateNextPointIntern(ButtonPoint startPoint,
+                                                 IntBinaryOperator operatorX,
+                                                 IntBinaryOperator operatorY) {
 
-        ButtonPoint startPoint = node.getThisPoint();
-        ButtonPoint prevResultButt = internalHolder.buttonPlusInd().buttonPoint();
-        Indicator prevResultInd = internalHolder.buttonPlusInd().indicator();
-        List<ButtonPoint> lastPoints = internalHolder.lastPoints();
-        ButtonPoint lastPoint = lastPoints.get(lastPoints.size() - 1);
         List<List<ButtonDescription>> fieldsList = this.getUtil().getFieldsList();
-
-        System.out.println("There was a mine point \n"+ prevResultButt +"\n");
-        int nextX;
-        if (recur) {
-            nextX = ((startPoint.myPoint().x() + 1) < this.getUtil().getCx()) ? startPoint.myPoint().x() + 1 : startPoint.myPoint().x();
-        } else {
-            nextX =((startPoint.myPoint().x() - 1) >= 0) ? startPoint.myPoint().x() - 1 : startPoint.myPoint().x();
-        }
-
-        int nextY;
-        if (recur) {
-            nextY =((startPoint.myPoint().y() + 1) < this.getUtil().getCy()) ? startPoint.myPoint().y() + 1 : startPoint.myPoint().y();
-        } else {
-            nextY =((startPoint.myPoint().y() - 1) >= 0) ? startPoint.myPoint().y() - 1 : startPoint.myPoint().y();
-        }
-        ButtonDescription description = fieldsList.get(nextY).get(nextX);
-        ButtonPoint resultButton = new ButtonPoint(new Point(nextX, nextY), description);
-        Indicator ind;
-        lastPoints.add(resultButton);
-        boolean successAddToSet = addToSet(this.pathTrials, resultButton,  false);
-        if (resultButton.buttonDescr().isMine()) {
-            ind = Indicator.FOUND_AFTER_ERROR;
-        } else {
-            ind = Indicator.FOUND_NEXT;
-        }
-        BPointPlusInternal nextResult = new BPointPlusInternal(new BPointPlusIndicator(resultButton, ind), lastPoints);
-        if (!successAddToSet || resultButton.buttonDescr().isMine()) {
-            nextResult = calculateNextPointIntern(node, nextResult, true);
-        }
-
-        return nextResult;
-    }
-
-    public static class Conditions {
-        private final Predicate<ButtonPoint> nextCond;
-
-        private final Predicate<ButtonPoint> endCond;
-
-        public Conditions(Predicate<ButtonPoint> nextCond, Predicate<ButtonPoint> endCond) {
-            this.nextCond = nextCond;
-            this.endCond = endCond;
-        }
-
-        public Predicate<ButtonPoint> nextCond() {
-            return nextCond;
-        }
-
-        public Predicate<ButtonPoint> endCond() {
-            return endCond;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (o == null || getClass() != o.getClass()) return false;
-            Conditions that = (Conditions) o;
-            return Objects.equals(nextCond, that.nextCond) && Objects.equals(endCond, that.endCond);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(nextCond, endCond);
-        }
-    }
-
-    public enum Indicator {
-        FOUND_NEXT,
-        FOUND_AFTER_ERROR;
-    }
-
-    public record BPointPlusIndicator(ButtonPoint buttonPoint, Indicator indicator) {
-
-    }
-
-    private record BPointPlusInternal(BPointPlusIndicator buttonPlusInd, List<ButtonPoint> lastPoints) {
-
+        System.out.println("The next point \n" + startPoint + "\n");
+        Point nextPoint = calcFun(startPoint.myPoint().x(),
+                startPoint.myPoint().y(),
+                this.util.getCx(), this.util.getCy(),
+                operatorX, operatorY);
+        ButtonDescription description = fieldsList.get(nextPoint.y()).get(nextPoint.x());
+        ButtonPoint resultButton = new ButtonPoint(nextPoint, description);
+        addToSet(this.pathTrials, resultButton, false);
+        return resultButton;
     }
 
     private static boolean addToSet(Set<ButtonPoint> theSet, ButtonPoint element, boolean throwException) {
@@ -288,5 +213,198 @@ public class PathCalculator {
             }
         }
     }
+
+    private Point calcFun(int x, int y, int upperX, int upperY, IntBinaryOperator opX, IntBinaryOperator opY) {
+        int xResult;
+        int yResult;
+        if (opX.applyAsInt(x, 1) >= 0 && opX.applyAsInt(x, 1) < upperX) {
+            xResult = opX.applyAsInt(x, 1);
+        } else if (opX.applyAsInt(x, 1) >= 0){
+            xResult = x;
+        } else {
+            xResult = 0;
+        }
+        if (opY.applyAsInt(y, 1) >= 0 && opY.applyAsInt(y, 1) < upperY) {
+            yResult = opY.applyAsInt(y, 1);
+        } else  if (opY.applyAsInt(y, 1) >= 0){
+            yResult = y;
+        } else {
+            yResult = 0;
+        }
+        return new Point(xResult, yResult);
+    }
+
+    public static class Conditions {
+        private final Predicate<ButtonPoint> nextOKCond;
+
+        private final Predicate<ButtonPoint> nextNotOKCond;
+
+        private final Predicate<ButtonPoint> endCond;
+
+        private Conditions(Predicate<ButtonPoint> nextOKCond, Predicate<ButtonPoint> nextNotOKCond, Predicate<ButtonPoint> endCond) {
+            this.nextOKCond = nextOKCond;
+            this.nextNotOKCond = nextNotOKCond;
+            this.endCond = endCond;
+        }
+
+        public Predicate<ButtonPoint> nextOKCond() {
+            return this.nextOKCond;
+        }
+
+        public Predicate<ButtonPoint> nextNotOKCond() {
+            return this.nextNotOKCond;
+        }
+
+
+        public Predicate<ButtonPoint> endCond() {
+            return this.endCond;
+        }
+
+        public SuccessIndicator testConditions(ButtonPoint value) {
+            Boolean success = false;
+            if (value != null) {
+                if (this.endCond() != null && this.nextOKCond() != null) {
+                    success = this.nextOKCond().test(value);
+                } else if (this.endCond() != null && this.nextNotOKCond() != null) {
+                    success = this.nextNotOKCond().test(value);
+                }
+                Boolean finished = this.endCond().test(value);
+                Integer indicator = findIndicator(success, finished);
+                return new SuccessIndicator(success,
+                        finished, indicator);
+            } else {
+                return new SuccessIndicator(Boolean.FALSE,
+                        Boolean.FALSE, SuccessIndicator.NOK);
+            }
+        }
+
+        public static Conditions instance(ButtonPoint endPoint,
+                                          ButtonPoint pointNext, Indicator indicator) {
+            Conditions inst;
+            if (indicator == Indicator.FOUND_NEXT) {
+                inst = new Conditions((e ->
+                        (!e.buttonDescr().isMine()
+                                && e.myPoint()
+                                .checkPointIsNeighbor(pointNext.myPoint())
+                                && (e.myPoint()
+                                .compareNearerToEnd(pointNext.myPoint(),
+                                        endPoint.myPoint())
+                                .xOtherNearer())
+                                || (!e.buttonDescr().isMine() && e.myPoint()
+                                .compareNearerToEnd(pointNext.myPoint(),
+                                        endPoint.myPoint())
+                                .yOtherNearer()))),
+                        null,
+                        (e -> !e.buttonDescr().isMine() && e.buttonDescr().pointType()
+                                .equals(endPoint.buttonDescr().pointType())
+                                && e.equals(endPoint)));
+            } else {
+                inst = new Conditions(null,
+                        (e -> !e.buttonDescr().isMine()
+                                && e.myPoint().checkPointIsNeighbor(pointNext.myPoint())),
+
+                        (e ->  !e.buttonDescr().isMine() && e.buttonDescr().pointType()
+                                .equals(endPoint.buttonDescr().pointType())
+                                && e.equals(endPoint)));
+            }
+            return inst;
+        }
+
+
+        private Integer findIndicator(Boolean success, Boolean finished) {
+            Integer indicator = DecisionTree.SuccessIndicator.NOK;
+            if (!success && finished) {
+                indicator = DecisionTree.SuccessIndicator.FINISHED;
+            } else {
+                if (success) {
+                    if (finished) {
+                        indicator = DecisionTree.SuccessIndicator.FIN_SUCCESS;
+                    } else {
+                        indicator = DecisionTree.SuccessIndicator.SUCCESSFUL;
+                    }
+                }
+            }
+            return indicator;
+        }
+
+
+    }
+
+    public static class SuccessIndicator {
+        private final Boolean success;
+
+        private final Boolean finished;
+
+        private final Integer indicator;
+
+        public static final Integer SUCCESSFUL = 0x01;
+        public static final Integer FINISHED = 0x02;
+        public static final Integer FIN_SUCCESS = SUCCESSFUL + FINISHED;
+        public static final Integer NOK = 0x10;
+
+
+        public SuccessIndicator(Boolean success, Boolean finished, Integer indicator) {
+            this.success = success;
+            this.finished = finished;
+            this.indicator = indicator;
+        }
+
+        public Boolean success() {
+            return this.success;
+        }
+
+        public Integer indicator() {
+            return this.indicator;
+        }
+
+        public Boolean finished() {
+            return this.finished;
+        }
+
+        public Boolean isFinishItem() {
+            return success() && finished();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || getClass() != o.getClass()) return false;
+            DecisionTree.SuccessIndicator that = (DecisionTree.SuccessIndicator) o;
+            return Objects.equals(success, that.success())
+                    && Objects.equals(finished, that.finished())
+                    && Objects.equals(indicator, that.indicator());
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(success, finished, indicator);
+        }
+
+        @Override
+        public String toString() {
+            return "SuccessIndicator{" +
+                    "success=" + success +
+                    ", finished=" + finished +
+                    ", indicator=" + indicator +
+                    '}';
+        }
+    }
+
+    public enum Indicator {
+        FOUND_NEXT,
+        FOUND_AFTER_ERROR;
+    }
+
+    public record FunTuple(IntBinaryOperator first, IntBinaryOperator second) {
+
+    }
+
+    public record BPointPlusIndicator(ButtonPoint buttonPoint, Indicator indicator, SuccessIndicator successIndicator) {
+
+    }
+
+    private record BPointPlusInternal(BPointPlusIndicator buttonPlusInd, List<ButtonPoint> lastPoints) {
+
+    }
+
 
 }
