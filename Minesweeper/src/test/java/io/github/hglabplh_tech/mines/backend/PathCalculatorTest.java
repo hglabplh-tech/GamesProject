@@ -32,23 +32,16 @@ class PathCalculatorTest {
     void calculatePath() {
         ButtonPoint start = labyrinth.getStart();
         ButtonPoint next = labyrinth.getFirstBase();
-        Set<ButtonPoint> result = this.pathCalculator.calculatePath(start, next);
+        List<ButtonPoint> result = this.pathCalculator.calculatePath(start, next);
         result.forEach( e -> System.out.println(e));
         System.out.println("Size of path: " + result.size());
     }
 
     @Test
     void calculateAllPaths() {
-        List<Set<ButtonPoint>> result = this.pathCalculator.calculateAllPaths();
-        System.out.println("===== Print out path trial points ====");
-        for (Set<ButtonPoint> buttonPoints : this.pathCalculator.getAllPathTrials()) {
-            System.out.println("Next list \n");
-            for (ButtonPoint t : buttonPoints) {
-                System.out.println(t);
-            }
-        }
+        List<List<ButtonPoint>> result = this.pathCalculator.calculateAllPaths();
         System.out.println("======== Print out path points =======");
-        for (Set<ButtonPoint> e : result) {
+        for (List<ButtonPoint> e : result) {
             System.out.println("Next list \n");
             for (ButtonPoint t : e) {
                 System.out.println(t);

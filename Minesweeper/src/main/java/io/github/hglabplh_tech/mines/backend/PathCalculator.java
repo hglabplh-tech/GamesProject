@@ -39,18 +39,13 @@ public class PathCalculator {
 
     private static final List<FunTuple> combinators = new ArrayList<>();
 
-    private static int combinatorsIndex = 0;
 
     private final SweeperLogic util;
     private final Labyrinth labyrinth;
 
 
-    private final Set<ButtonPoint> path = new HashSet<>();
+    private final List<ButtonPoint> path = new ArrayList<>();
 
-    private final Set<ButtonPoint> pathTrials = new HashSet<>();
-
-    private final List<Set<ButtonPoint>> allPaths = new ArrayList<>();
-    private final List<Set<ButtonPoint>> allPathTrials = new ArrayList<>();
 
     static {
         combinators.add(new FunTuple(plus, minus));
@@ -69,34 +64,31 @@ public class PathCalculator {
         this.labyrinth = labyrinth;
     }
 
-    public List<Set<ButtonPoint>> calculateAllPaths() {
-        this.getAllPaths().clear();
-        this.getAllPathTrials().clear();
+    public List<List<ButtonPoint>> calculateAllPaths() {
+        List<List<ButtonPoint>> allPaths = new ArrayList<>();
         List<ButtonPoint> pointsOrder = this.getLabyrinth().getPointsOrder();
         ButtonPoint first = pointsOrder.get(0);
         int index = 1;
-        ButtonPoint next ;
+        ButtonPoint next;
         while (index < pointsOrder.size()) {
             next = pointsOrder.get(index);
-            this.getAllPaths().add(calculatePath(first, next));
-            this.getAllPathTrials().add(this.getPathTrials());
+            allPaths.add(calculatePath(first, next));
             index++;
             first = next;
         }
-        return this.getAllPaths();
+        return allPaths;
     }
 
-    public Set<ButtonPoint> calculatePath(ButtonPoint startPoint, ButtonPoint endPoint) {
-        this.getPath().clear();
-        this.getAllPathTrials().clear();
+    public List<ButtonPoint> calculatePath(ButtonPoint startPoint, ButtonPoint endPoint) {
+        List<ButtonPoint> path = new ArrayList<>();
         ButtonPoint nextPoint = startPoint;
-        BPointPlusIndicator result = new BPointPlusIndicator(startPoint,  Indicator.FOUND_NEXT,
+        BPointPlusIndicator result = new BPointPlusIndicator(startPoint, Indicator.FOUND_NEXT,
                 new SuccessIndicator(true, false, SuccessIndicator.SUCCESSFUL));
         boolean finish = false;
         boolean success = true;
         while (!finish) {
             if (success) {
-                addToSet(this.getPath(), result.buttonPoint(), true);
+                addToSet(path, result.buttonPoint(), false);
 
             }
             result = this.calculateAndSetNextPoint(nextPoint, endPoint);
@@ -104,7 +96,8 @@ public class PathCalculator {
             finish = result.successIndicator().finished();
             success = result.successIndicator().success();
         }
-        return this.getPath();
+        addToSet(path, result.buttonPoint(), false);
+        return path;
     }
 
 
@@ -116,28 +109,11 @@ public class PathCalculator {
         return this.labyrinth;
     }
 
-    public Set<ButtonPoint> getPathTrials() {
-        return this.pathTrials;
-    }
-
-    public Set<ButtonPoint> getPath() {
-        return this.path;
-    }
-
-    public List<Set<ButtonPoint>> getAllPaths() {
-        return allPaths;
-    }
-
-    public List<Set<ButtonPoint>> getAllPathTrials() {
-        return allPathTrials;
-    }
-
     // TODO: if there was a mine-point the last point must be excluded in the next run change switch to if with swapping - / + for the point calculated
     public BPointPlusIndicator calculateAndSetNextPoint(ButtonPoint startPoint,
                                                         ButtonPoint endPoint) {
         int nextX = 0;
         int nextY = 0;
-        addToSet(this.pathTrials, startPoint, false);
         System.out.println("The next point \n" + startPoint + "\n");
         int stepsX = endPoint.myPoint().x() - startPoint.myPoint().x();
         int stepsY = endPoint.myPoint().y() - startPoint.myPoint().y();
@@ -156,30 +132,25 @@ public class PathCalculator {
         ButtonDescription description = this.getUtil().getFieldsList().get(nextY).get(nextX);
         ButtonPoint lastButtonPoint = startPoint;
         ButtonPoint resultButton = new ButtonPoint(new Point(nextX, nextY), description);
-        addToSet(this.pathTrials, resultButton, false);
-
-        Conditions conditions = Conditions.instance(endPoint, resultButton, Indicator.FOUND_NEXT);
+        Conditions conditions = Conditions.instance(endPoint, startPoint, Indicator.FOUND_NEXT);
         SuccessIndicator indicator = conditions.testConditions(resultButton);
         BPointPlusIndicator result = new BPointPlusIndicator(resultButton, Indicator.FOUND_NEXT, indicator);
-        while (!indicator.success() || this.getPathTrials().contains(result.buttonPoint())) {
-            if (combinatorsIndex < combinators.size()) {
-                combinatorsIndex++;
+        if (!indicator.success()) {
+            for (FunTuple tuple : combinators) {
+                result = new BPointPlusIndicator(calculateNextPointIntern(lastButtonPoint, tuple.first(), tuple.second()),
+                        Indicator.FOUND_AFTER_ERROR, indicator);
+                resultButton = result.buttonPoint();
+                conditions = Conditions.instance(endPoint, lastButtonPoint, Indicator.FOUND_AFTER_ERROR);
+                indicator = conditions.testConditions(resultButton);
+                if (indicator.success()) {
+                    result = new BPointPlusIndicator(resultButton,
+                            Indicator.FOUND_AFTER_ERROR, indicator);
+                    break;
+                } else {
+                    lastButtonPoint = resultButton;
+                }
             }
-            if (combinatorsIndex == combinators.size()) {
-                combinatorsIndex = 0;
-            }
-            FunTuple tuple = combinators.get(combinatorsIndex);
-            resultButton = result.buttonPoint();
-            conditions = Conditions.instance(endPoint, resultButton,Indicator.FOUND_AFTER_ERROR);
-            indicator = conditions.testConditions(resultButton);
-            result = new BPointPlusIndicator(calculateNextPointIntern(lastButtonPoint, tuple.first(), tuple.second()),
-                    Indicator.FOUND_AFTER_ERROR, indicator);
-            lastButtonPoint = resultButton;
-            addToSet(this.pathTrials, resultButton, false);
         }
-        result = new BPointPlusIndicator(result.buttonPoint(),
-                Indicator.FOUND_AFTER_ERROR, indicator);
-
         return result;
     }
 
@@ -195,23 +166,20 @@ public class PathCalculator {
                 operatorX, operatorY);
         ButtonDescription description = fieldsList.get(nextPoint.y()).get(nextPoint.x());
         ButtonPoint resultButton = new ButtonPoint(nextPoint, description);
-        addToSet(this.pathTrials, resultButton, false);
         return resultButton;
     }
 
-    private static boolean addToSet(Set<ButtonPoint> theSet, ButtonPoint element, boolean throwException) {
-
-        if (throwException) {
+    private static boolean addToSet(List<ButtonPoint> theSet, ButtonPoint element, boolean throwException) {
+        if (theSet.contains(element)) {
+            if (throwException) {
+                throw new IllegalStateException("element: " + element + " is already in list");
+            }
+            return false;
+        } else {
             theSet.add(element);
             return true;
-        } else {
-            if (theSet.contains(element)) {
-                return false;
-            } else {
-                theSet.add(element);
-                return true;
-            }
         }
+
     }
 
     private Point calcFun(int x, int y, int upperX, int upperY, IntBinaryOperator opX, IntBinaryOperator opY) {
@@ -219,14 +187,14 @@ public class PathCalculator {
         int yResult;
         if (opX.applyAsInt(x, 1) >= 0 && opX.applyAsInt(x, 1) < upperX) {
             xResult = opX.applyAsInt(x, 1);
-        } else if (opX.applyAsInt(x, 1) >= 0){
+        } else if (opX.applyAsInt(x, 1) >= 0) {
             xResult = x;
         } else {
             xResult = 0;
         }
         if (opY.applyAsInt(y, 1) >= 0 && opY.applyAsInt(y, 1) < upperY) {
             yResult = opY.applyAsInt(y, 1);
-        } else  if (opY.applyAsInt(y, 1) >= 0){
+        } else if (opY.applyAsInt(y, 1) >= 0) {
             yResult = y;
         } else {
             yResult = 0;
@@ -284,16 +252,16 @@ public class PathCalculator {
             if (indicator == Indicator.FOUND_NEXT) {
                 inst = new Conditions((e ->
                         (!e.buttonDescr().isMine()
-                                && e.myPoint()
+                                && (e.myPoint()
                                 .checkPointIsNeighbor(pointNext.myPoint())
                                 && (e.myPoint()
                                 .compareNearerToEnd(pointNext.myPoint(),
                                         endPoint.myPoint())
                                 .xOtherNearer())
-                                || (!e.buttonDescr().isMine() && e.myPoint()
+                                || (e.myPoint()
                                 .compareNearerToEnd(pointNext.myPoint(),
                                         endPoint.myPoint())
-                                .yOtherNearer()))),
+                                .yOtherNearer())))),
                         null,
                         (e -> !e.buttonDescr().isMine() && e.buttonDescr().pointType()
                                 .equals(endPoint.buttonDescr().pointType())
@@ -303,7 +271,7 @@ public class PathCalculator {
                         (e -> !e.buttonDescr().isMine()
                                 && e.myPoint().checkPointIsNeighbor(pointNext.myPoint())),
 
-                        (e ->  !e.buttonDescr().isMine() && e.buttonDescr().pointType()
+                        (e -> !e.buttonDescr().isMine() && e.buttonDescr().pointType()
                                 .equals(endPoint.buttonDescr().pointType())
                                 && e.equals(endPoint)));
             }

@@ -82,8 +82,8 @@ public record Point(Integer x, Integer y) implements PointCompareIfc {
         int yDiffThisToEnd = StrictMath.abs(this.y() - end.y());
         int xDiffOtherToEnd = StrictMath.abs(other.x() - end.x());
         int yDiffOtherToEnd = StrictMath.abs(other.y() - end.y());
-        boolean xOtherNearer = (xDiffThisToEnd > xDiffOtherToEnd);
-        boolean yOtherNearer = (yDiffThisToEnd > yDiffOtherToEnd);
+        boolean xOtherNearer = (xDiffThisToEnd <= xDiffOtherToEnd);
+        boolean yOtherNearer = (yDiffThisToEnd <= yDiffOtherToEnd);
         boolean bothNearer = (xOtherNearer && yOtherNearer);
         return new NearerResult(xDiffThisToEnd, yDiffThisToEnd,
                 xDiffOtherToEnd, yDiffOtherToEnd,
