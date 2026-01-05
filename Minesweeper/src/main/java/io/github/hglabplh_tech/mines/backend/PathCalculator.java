@@ -43,8 +43,7 @@ public class PathCalculator {
     private final SweeperLogic util;
     private final Labyrinth labyrinth;
 
-
-    private final List<ButtonPoint> path = new ArrayList<>();
+    private final List<ButtonPoint> pathTrials = new ArrayList<>();
 
 
     static {
@@ -80,24 +79,30 @@ public class PathCalculator {
     }
 
     public List<ButtonPoint> calculatePath(ButtonPoint startPoint, ButtonPoint endPoint) {
+        this.pathTrials.clear();
         List<ButtonPoint> path = new ArrayList<>();
         ButtonPoint nextPoint = startPoint;
         BPointPlusIndicator result = new BPointPlusIndicator(startPoint, Indicator.FOUND_NEXT,
-                new SuccessIndicator(true, false, SuccessIndicator.SUCCESSFUL));
+               new SuccessIndicator(true, false, SuccessIndicator.SUCCESSFUL));
         boolean finish = false;
         boolean success = true;
         while (!finish) {
             if (success) {
-                addToSet(path, result.buttonPoint(), false);
+                addToSet(path, result.buttonPoint(), true);
 
             }
             result = this.calculateAndSetNextPoint(nextPoint, endPoint);
             nextPoint = result.buttonPoint();
             finish = result.successIndicator().finished();
-            success = result.successIndicator().success();
+            success = result.successIndicator().success() &&
+                    !this.pathTrials.contains(result.buttonPoint());
         }
-        addToSet(path, result.buttonPoint(), false);
-        return path;
+
+        System.out.println("==== Print out path trials ====");
+        this.pathTrials.forEach(e -> System.out.println("entry: ->" + e));
+        List<ButtonPoint> resultPath = new ArrayList<>(path);
+        resultPath.add(endPoint);
+        return resultPath;
     }
 
 
@@ -115,6 +120,7 @@ public class PathCalculator {
         int nextX = 0;
         int nextY = 0;
         System.out.println("The next point \n" + startPoint + "\n");
+        addToSet(this.pathTrials, startPoint, false);
         int stepsX = endPoint.myPoint().x() - startPoint.myPoint().x();
         int stepsY = endPoint.myPoint().y() - startPoint.myPoint().y();
         if (stepsX <= 0) {
@@ -132,19 +138,23 @@ public class PathCalculator {
         ButtonDescription description = this.getUtil().getFieldsList().get(nextY).get(nextX);
         ButtonPoint lastButtonPoint = startPoint;
         ButtonPoint resultButton = new ButtonPoint(new Point(nextX, nextY), description);
+
         Conditions conditions = Conditions.instance(endPoint, startPoint, Indicator.FOUND_NEXT);
         SuccessIndicator indicator = conditions.testConditions(resultButton);
         BPointPlusIndicator result = new BPointPlusIndicator(resultButton, Indicator.FOUND_NEXT, indicator);
-        if (!indicator.success()) {
+
+        if (!indicator.success() && !this.pathTrials.contains(resultButton)) {
             for (FunTuple tuple : combinators) {
+                addToSet(this.pathTrials, resultButton, false);
                 result = new BPointPlusIndicator(calculateNextPointIntern(lastButtonPoint, tuple.first(), tuple.second()),
                         Indicator.FOUND_AFTER_ERROR, indicator);
                 resultButton = result.buttonPoint();
                 conditions = Conditions.instance(endPoint, lastButtonPoint, Indicator.FOUND_AFTER_ERROR);
                 indicator = conditions.testConditions(resultButton);
-                if (indicator.success()) {
+                if (indicator.success() && !this.pathTrials.contains(resultButton)) {
                     result = new BPointPlusIndicator(resultButton,
                             Indicator.FOUND_AFTER_ERROR, indicator);
+                    addToSet(this.pathTrials, resultButton, false);
                     break;
                 } else {
                     lastButtonPoint = resultButton;
