@@ -29,15 +29,15 @@ import java.util.function.Predicate;
 
 public class PathCalculator {
 
-    private static final IntBinaryOperator plus = Integer::sum;
+    public static final IntBinaryOperator plus = Integer::sum;
 
-    private static final IntBinaryOperator minus = (a, b) -> a - b;
+    public static final IntBinaryOperator minus = (a, b) -> a - b;
 
-    private static final IntBinaryOperator mul = (a, b) -> a * b;
+    public static final IntBinaryOperator mul = (a, b) -> a * b;
 
-    private static final IntBinaryOperator div = (a, b) -> a / b;
+    public static final IntBinaryOperator div = (a, b) -> a / b;
 
-    private static final List<FunTuple> combinators = new ArrayList<>();
+    public static final List<FunTuple> combinators = new ArrayList<>();
 
 
     private final SweeperLogic util;
@@ -164,7 +164,7 @@ public class PathCalculator {
         return result;
     }
 
-    private ButtonPoint calculateNextPointIntern(ButtonPoint startPoint,
+    public ButtonPoint calculateNextPointIntern(ButtonPoint startPoint,
                                                  IntBinaryOperator operatorX,
                                                  IntBinaryOperator operatorY) {
 
