@@ -1,0 +1,5582 @@
+{
+  "cx": 30,
+  "cy": 30,
+  "fieldsList": [
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "STARTPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "FIRST_BASE"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "SECOND_BASE"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "ENDPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ]
+  ],
+  "numFields": 900,
+  "numMines": 25,
+  "labyrinth": {
+    "nextIndex": 1,
+    "nextPoint": {
+      "myPoint": {
+        "x": 1,
+        "y": 11
+      },
+      "buttonDescr": {
+        "isProcessed": false,
+        "pointType": "FIRST_BASE"
+      }
+    },
+    "startPoint": {
+      "myPoint": {
+        "x": 8,
+        "y": 8
+      },
+      "buttonDescr": {
+        "isProcessed": false,
+        "pointType": "STARTPOINT"
+      }
+    },
+    "firstBase": {
+      "myPoint": {
+        "x": 1,
+        "y": 11
+      },
+      "buttonDescr": {
+        "isProcessed": false,
+        "pointType": "FIRST_BASE"
+      }
+    },
+    "secondBase": {
+      "myPoint": {
+        "x": 28,
+        "y": 11
+      },
+      "buttonDescr": {
+        "isProcessed": false,
+        "pointType": "SECOND_BASE"
+      }
+    },
+    "endPoint": {
+      "myPoint": {
+        "x": 15,
+        "y": 29
+      },
+      "buttonDescr": {
+        "isProcessed": false,
+        "pointType": "ENDPOINT"
+      }
+    },
+    "path": [],
+    "pathToNext": [],
+    "pointsOrder": [
+      {
+        "myPoint": {
+          "x": 8,
+          "y": 8
+        },
+        "buttonDescr": {
+          "isProcessed": false,
+          "pointType": "STARTPOINT"
+        }
+      },
+      {
+        "myPoint": {
+          "x": 1,
+          "y": 11
+        },
+        "buttonDescr": {
+          "isProcessed": false,
+          "pointType": "FIRST_BASE"
+        }
+      },
+      {
+        "myPoint": {
+          "x": 28,
+          "y": 11
+        },
+        "buttonDescr": {
+          "isProcessed": false,
+          "pointType": "SECOND_BASE"
+        }
+      },
+      {
+        "myPoint": {
+          "x": 15,
+          "y": 29
+        },
+        "buttonDescr": {
+          "isProcessed": false,
+          "pointType": "ENDPOINT"
+        }
+      }
+    ],
+    "actPoint": {
+      "myPoint": {
+        "x": 8,
+        "y": 8
+      },
+      "buttonDescr": {
+        "isProcessed": false,
+        "pointType": "STARTPOINT"
+      }
+    }
+  },
+  "shadowArray": [
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "labArray": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "successHits": 0,
+  "labyrinthOpt": "#lab-opt-placeholder#",
+  "playMode": "LABYRINTH"
+}

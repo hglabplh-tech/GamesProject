@@ -7,8 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,8 +40,22 @@ class JSONUtilTest {
     }
 
     @Test
-    void testLoadSweepLogic() {
-
+    void testLoadSweepLogic() throws IOException {
+        String outFilePath = System.getProperty("user.home") +
+                "/gamesTest/";
+        String completePath = outFilePath + "sweeplogic.tmp";
+        File temp = new File(outFilePath);
+        if (!temp.exists()) {
+            temp.mkdirs();
+        }
+        FileWriter writer = new FileWriter(completePath);
+        JSONUtil.storeSweepLogic(this.logic, writer);
+        writer.close();
+        Reader reader = new FileReader(completePath);
+        SweeperLogic loaded = JSONUtil.loadSweepLogic(reader);
+        reader.close();
+        assertEquals(loaded.getCy(), this.logic.getCy());
+        assertEquals(loaded.getLabyrinth().getStart(), this.logic.getLabyrinth().getStart());
     }
 
     @Test
