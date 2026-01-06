@@ -18,10 +18,11 @@ class JSONUtilTest {
 
     @BeforeEach
     public void before() {
-            this.logic = new SweeperLogic(PlayModes.LABYRINTH, 30,30, 25);
-            this.logic.calculateMines();
-            this.labyrinth = this.logic.getLabyrinth();
-            assertNotNull(this.labyrinth);
+        this.logic = new SweeperLogic(PlayModes.LABYRINTH, 30, 30, 25);
+        assertNotNull(this.logic);
+        this.logic.calculateMines();
+        this.labyrinth = this.logic.getLabyrinth();
+        assertNotNull(this.labyrinth);
     }
 
     @AfterEach
@@ -61,7 +62,6 @@ class JSONUtilTest {
     @Test
     void testLoadLabyrinth() {
     }
-
 
 
     @Test
