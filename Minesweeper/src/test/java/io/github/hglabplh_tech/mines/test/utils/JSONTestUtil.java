@@ -8,6 +8,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.Optional;
 
 import static io.github.hglabplh_tech.mines.backend.jsonstore.JSONUtil.*;
 
@@ -61,6 +65,37 @@ public class JSONTestUtil {
         Labyrinth labyrinth = loadLabyrinth(reader);
         reader.close();
         return labyrinth;
+    }
+
+    public static Optional<SweeperLogic> loadSweepLogicFromResources(String fileName) {
+        String resource = "/sweeplogic-json/" + fileName;
+        URL resourceURL = JSONTestUtil.class.getResource(resource);
+        URI resourceURI;
+        if (resourceURL != null) {
+            try {
+                resourceURI = resourceURL.toURI();
+                File file = new File(resourceURI);
+                String fullName = file.getAbsolutePath();
+                FileReader reader = new FileReader(fullName);
+                SweeperLogic logic = loadSweepLogic(reader);
+                reader.close();
+                return Optional.of(logic);
+            } catch (IOException | URISyntaxException ex) {
+                return Optional.empty();
+            }
+        }
+        return Optional.empty();
+    }
+
+    public static void main(String[] args) {
+        Optional<SweeperLogic> logicOpt = loadSweepLogicFromResources("testfield-one.json");
+        if (logicOpt.isPresent()) {
+            SweeperLogic logic = logicOpt.get();
+            System.out.println(logic.getShadowArray().length);
+            System.out.println(logic.getLabArray().length);
+            System.out.println(logic.getFieldsList().size());
+            logic.getFieldsList().forEach(e -> System.out.println("x-size: " + e.size()));
+        }
     }
 
 

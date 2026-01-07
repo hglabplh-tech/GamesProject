@@ -164,6 +164,10 @@
       {
         "isProcessed": false,
         "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
       }
     ],
     [
@@ -278,7 +282,7 @@
       {
         "isProcessed": false,
         "pointType": "NORMALPOINT"
-      }0,
+      },
       {
         "isProcessed": false,
         "pointType": "MINEPOINT"
@@ -628,12 +632,9 @@
     false,
     false,
     false,
-    false,
     false
   ],
   "labArray": [
-    false,
-    false,
     false,
     false,
     false,

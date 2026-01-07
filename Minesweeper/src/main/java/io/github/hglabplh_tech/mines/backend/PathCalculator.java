@@ -192,7 +192,7 @@ public class PathCalculator {
 
     }
 
-    private Point calcFun(int x, int y, int upperX, int upperY, IntBinaryOperator opX, IntBinaryOperator opY) {
+    public Point calcFun(int x, int y, int upperX, int upperY, IntBinaryOperator opX, IntBinaryOperator opY) {
         int xResult;
         int yResult;
         if (opX.applyAsInt(x, 1) >= 0 && opX.applyAsInt(x, 1) < upperX) {
@@ -210,6 +210,16 @@ public class PathCalculator {
             yResult = 0;
         }
         return new Point(xResult, yResult);
+    }
+
+
+    // TODO: think about correctness
+    public boolean correctPointCondition(ButtonPoint startButton, ButtonPoint resultButton, Conditions conditions) {
+
+        SuccessIndicator indicator = conditions.testConditions(resultButton);
+        BPointPlusIndicator result = new BPointPlusIndicator(resultButton, Indicator.FOUND_NEXT, indicator);
+
+        return (!indicator.success() && (!this.pathTrials.contains(resultButton) || !resultButton.equalsInPoint(startButton.myPoint())));
     }
 
     public static class Conditions {
@@ -308,6 +318,7 @@ public class PathCalculator {
 
     }
 
+
     public static class SuccessIndicator {
         private final Boolean success;
 
@@ -380,9 +391,6 @@ public class PathCalculator {
 
     }
 
-    private record BPointPlusInternal(BPointPlusIndicator buttonPlusInd, List<ButtonPoint> lastPoints) {
-
-    }
 
 
 }
