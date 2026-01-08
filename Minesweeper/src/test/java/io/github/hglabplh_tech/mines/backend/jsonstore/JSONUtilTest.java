@@ -18,7 +18,7 @@ class JSONUtilTest {
 
     @BeforeEach
     public void before() {
-        this.logic = new SweeperLogic(PlayModes.LABYRINTH, 30, 30, 25);
+        this.logic = new SweeperLogic(PlayModes.LABYRINTH, 10, 10, 20);
         assertNotNull(this.logic);
         this.logic.calculateMines();
         this.labyrinth = this.logic.getLabyrinth();
@@ -44,7 +44,7 @@ class JSONUtilTest {
     void testLoadSweepLogic() throws IOException {
         String outFilePath = System.getProperty("user.home") +
                 "/gamesTest/";
-        String completePath = outFilePath + "sweeplogic.tmp";
+        String completePath = outFilePath + "sweeplogic2.tmp";
         File temp = new File(outFilePath);
         if (!temp.exists()) {
             temp.mkdirs();

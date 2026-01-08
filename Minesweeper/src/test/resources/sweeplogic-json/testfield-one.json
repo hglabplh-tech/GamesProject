@@ -13,6 +13,56 @@
       },
       {
         "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
         "pointType": "MINEPOINT"
       },
       {
@@ -25,99 +75,7 @@
       },
       {
         "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      }
-    ],
-    [
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      }
-    ],
-    [
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
+        "pointType": "MINEPOINT"
       },
       {
         "isProcessed": false,
@@ -205,164 +163,14 @@
       },
       {
         "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      }
-    ],
-    [
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-      "isProcessed": false,
-      "pointType": "NORMALPOINT"
-    },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      }
-    ],
-    [
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
         "pointType": "MINEPOINT"
       },
       {
         "isProcessed": false,
         "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
       }
     ],
     [
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      }
-    ],
-    [
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
-      {
-        "isProcessed": false,
-        "pointType": "NORMALPOINT"
-      },
       {
         "isProcessed": false,
         "pointType": "NORMALPOINT"
@@ -377,6 +185,72 @@
       },
       {
         "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "FIRST_BASE"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
         "pointType": "NORMALPOINT"
       }
     ],
@@ -388,6 +262,132 @@
       {
         "isProcessed": false,
         "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "SECOND_BASE"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "ENDPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      }
+    ],
+    [
+      {
+        "isProcessed": false,
+        "pointType": "NORMALPOINT"
+      },
+      {
+        "isProcessed": false,
+        "pointType": "MINEPOINT"
       },
       {
         "isProcessed": false,
@@ -430,7 +430,7 @@
     "nextPoint": {
       "myPoint": {
         "x": 1,
-        "y": 11
+        "y": 5
       },
       "buttonDescr": {
         "isProcessed": false,
@@ -439,8 +439,8 @@
     },
     "startPoint": {
       "myPoint": {
-        "x": 8,
-        "y": 8
+        "x": 2,
+        "y": 4
       },
       "buttonDescr": {
         "isProcessed": false,
@@ -450,7 +450,7 @@
     "firstBase": {
       "myPoint": {
         "x": 1,
-        "y": 11
+        "y": 5
       },
       "buttonDescr": {
         "isProcessed": false,
@@ -459,8 +459,8 @@
     },
     "secondBase": {
       "myPoint": {
-        "x": 28,
-        "y": 11
+        "x": 6,
+        "y": 6
       },
       "buttonDescr": {
         "isProcessed": false,
@@ -469,8 +469,8 @@
     },
     "endPoint": {
       "myPoint": {
-        "x": 15,
-        "y": 29
+        "x": 8,
+        "y": 7
       },
       "buttonDescr": {
         "isProcessed": false,
@@ -482,8 +482,8 @@
     "pointsOrder": [
       {
         "myPoint": {
-          "x": 8,
-          "y": 8
+          "x": 2,
+          "y": 4
         },
         "buttonDescr": {
           "isProcessed": false,
@@ -493,7 +493,7 @@
       {
         "myPoint": {
           "x": 1,
-          "y": 11
+          "y": 5
         },
         "buttonDescr": {
           "isProcessed": false,
@@ -502,8 +502,8 @@
       },
       {
         "myPoint": {
-          "x": 28,
-          "y": 11
+          "x": 6,
+          "y": 6
         },
         "buttonDescr": {
           "isProcessed": false,
@@ -512,8 +512,8 @@
       },
       {
         "myPoint": {
-          "x": 15,
-          "y": 29
+          "x": 8,
+          "y": 7
         },
         "buttonDescr": {
           "isProcessed": false,
@@ -523,8 +523,8 @@
     ],
     "actPoint": {
       "myPoint": {
-        "x": 8,
-        "y": 8
+        "x": 2,
+        "y": 4
       },
       "buttonDescr": {
         "isProcessed": false,
@@ -535,19 +535,10 @@
   "shadowArray": [
     false,
     false,
+    false,
+    false,
     true,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
+    true,
     false,
     true,
     false,
@@ -556,32 +547,11 @@
     false,
     false,
     false,
+    true,
     false,
     false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
+    true,
+    true,
     false,
     false,
     false,
@@ -606,6 +576,10 @@
     false,
     false,
     false,
+    true,
+    false,
+    true,
+    true,
     false,
     false,
     false,
@@ -613,6 +587,18 @@
     false,
     false,
     false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
     false,
     false,
     false,
@@ -625,6 +611,20 @@
     false,
     false,
     false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    false,
+    false,
+    true,
     false,
     false,
     false,
@@ -677,6 +677,16 @@
     false,
     false,
     false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
     false,
     false,
     false,
@@ -691,6 +701,7 @@
     false,
     false,
     false,
+    true,
     false,
     false,
     false,
@@ -702,18 +713,7 @@
     false,
     false,
     false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
+    true,
     false,
     false,
     false,
