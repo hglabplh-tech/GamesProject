@@ -35,7 +35,7 @@ public class SweeperLogic {
     private final Integer cx;
     private final Integer cy;
     private final Integer numMines;
-    private final List<List<ButtonDescription>> fieldsList = new ArrayList<>();
+    private final List<List<ButtonStatus>> fieldsList = new ArrayList<>();
     private final Boolean[] shadowArray;
     private final Boolean[] labArray;
 
@@ -56,13 +56,13 @@ public class SweeperLogic {
         this.labyrinth = null;
     }
 
-    public List<List<ButtonDescription>> calculateMines() {
+    public List<List<ButtonStatus>> calculateMines() {
         Random rand = new Random();
         int arrIndex = 0;
       for (int cyInd = 0; cyInd < this.cy; cyInd++) {
             this.fieldsList.add(new ArrayList<>());
             for (int cxInd = 0; cxInd < this.cx; cxInd++) {
-              /*  this.fieldsList.get(cyInd).add(cxInd, new ButtonDescription(Boolean.FALSE,
+              /*  this.fieldsList.get(cyInd).add(cxInd, new ButtonStatus(Boolean.FALSE,
                         SweepPointType.NORMALPOINT)); */
                 this.shadowArray[arrIndex] = Boolean.FALSE;
                 this.labArray[arrIndex] = Boolean.FALSE;
@@ -102,11 +102,11 @@ public class SweeperLogic {
                     };
                     pointType = temp ? SweepPointType.MINEPOINT : pointType;
                     labPoints[labIndex] = new ButtonPoint(new Point(cxInd, cyInd),
-                            new ButtonDescription(Boolean.FALSE, pointType));
+                            new ButtonStatus(Boolean.FALSE, pointType));
                     labIndex++;
                 }
                 pointType = temp ? SweepPointType.MINEPOINT : pointType;
-                this.fieldsList.get(cyInd).add(cxInd, new ButtonDescription(Boolean.FALSE,
+                this.fieldsList.get(cyInd).add(cxInd, new ButtonStatus(Boolean.FALSE,
                         pointType));
                 arrIndex++;
 
@@ -118,7 +118,7 @@ public class SweeperLogic {
         return getFieldsList();
     }
 
-    public void addToXYLabPath(Integer x, Integer y, ButtonDescription buttDescr) {
+    public void addToXYLabPath(Integer x, Integer y, ButtonStatus buttDescr) {
         if (this.labyrinth != null) {
             labyrinth.addXYToPath(x, y, buttDescr);
         }
@@ -143,7 +143,7 @@ public class SweeperLogic {
         String[] buttonValues = buttonName.split("#");
         Integer x = Integer.valueOf(buttonValues[0]);
         Integer y = Integer.valueOf(buttonValues[1]);
-        ButtonDescription temp = this.fieldsList.get(y).get(x);
+        ButtonStatus temp = this.fieldsList.get(y).get(x);
         Boolean mineHit = Boolean.valueOf(buttonValues[2]);
         if (!temp.isProcessed() && !mineHit) {
             this.successHits++;
@@ -156,7 +156,7 @@ public class SweeperLogic {
         String[] buttonValues = buttonName.split("#");
         Integer x = Integer.valueOf(buttonValues[0]);
         Integer y = Integer.valueOf(buttonValues[1]);
-        ButtonDescription descr = this.fieldsList.get(y).get(x);
+        ButtonStatus descr = this.fieldsList.get(y).get(x);
         return new ButtonPoint(new Point(x, y), descr);
     }
 
@@ -209,7 +209,7 @@ public class SweeperLogic {
         return shadowArray;
     }
 
-    public List<List<ButtonDescription>> getFieldsList() {
+    public List<List<ButtonStatus>> getFieldsList() {
         return Collections.unmodifiableList(this.fieldsList);
     }
 

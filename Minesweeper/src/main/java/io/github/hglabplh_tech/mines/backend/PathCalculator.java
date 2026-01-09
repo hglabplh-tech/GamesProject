@@ -135,7 +135,7 @@ public class PathCalculator {
         if (stepsY > 0) {
             nextY = startPoint.myPoint().y() + 1;
         }
-        ButtonDescription description = this.getUtil().getFieldsList().get(nextY).get(nextX);
+        ButtonStatus description = this.getUtil().getFieldsList().get(nextY).get(nextX);
         ButtonPoint lastButtonPoint = startPoint;
         ButtonPoint resultButton = new ButtonPoint(new Point(nextX, nextY), description);
 
@@ -168,13 +168,13 @@ public class PathCalculator {
                                                  IntBinaryOperator operatorX,
                                                  IntBinaryOperator operatorY) {
 
-        List<List<ButtonDescription>> fieldsList = this.getUtil().getFieldsList();
+        List<List<ButtonStatus>> fieldsList = this.getUtil().getFieldsList();
         System.out.println("The next point \n" + startPoint + "\n");
         Point nextPoint = calcFun(startPoint.myPoint().x(),
                 startPoint.myPoint().y(),
                 this.util.getCx(), this.util.getCy(),
                 operatorX, operatorY);
-        ButtonDescription description = fieldsList.get(nextPoint.y()).get(nextPoint.x());
+        ButtonStatus description = fieldsList.get(nextPoint.y()).get(nextPoint.x());
         ButtonPoint resultButton = new ButtonPoint(nextPoint, description);
         return resultButton;
     }

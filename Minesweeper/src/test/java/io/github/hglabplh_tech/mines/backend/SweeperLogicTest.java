@@ -5,12 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 
 class SweeperLogicTest {
     private SweeperLogic util;
@@ -28,10 +26,10 @@ class SweeperLogicTest {
      */
     @Test
     void calculateMines() {
-        List<List<ButtonDescription>> thisList = util.calculateMines();
+        List<List<ButtonStatus>> thisList = util.calculateMines();
         Boolean[] shadow = util.getShadowArray();
         SweeperLogic util2 = new SweeperLogic(PlayModes.NORMAL, 20, 20, 15);
-        List<List<ButtonDescription>> thisList2 = util2.calculateMines();
+        List<List<ButtonStatus>> thisList2 = util2.calculateMines();
         Boolean[] shadow2 = util2.getShadowArray();
         Boolean equal = (Arrays.compare(shadow2, shadow) == 0);
         assertThat("Arrays are equal allthough random filled", equal, is(false));
@@ -57,7 +55,7 @@ class SweeperLogicTest {
      */
     @Test
     void isMineHit() {
-        List<List<ButtonDescription>> thisList = util.calculateMines();
+        List<List<ButtonStatus>> thisList = util.calculateMines();
         String name = this.util.makeButtonName(5, 7, true);
         assertThat("there should be a hit", util.isMineHit(name), is(true));
         name = this.util.makeButtonName(5, 7, false);

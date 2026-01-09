@@ -27,10 +27,10 @@ import java.util.Objects;
 
 import static java.lang.StrictMath.abs;
 
-public record ButtonPoint(Point myPoint, ButtonDescription buttonDescr)  {
+public record ButtonPoint(Point myPoint, ButtonStatus buttonDescr)  {
 
     @Override
-    public ButtonDescription buttonDescr() {
+    public ButtonStatus buttonDescr() {
         return buttonDescr;
     }
 

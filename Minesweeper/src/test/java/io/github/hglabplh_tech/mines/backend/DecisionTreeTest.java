@@ -13,7 +13,7 @@ class DecisionTreeTest {
     public void before () {
         this.theTree = new DecisionTree();
         Point rootP = new Point(0,0);
-        ButtonDescription buttDescription = new ButtonDescription(Boolean.FALSE, SweepPointType.STARTPOINT);
+        ButtonStatus buttDescription = new ButtonStatus(Boolean.FALSE, SweepPointType.STARTPOINT);
         this.theTree.initRoot(new ButtonPoint(rootP, buttDescription));
     }
 
@@ -21,9 +21,9 @@ class DecisionTreeTest {
     public void initRoot() {
         DecisionTree tree = new DecisionTree();
         Point rootP = new Point(8,10);
-        ButtonDescription buttDescription = new ButtonDescription(Boolean.FALSE, SweepPointType.STARTPOINT);
+        ButtonStatus buttDescription = new ButtonStatus(Boolean.FALSE, SweepPointType.STARTPOINT);
         Point leftP = new Point(17,13);
-        ButtonDescription buttDescrLeft = new ButtonDescription(Boolean.FALSE, SweepPointType.NORMALPOINT);
+        ButtonStatus buttDescrLeft = new ButtonStatus(Boolean.FALSE, SweepPointType.NORMALPOINT);
         DecisionTree.TreeElement rootElement = tree.initRoot(new ButtonPoint(rootP, buttDescription));
         DecisionTree.TreeElement leftElement = tree.newTreeElement(rootElement, DecisionTree.TreeElementType.LEFT,
                 new ButtonPoint(leftP, buttDescrLeft));
@@ -33,7 +33,7 @@ class DecisionTreeTest {
 
     @Test
     public void newTreeElement() {
-        ButtonDescription buttDescription = new ButtonDescription(Boolean.FALSE,
+        ButtonStatus buttDescription = new ButtonStatus(Boolean.FALSE,
                 SweepPointType.FIRST_BASE);
         Point point = new Point(17,13);
         ButtonPoint buttonPoint = new ButtonPoint(point, buttDescription);
@@ -154,7 +154,7 @@ class DecisionTreeTest {
 
     public DecisionTree.TreeElement makeNewElement(Boolean processed, DecisionTree.TreeElementType elementType,
                                                    SweepPointType pointType, int x, int y) {
-        ButtonDescription buttDescription = new ButtonDescription(processed,
+        ButtonStatus buttDescription = new ButtonStatus(processed,
                 pointType);
         Point point = new Point(x, y);
         ButtonPoint buttonPoint = new ButtonPoint(point, buttDescription);

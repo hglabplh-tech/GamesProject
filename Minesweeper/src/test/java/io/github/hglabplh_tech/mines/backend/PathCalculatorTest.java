@@ -1,14 +1,11 @@
 package io.github.hglabplh_tech.mines.backend;
 
 import io.github.hglabplh_tech.mines.backend.config.PlayModes;
-import io.github.hglabplh_tech.mines.backend.util.DecisionTreeUtils;
 import io.github.hglabplh_tech.mines.backend.util.Point;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import static io.github.hglabplh_tech.mines.backend.PathCalculator.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -58,15 +55,15 @@ class PathCalculatorTest {
 
     @Test
     void calculateNextPointIntern() {
-        ButtonPoint buttonPoint = new ButtonPoint(new Point(3,3), new ButtonDescription(false, SweepPointType.NORMALPOINT));
-        ButtonPoint firstRes = new ButtonPoint(new Point(4,4), new ButtonDescription(false, SweepPointType.NORMALPOINT));
-        ButtonPoint secondRes = new ButtonPoint(new Point(4,3), new ButtonDescription(false, SweepPointType.NORMALPOINT));
-        ButtonPoint thirdRes = new ButtonPoint(new Point(2,3), new ButtonDescription(false, SweepPointType.NORMALPOINT));
-        ButtonPoint fourthRes = new ButtonPoint(new Point(3,4), new ButtonDescription(false, SweepPointType.NORMALPOINT));
-        ButtonPoint fivRes = new ButtonPoint(new Point(3,2), new ButtonDescription(false, SweepPointType.NORMALPOINT));
-        ButtonPoint sixthRes = new ButtonPoint(new Point(2,2), new ButtonDescription(false, SweepPointType.NORMALPOINT));
-        ButtonPoint seventhRes = new ButtonPoint(new Point(2,4), new ButtonDescription(false, SweepPointType.NORMALPOINT));
-        ButtonPoint eighthRes = new ButtonPoint(new Point(4,2), new ButtonDescription(false, SweepPointType.NORMALPOINT));
+        ButtonPoint buttonPoint = new ButtonPoint(new Point(3,3), new ButtonStatus(false, SweepPointType.NORMALPOINT));
+        ButtonPoint firstRes = new ButtonPoint(new Point(4,4), new ButtonStatus(false, SweepPointType.NORMALPOINT));
+        ButtonPoint secondRes = new ButtonPoint(new Point(4,3), new ButtonStatus(false, SweepPointType.NORMALPOINT));
+        ButtonPoint thirdRes = new ButtonPoint(new Point(2,3), new ButtonStatus(false, SweepPointType.NORMALPOINT));
+        ButtonPoint fourthRes = new ButtonPoint(new Point(3,4), new ButtonStatus(false, SweepPointType.NORMALPOINT));
+        ButtonPoint fivRes = new ButtonPoint(new Point(3,2), new ButtonStatus(false, SweepPointType.NORMALPOINT));
+        ButtonPoint sixthRes = new ButtonPoint(new Point(2,2), new ButtonStatus(false, SweepPointType.NORMALPOINT));
+        ButtonPoint seventhRes = new ButtonPoint(new Point(2,4), new ButtonStatus(false, SweepPointType.NORMALPOINT));
+        ButtonPoint eighthRes = new ButtonPoint(new Point(4,2), new ButtonStatus(false, SweepPointType.NORMALPOINT));
         ButtonPoint result = this.pathCalculator.calculateNextPointIntern(buttonPoint, plus, plus);
         assertTrue(firstRes.equalsInPoint(result.myPoint()), "Points must fit");
         result = this.pathCalculator.calculateNextPointIntern(buttonPoint, plus, mul);

@@ -30,9 +30,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import io.github.hglabplh_tech.mines.backend.ButtonDescription;
+import io.github.hglabplh_tech.mines.backend.ButtonStatus;
 import io.github.hglabplh_tech.mines.backend.ButtonPoint;
 import io.github.hglabplh_tech.mines.backend.Labyrinth;
 import io.github.hglabplh_tech.mines.backend.config.Configuration;
@@ -101,7 +100,7 @@ public class Sweeper extends JPanel
                 configBean.getMineConfig().getGridCX(),
                 configBean.getMineConfig().getGridCY(),
                 configBean.getMineConfig().getMinesCount());
-        List<List<ButtonDescription>> fieldsArray = buildFieldsArray();
+        List<List<ButtonStatus>> fieldsArray = buildFieldsArray();
         GridLayout grid = new GridLayout();
         grid.setVgap(3);
         grid.setHgap(3);
@@ -111,15 +110,15 @@ public class Sweeper extends JPanel
         this.setLayout(grid);
         for (int y = 0; y < this.util.getCy(); y++) {
             for (int x = 0; x < this.util.getCx(); x++) {
-                ButtonDescription bDescr = fieldsArray.get(y).get(x);
+                ButtonStatus bDescr = fieldsArray.get(y).get(x);
                 makeAndAddButton(x, y, bDescr);
             }
         }
         this.repaint();
     }
 
-    public List<List<ButtonDescription>> buildFieldsArray() {
-        List<List<ButtonDescription>> array = util.calculateMines();
+    public List<List<ButtonStatus>> buildFieldsArray() {
+        List<List<ButtonStatus>> array = util.calculateMines();
         if (this.playMode.equals(PlayModes.LABYRINTH)) {
             buildLabyrinth();
         }
@@ -192,7 +191,7 @@ public class Sweeper extends JPanel
     /**
      * Returns an ImageIcon, or null if the path was invalid.
      */
-    private void makeAndAddButton(Integer x, Integer y, ButtonDescription bDescr) {
+    private void makeAndAddButton(Integer x, Integer y, ButtonStatus bDescr) {
         JButton button = null;
         if (playMode.equals(PlayModes.LABYRINTH)) {
             button = switch (bDescr.pointType()) {

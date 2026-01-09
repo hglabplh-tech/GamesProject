@@ -23,11 +23,11 @@ package io.github.hglabplh_tech.mines.backend;
 
 import java.util.Objects;
 
-public class ButtonDescription {
+public class ButtonStatus {
     private boolean isProcessed;
     private final SweepPointType pointType;
 
-    public ButtonDescription(boolean isProcessed, SweepPointType pointType) {
+    public ButtonStatus(boolean isProcessed, SweepPointType pointType) {
         this.isProcessed = isProcessed;
         this.pointType = pointType;
     }
@@ -40,7 +40,7 @@ public class ButtonDescription {
     }
     public boolean equalsComplete(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        ButtonDescription that = (ButtonDescription) o;
+        ButtonStatus that = (ButtonStatus) o;
         return isProcessed() == that.isProcessed() && pointType() == that.pointType();
     }
 
@@ -55,7 +55,7 @@ public class ButtonDescription {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        ButtonDescription that = (ButtonDescription) o;
+        ButtonStatus that = (ButtonStatus) o;
         return  pointType() == that.pointType();
     }
 
@@ -66,7 +66,7 @@ public class ButtonDescription {
 
     @Override
     public String toString() {
-        return "ButtonDescription{" +
+        return "ButtonStatus{" +
                 "isProcessed=" + isProcessed +
                 ", pointType=" + pointType +
                 '}';

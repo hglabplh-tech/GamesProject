@@ -19,13 +19,13 @@ class LabyrinthTest {
     @BeforeEach
     public void before() {
         this.startPoint = new ButtonPoint(new Point(3,8),
-                new ButtonDescription(Boolean.FALSE, STARTPOINT));
+                new ButtonStatus(Boolean.FALSE, STARTPOINT));
         this.firstBasePoint = new ButtonPoint(new Point(10,35),
-                new ButtonDescription(Boolean.FALSE, FIRST_BASE) );
+                new ButtonStatus(Boolean.FALSE, FIRST_BASE) );
         this.secondBasePoint = new ButtonPoint(new Point(43, 27),
-                new ButtonDescription(Boolean.FALSE, SECOND_BASE));
+                new ButtonStatus(Boolean.FALSE, SECOND_BASE));
         this.endPoint = new ButtonPoint(new Point(60,13),
-                new ButtonDescription(Boolean.FALSE, ENDPOINT));
+                new ButtonStatus(Boolean.FALSE, ENDPOINT));
         this.labyrinthObj = new Labyrinth(this.startPoint, this.firstBasePoint,
                 this.secondBasePoint, this.endPoint);
     }
@@ -34,7 +34,7 @@ class LabyrinthTest {
     public void testAddXYToPath() {
         this.labyrinthObj.addXYToPath(this.startPoint.myPoint().x(),
                 this.startPoint.myPoint().y(), startPoint.buttonDescr());
-        this.labyrinthObj.addXYToPath(4,9, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+        this.labyrinthObj.addXYToPath(4,9, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         boolean pathOk = this.labyrinthObj.checkCorrectPath();
         assertTrue(pathOk, "Path should be correct Ups");
     }
@@ -56,18 +56,18 @@ class LabyrinthTest {
 
         // to first base
         for (int indexx = 4; indexx < 10; indexx++) {
-            this.labyrinthObj.addXYToPath(indexx, 8, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(indexx, 8, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         for (int indexy = 8; indexy < 35; indexy++) {
-            this.labyrinthObj.addXYToPath(9, indexy, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(9, indexy, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         this.labyrinthObj.addToPath(this.firstBasePoint);
         // to second base
         for (int indexx = 11; indexx < 43; indexx++) {
-            this.labyrinthObj.addXYToPath(indexx, 35, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(indexx, 35, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         for (int indexy = 36; indexy > 27; indexy--) {
-            this.labyrinthObj.addXYToPath(42, indexy, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(42, indexy, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         this.labyrinthObj.addToPath(this.secondBasePoint);
         assertTrue(this.labyrinthObj.checkCorrectPath(), "path not correct");
@@ -78,18 +78,18 @@ class LabyrinthTest {
 
         // to first base
         for (int indexx = 4; indexx < 10; indexx++) {
-            this.labyrinthObj.addXYToPath(indexx, 8, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(indexx, 8, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         for (int indexy = 8; indexy < 35; indexy++) {
-            this.labyrinthObj.addXYToPath(9, indexy, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(9, indexy, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         this.labyrinthObj.addToPath(this.firstBasePoint);
         // to the end
         for (int indexx = 44; indexx < 60; indexx++) {
-            this.labyrinthObj.addXYToPath(indexx, 27, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(indexx, 27, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         for (int indexy = 27; indexy > 13; indexy--) {
-            this.labyrinthObj.addXYToPath(59, indexy, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(59, indexy, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         this.labyrinthObj.addToPath(this.endPoint);
         assertFalse(this.labyrinthObj.checkCorrectPath(), "path seen as correct though it is incorrect");
@@ -101,27 +101,27 @@ class LabyrinthTest {
 
         // to first base
         for (int indexx = 4; indexx < 10; indexx++) {
-            this.labyrinthObj.addXYToPath(indexx, 8, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(indexx, 8, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         for (int indexy = 9; indexy < 35; indexy++) {
-            this.labyrinthObj.addXYToPath(9, indexy, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(9, indexy, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         this.labyrinthObj.addToPath(this.firstBasePoint);
         // to second base
         for (int indexx = 11; indexx < 43; indexx++) {
-            this.labyrinthObj.addXYToPath(indexx, 35, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(indexx, 35, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         for (int indexy = 36; indexy > 27; indexy--) {
-            this.labyrinthObj.addXYToPath(42, indexy, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(42, indexy, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         this.labyrinthObj.addToPath(this.secondBasePoint);
 
         // to the end
         for (int indexx = 44; indexx < 60; indexx++) {
-            this.labyrinthObj.addXYToPath(indexx, 27, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(indexx, 27, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         for (int indexy = 27; indexy > 13; indexy--) {
-            this.labyrinthObj.addXYToPath(59, indexy, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(59, indexy, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         this.labyrinthObj.addToPath(this.endPoint);
 
@@ -138,18 +138,18 @@ class LabyrinthTest {
 
         // to first base
         for (int indexx = 4; indexx < 10; indexx++) {
-            this.labyrinthObj.addXYToPath(indexx, 8, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(indexx, 8, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         for (int indexy = 9; indexy < 35; indexy++) {
-            this.labyrinthObj.addXYToPath(9, indexy, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(9, indexy, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         this.labyrinthObj.addToPath(this.firstBasePoint);
         // to second base
         for (int indexx = 11; indexx < 43; indexx++) {
-            this.labyrinthObj.addXYToPath(indexx, 35, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(indexx, 35, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         for (int indexy = 36; indexy > 27; indexy--) {
-            this.labyrinthObj.addXYToPath(43, indexy, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(43, indexy, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         this.labyrinthObj.addToPath(this.secondBasePoint);
         assertThat( "count bases not correct", this.labyrinthObj.countBasesReached(), is(2));
@@ -159,18 +159,18 @@ class LabyrinthTest {
 
         // to first base
         for (int indexx = 4; indexx <= 10; indexx++) {
-            this.labyrinthObj.addXYToPath(indexx, 8, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(indexx, 8, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         for (int indexy = 9; indexy < 35; indexy++) {
-            this.labyrinthObj.addXYToPath(9, indexy, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(9, indexy, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         this.labyrinthObj.addToPath(this.firstBasePoint);
         // to the end
         for (int indexx = 44; indexx < 60; indexx++) {
-            this.labyrinthObj.addXYToPath(indexx, 27, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(indexx, 27, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         for (int indexy = 26; indexy > 13; indexy--) {
-            this.labyrinthObj.addXYToPath(59, indexy, new ButtonDescription(Boolean.TRUE, NORMALPOINT));
+            this.labyrinthObj.addXYToPath(59, indexy, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         }
         this.labyrinthObj.addToPath(this.endPoint);
         assertThat( "count bases not correct", this.labyrinthObj.countBasesReached(), is(0));

@@ -23,7 +23,6 @@ package io.github.hglabplh_tech.mines.backend;
 
 import io.github.hglabplh_tech.mines.backend.util.Point;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -51,7 +50,7 @@ public class Labyrinth  {
         this.actPoint = pointsOrder.get(0);
     }
 
-    public void addXYToPath(Integer x, Integer y, ButtonDescription description) {
+    public void addXYToPath(Integer x, Integer y, ButtonStatus description) {
         this.addToPath(new ButtonPoint(new Point(x, y), description));
     }
 

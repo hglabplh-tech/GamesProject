@@ -23,7 +23,7 @@ SOFTWARE.
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonWriter;
-import io.github.hglabplh_tech.mines.backend.ButtonDescription;
+import io.github.hglabplh_tech.mines.backend.ButtonStatus;
 import io.github.hglabplh_tech.mines.backend.ButtonPoint;
 import io.github.hglabplh_tech.mines.backend.Labyrinth;
 import io.github.hglabplh_tech.mines.backend.SweeperLogic;
@@ -53,7 +53,7 @@ public class JSONUtil {
                         new TypeAdaptPoint())
                 .registerTypeAdapter(ButtonPoint.class,
                         new TypeAdaptButtPoint())
-                .registerTypeAdapter(ButtonDescription.class,
+                .registerTypeAdapter(ButtonStatus.class,
                         new TypeAdaptButtDescr())
                 .registerTypeAdapter(SweeperLogic.class,
                         new TypeAdaptSweepLogic())
@@ -79,7 +79,7 @@ public class JSONUtil {
                         new TypeAdaptPoint())
                 .registerTypeAdapter(ButtonPoint.class,
                         new TypeAdaptButtPoint())
-                .registerTypeAdapter(ButtonDescription.class,
+                .registerTypeAdapter(ButtonStatus.class,
                         new TypeAdaptButtDescr())
                 .registerTypeAdapter(SweeperLogic.class,
                         new TypeAdaptSweepLogic())

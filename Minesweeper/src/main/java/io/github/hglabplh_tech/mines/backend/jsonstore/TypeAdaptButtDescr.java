@@ -24,17 +24,17 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import io.github.hglabplh_tech.mines.backend.ButtonDescription;
+import io.github.hglabplh_tech.mines.backend.ButtonStatus;
 
 import java.lang.reflect.Type;
 
-public class TypeAdaptButtDescr implements JsonSerializer<ButtonDescription> {
+public class TypeAdaptButtDescr implements JsonSerializer<ButtonStatus> {
 
     public TypeAdaptButtDescr() {
         super();
     }
     @Override
-    public JsonElement serialize(ButtonDescription src, Type typeOfSrc, JsonSerializationContext context) {
+    public JsonElement serialize(ButtonStatus src, Type typeOfSrc, JsonSerializationContext context) {
         final JsonObject jsonObj = new JsonObject();
 
         jsonObj.add("isProcessed", context.serialize(src.isProcessed()));
