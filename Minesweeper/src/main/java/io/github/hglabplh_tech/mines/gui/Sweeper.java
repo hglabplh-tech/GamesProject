@@ -59,6 +59,7 @@ public class Sweeper extends JPanel
     private final ImageIcon baseoneIcon;
     private final ImageIcon basetwoIcon;
     private final ImageIcon purpleIcon;
+    private final ImageIcon pathIcon;
     private final List<JButton> buttonList = new ArrayList<>();
     private PlayModes playMode;
     private final StatusPanel statusPanel;
@@ -80,6 +81,7 @@ public class Sweeper extends JPanel
         this.basetwoIcon = GUILogics.createIcon("basetwo.png");
         this.endIcon = GUILogics.createIcon("finish.png");
         this.purpleIcon = GUILogics.createIcon("crazy.png");
+        this.pathIcon = GUILogics.createIcon("path.png");
         JPopupMenu popupMenu = createPopupMenu();
         this.add(popupMenu);
         this.addMouseListener(new GameMouseListener(popupMenu));
