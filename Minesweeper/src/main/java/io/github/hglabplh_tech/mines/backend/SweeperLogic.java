@@ -148,7 +148,7 @@ public class SweeperLogic {
         if (!temp.isProcessed() && !mineHit) {
             this.successHits++;
         }
-        this.fieldsList.get(y).add(x, new ButtonDescription(Boolean.TRUE, temp.pointType()));
+        this.fieldsList.get(y).get(x).toggleProcessed();
         return mineHit;
     }
 

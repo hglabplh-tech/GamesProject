@@ -36,6 +36,7 @@ public class StatusPanel extends JPanel implements ActionListener {
     private final JLabel timeValue;
     private final JLabel counterValue;
     private final JLabel scoreValue;
+    private final JLabel minesCountValue;
 
     private  PlayModes playMode;
 
@@ -60,6 +61,9 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.counterValue = new JLabel("0");
         JLabel scoreLabel = new JLabel("Score: ");
         this.scoreValue = new JLabel("0");
+        JLabel minesCountLabel = new JLabel("Mines count: ");
+        this.minesCountValue = new JLabel(configBean.getMineConfig().getMinesCount().toString());
+
         this.restartButton = new JButton("Restart Game");
         this.restartButton.setBackground(Color.green);
         this.restartButton.setActionCommand("restart");
@@ -93,6 +97,10 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.add(this.counterValue);
         this.add(scoreLabel);
         this.add(this.scoreValue);
+        this.add(scoreLabel);
+        this.add(this.scoreValue);
+        this.add(minesCountLabel);
+        this.add(this.minesCountValue);
 
         this.add(this.radioButtNorm);
         this.add(this.radioButtLab);

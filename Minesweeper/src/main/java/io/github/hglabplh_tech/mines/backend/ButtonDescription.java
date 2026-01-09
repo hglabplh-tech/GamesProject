@@ -23,16 +23,33 @@ package io.github.hglabplh_tech.mines.backend;
 
 import java.util.Objects;
 
-public record ButtonDescription(boolean isProcessed, SweepPointType pointType) {
+public class ButtonDescription {
+    private boolean isProcessed;
+    private final SweepPointType pointType;
+
+    public ButtonDescription(boolean isProcessed, SweepPointType pointType) {
+        this.isProcessed = isProcessed;
+        this.pointType = pointType;
+    }
 
     public boolean isMine() {
         return pointType().equals(SweepPointType.MINEPOINT);
     }
-
+    public void toggleProcessed() {
+        this.isProcessed = !this.isProcessed();
+    }
     public boolean equalsComplete(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ButtonDescription that = (ButtonDescription) o;
         return isProcessed() == that.isProcessed() && pointType() == that.pointType();
+    }
+
+    public boolean isProcessed() {
+        return this.isProcessed;
+    }
+
+    public SweepPointType pointType() {
+        return pointType;
     }
 
     @Override
