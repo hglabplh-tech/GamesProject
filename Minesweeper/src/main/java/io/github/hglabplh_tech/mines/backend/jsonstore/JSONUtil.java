@@ -54,7 +54,7 @@ public class JSONUtil {
                 .registerTypeAdapter(ButtonPoint.class,
                         new TypeAdaptButtPoint())
                 .registerTypeAdapter(ButtonStatus.class,
-                        new TypeAdaptButtDescr())
+                        new TypeAdaptButtStat())
                 .registerTypeAdapter(SweeperLogic.class,
                         new TypeAdaptSweepLogic())
                 .registerTypeAdapter(Labyrinth.class,
@@ -80,7 +80,7 @@ public class JSONUtil {
                 .registerTypeAdapter(ButtonPoint.class,
                         new TypeAdaptButtPoint())
                 .registerTypeAdapter(ButtonStatus.class,
-                        new TypeAdaptButtDescr())
+                        new TypeAdaptButtStat())
                 .registerTypeAdapter(SweeperLogic.class,
                         new TypeAdaptSweepLogic())
                 .registerTypeAdapter(Labyrinth.class,

@@ -27,11 +27,11 @@ import java.util.Objects;
 
 import static java.lang.StrictMath.abs;
 
-public record ButtonPoint(Point myPoint, ButtonStatus buttonDescr)  {
+public record ButtonPoint(Point myPoint, ButtonStatus buttonStatus)  {
 
     @Override
-    public ButtonStatus buttonDescr() {
-        return buttonDescr;
+    public ButtonStatus buttonStatus() {
+        return buttonStatus;
     }
 
     public boolean equalsInPoint(Point point) {
@@ -42,19 +42,19 @@ public record ButtonPoint(Point myPoint, ButtonStatus buttonDescr)  {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ButtonPoint that = (ButtonPoint) o;
-        return Objects.equals(myPoint(), that.myPoint()) && Objects.equals(buttonDescr(), that.buttonDescr());
+        return Objects.equals(myPoint(), that.myPoint()) && Objects.equals(buttonStatus(), that.buttonStatus());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(myPoint(), buttonDescr());
+        return Objects.hash(myPoint(), buttonStatus());
     }
 
     @Override
     public String toString() {
         return "ButtonPoint{" +
                 "myPoint=" + myPoint +
-                ", buttonDescr=" + buttonDescr +
+                ", buttonStatus=" + buttonStatus +
                 '}';
     }
 }

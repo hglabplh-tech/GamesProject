@@ -37,7 +37,7 @@ public class TypeAdaptButtPoint implements JsonSerializer<ButtonPoint> {
     public JsonElement serialize(ButtonPoint src, Type typeOfSrc, JsonSerializationContext context) {
         final JsonObject jsonObj = new JsonObject();
         jsonObj.add("myPoint", context.serialize(src.myPoint()));
-        jsonObj.add("buttonDescr", context.serialize(src.buttonDescr()));
+        jsonObj.add("buttonStatus", context.serialize(src.buttonStatus()));
         return jsonObj;
     }
 }

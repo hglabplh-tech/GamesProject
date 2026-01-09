@@ -104,16 +104,16 @@ class DecisionTreeTest {
         Point p = new Point(7,7);
         Point p1 = new Point(45,30);
         Point p2 = new Point(50, 50);
-        elementNext.addSuccessor((e -> (e.equalsInPoint(p) && !e.buttonDescr().isMine())) ,
-                (e -> (e.equalsInPoint(p2) && !e.buttonDescr().isMine())),
+        elementNext.addSuccessor((e -> (e.equalsInPoint(p) && !e.buttonStatus().isMine())) ,
+                (e -> (e.equalsInPoint(p2) && !e.buttonStatus().isMine())),
                 elementNext.getThisPoint());
         Assertions.assertTrue(elementNext.successIndicator().success());
         Assertions.assertFalse(elementNext.successIndicator().finished());
         Assertions.assertEquals(DecisionTree.SuccessIndicator.SUCCESSFUL, elementNext.successIndicator().indicator());
 
         elementNoSuccMine.addSuccessor(
-                (e -> (e.equalsInPoint(p1)&& !e.buttonDescr().isMine())),
-                (e -> (e.equalsInPoint(p2)&& !e.buttonDescr().isMine())),
+                (e -> (e.equalsInPoint(p1)&& !e.buttonStatus().isMine())),
+                (e -> (e.equalsInPoint(p2)&& !e.buttonStatus().isMine())),
                 elementNoSuccMine.getThisPoint());
         Assertions.assertFalse(elementNoSuccMine.successIndicator().success());
         Assertions.assertFalse(elementNoSuccMine.successIndicator().finished());
@@ -121,8 +121,8 @@ class DecisionTreeTest {
 
 
         elementNoSuccPos.addSuccessor(
-                (e -> (e.equalsInPoint(p1)&& !e.buttonDescr().isMine())),
-                (e -> (e.equalsInPoint(p2)&& !e.buttonDescr().isMine())),
+                (e -> (e.equalsInPoint(p1)&& !e.buttonStatus().isMine())),
+                (e -> (e.equalsInPoint(p2)&& !e.buttonStatus().isMine())),
                 elementNoSuccPos.getThisPoint());
         Assertions.assertFalse(elementNoSuccPos.successIndicator().success());
         Assertions.assertFalse(elementNoSuccPos.successIndicator().finished());

@@ -271,7 +271,7 @@ public class PathCalculator {
             Conditions inst;
             if (indicator == Indicator.FOUND_NEXT) {
                 inst = new Conditions((e ->
-                        (!e.buttonDescr().isMine()
+                        (!e.buttonStatus().isMine()
                                 && (e.myPoint()
                                 .checkPointIsNeighbor(pointNext.myPoint())
                                 && (e.myPoint()
@@ -283,16 +283,16 @@ public class PathCalculator {
                                         endPoint.myPoint())
                                 .yOtherNearer())))),
                         null,
-                        (e -> !e.buttonDescr().isMine() && e.buttonDescr().pointType()
-                                .equals(endPoint.buttonDescr().pointType())
+                        (e -> !e.buttonStatus().isMine() && e.buttonStatus().pointType()
+                                .equals(endPoint.buttonStatus().pointType())
                                 && e.equals(endPoint)));
             } else {
                 inst = new Conditions(null,
-                        (e -> !e.buttonDescr().isMine()
+                        (e -> !e.buttonStatus().isMine()
                                 && e.myPoint().checkPointIsNeighbor(pointNext.myPoint())),
 
-                        (e -> !e.buttonDescr().isMine() && e.buttonDescr().pointType()
-                                .equals(endPoint.buttonDescr().pointType())
+                        (e -> !e.buttonStatus().isMine() && e.buttonStatus().pointType()
+                                .equals(endPoint.buttonStatus().pointType())
                                 && e.equals(endPoint)));
             }
             return inst;

@@ -28,9 +28,9 @@ import io.github.hglabplh_tech.mines.backend.ButtonStatus;
 
 import java.lang.reflect.Type;
 
-public class TypeAdaptButtDescr implements JsonSerializer<ButtonStatus> {
+public class TypeAdaptButtStat implements JsonSerializer<ButtonStatus> {
 
-    public TypeAdaptButtDescr() {
+    public TypeAdaptButtStat() {
         super();
     }
     @Override

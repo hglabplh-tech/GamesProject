@@ -33,7 +33,7 @@ class LabyrinthTest {
     @Test
     public void testAddXYToPath() {
         this.labyrinthObj.addXYToPath(this.startPoint.myPoint().x(),
-                this.startPoint.myPoint().y(), startPoint.buttonDescr());
+                this.startPoint.myPoint().y(), startPoint.buttonStatus());
         this.labyrinthObj.addXYToPath(4,9, new ButtonStatus(Boolean.TRUE, NORMALPOINT));
         boolean pathOk = this.labyrinthObj.checkCorrectPath();
         assertTrue(pathOk, "Path should be correct Ups");
