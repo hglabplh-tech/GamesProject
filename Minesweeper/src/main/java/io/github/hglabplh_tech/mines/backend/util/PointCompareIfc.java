@@ -24,6 +24,8 @@ public interface PointCompareIfc {
 
     CompareResult comparePoint(Point other);
 
+    boolean checkPointIsNeighbor(Point other);
+
     NearerResult compareNearerToEnd(Point other, Point end);
 
     record CompareResult(int xDiffABS, int yDiffABS, int xComp, int yComp, boolean equal) {

@@ -45,6 +45,8 @@ public class PathCalculator {
 
     private final List<ButtonPoint> pathTrials = new ArrayList<>();
 
+    private Integer mineAndTryCount;
+
 
     static {
         combinators.add(new FunTuple(plus, minus));
@@ -63,8 +65,8 @@ public class PathCalculator {
         this.labyrinth = labyrinth;
     }
 
-    public List<List<ButtonPoint>> calculateAllPaths() {
-        List<List<ButtonPoint>> allPaths = new ArrayList<>();
+    public List<PathResult> calculateAllPaths() {
+        List<PathResult> allPaths = new ArrayList<>();
         List<ButtonPoint> pointsOrder = this.getLabyrinth().getPointsOrder();
         ButtonPoint first = pointsOrder.get(0);
         int index = 1;
@@ -78,7 +80,8 @@ public class PathCalculator {
         return allPaths;
     }
 
-    public List<ButtonPoint> calculatePath(ButtonPoint startPoint, ButtonPoint endPoint) {
+    public PathResult calculatePath(ButtonPoint startPoint, ButtonPoint endPoint) {
+        this.mineAndTryCount = 0;
         this.pathTrials.clear();
         List<ButtonPoint> path = new ArrayList<>();
         ButtonPoint nextPoint = startPoint;
@@ -98,11 +101,32 @@ public class PathCalculator {
                     !this.pathTrials.contains(result.buttonPoint());
         }
 
+
+
         System.out.println("==== Print out path trials ====");
         this.pathTrials.forEach(e -> System.out.println("entry: ->" + e));
         List<ButtonPoint> resultPath = new ArrayList<>(path);
+
         resultPath.add(endPoint);
-        return resultPath;
+        System.out.println("==== Print out path  ====");
+        resultPath.forEach(e -> System.out.println("entry: ->" + e));
+        // TODO : change all this to LOGGING and throw Exceptions look for all occurrences of System/ println
+        if(Labyrinth.reallyCheckCorrectPath(resultPath)) {
+            System.out.println("Path is correct");
+        } else {
+            System.out.println("Path is NOT correct");
+
+        }
+
+        return new PathResult(resultPath, this.mineAndTryCount, this.pathTrials);
+    }
+    public boolean isPathPoint(List<ButtonPoint> pointList, ButtonPoint compare) {
+        for (ButtonPoint point: pointList) {
+            if (point.equalsInPoint(compare.myPoint())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -121,6 +145,7 @@ public class PathCalculator {
         int nextY = 0;
         System.out.println("The next point \n" + startPoint + "\n");
         addToSet(this.pathTrials, startPoint, false);
+        this.mineAndTryCount++;
         int stepsX = endPoint.myPoint().x() - startPoint.myPoint().x();
         int stepsY = endPoint.myPoint().y() - startPoint.myPoint().y();
         if (stepsX <= 0) {
@@ -146,6 +171,7 @@ public class PathCalculator {
         if (!indicator.success() && !this.pathTrials.contains(resultButton)) {
             for (FunTuple tuple : combinators) {
                 addToSet(this.pathTrials, resultButton, false);
+                this.mineAndTryCount++;
                 result = new BPointPlusIndicator(calculateNextPointIntern(lastButtonPoint, tuple.first(), tuple.second()),
                         Indicator.FOUND_AFTER_ERROR, indicator);
                 resultButton = result.buttonPoint();
@@ -155,6 +181,7 @@ public class PathCalculator {
                     result = new BPointPlusIndicator(resultButton,
                             Indicator.FOUND_AFTER_ERROR, indicator);
                     addToSet(this.pathTrials, resultButton, false);
+                    this.mineAndTryCount++;
                     break;
                 } else {
                     lastButtonPoint = resultButton;
@@ -388,6 +415,14 @@ public class PathCalculator {
     }
 
     public record BPointPlusIndicator(ButtonPoint buttonPoint, Indicator indicator, SuccessIndicator successIndicator) {
+
+    }
+
+    public record PathResult (List<ButtonPoint> path, Integer mineAndTryCount, List<ButtonPoint> pathTrials
+
+
+
+    ) {
 
     }
 

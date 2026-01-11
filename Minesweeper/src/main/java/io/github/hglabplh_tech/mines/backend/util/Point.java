@@ -25,6 +25,7 @@ import java.util.Objects;
 
 public record Point(Integer x, Integer y) implements PointCompareIfc {
 
+    // TODO: check correctness
     public boolean checkPointIsNeighbor(Point other) {
         boolean success = false;
         if ((this.y() + 1) == other.y()) {

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Harald Glab-Plhak
+Copyright (c) 2025/2026 Harald Glab-Plhak
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -45,6 +45,7 @@ public class StatusPanel extends JPanel implements ActionListener {
     private final JRadioButton radioButtLab;
     private final JRadioButton radioButtEnhanced;
 
+    private final JButton showPathButton;
     private final JButton restartButton;
     private final JButton saveButton;
 
@@ -52,8 +53,7 @@ public class StatusPanel extends JPanel implements ActionListener {
 
     public StatusPanel(Configuration.ConfigBean configBean) {
 
-        PlayModes playMode = configBean.getMineConfig().getPlayMode();
-        this.playMode = playMode;
+        this.playMode = configBean.getMineConfig().getPlayMode();
 
         JLabel timerLabel = new JLabel("Time elapsed: ");
         this.timeValue = new JLabel("00");
@@ -72,6 +72,12 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.saveButton.setBackground(Color.green);
         this.saveButton.setActionCommand("savegame");
         this.saveButton.addActionListener(this);
+
+        this.showPathButton = new JButton("Show Paths");
+        this.showPathButton.setVisible(false);
+        this.showPathButton.setBackground(Color.green);
+        this.showPathButton.setActionCommand("showPaths");
+        this.showPathButton.addActionListener(this);
 
         this.radioGroup = new ButtonGroup();
 
@@ -105,7 +111,9 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.add(this.radioButtNorm);
         this.add(this.radioButtLab);
         this.add(this.radioButtEnhanced);
-
+        this.add(showPathButton);
+        boolean pathButtonVisible = (this.playMode.equals(PlayModes.LABYRINTH));
+        this.showPathButton.setVisible(pathButtonVisible);
         this.add(restartButton);
         this.add(saveButton);
         timerThread = new Thread(new TimerThread(this));
@@ -136,6 +144,7 @@ public class StatusPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() instanceof JRadioButton || e.getSource() instanceof JButton) {
+            boolean showPaths = false;
             this.getCounterValue().setText("0");
             timerThread.stop();
             timerThread = new Thread(new TimerThread(this));
@@ -157,8 +166,15 @@ public class StatusPanel extends JPanel implements ActionListener {
                 System.err.println("Enhanced has to be implemented");
             } else if (command.equals("restart")) {
                 sweeper = Sweeper.getSweeper(this.playMode); //TODO: change this
+            } else if (command.equals("showPaths")) {
+                showPaths = (this.playMode.equals(PlayModes.LABYRINTH));
+                sweeper = Sweeper.getSweeper(this.playMode);
             }
-            sweeper.initButtons(Configuration.getConfigBeanInstance());
+            if (showPaths) {
+                sweeper.showPaths();
+            } else {
+                sweeper.initButtons(Configuration.getConfigBeanInstance());
+            }
 
         }
     }

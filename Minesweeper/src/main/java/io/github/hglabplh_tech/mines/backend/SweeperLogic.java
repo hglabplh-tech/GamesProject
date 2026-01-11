@@ -62,8 +62,6 @@ public class SweeperLogic {
       for (int cyInd = 0; cyInd < this.cy; cyInd++) {
             this.fieldsList.add(new ArrayList<>());
             for (int cxInd = 0; cxInd < this.cx; cxInd++) {
-              /*  this.fieldsList.get(cyInd).add(cxInd, new ButtonStatus(Boolean.FALSE,
-                        SweepPointType.NORMALPOINT)); */
                 this.shadowArray[arrIndex] = Boolean.FALSE;
                 this.labArray[arrIndex] = Boolean.FALSE;
                 arrIndex++;

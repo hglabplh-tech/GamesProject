@@ -31,14 +31,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.hglabplh_tech.mines.backend.ButtonStatus;
-import io.github.hglabplh_tech.mines.backend.ButtonPoint;
-import io.github.hglabplh_tech.mines.backend.Labyrinth;
+import io.github.hglabplh_tech.mines.backend.*;
 import io.github.hglabplh_tech.mines.backend.config.Configuration;
 import io.github.hglabplh_tech.mines.backend.config.PlayModes;
-import io.github.hglabplh_tech.mines.backend.SweeperLogic;
 import io.github.hglabplh_tech.mines.backend.util.Point;
 
+import static io.github.hglabplh_tech.mines.backend.PathCalculator.*;
 import static io.github.hglabplh_tech.mines.gui.GUILogics.createPopupMenu;
 
 /*
@@ -188,6 +186,35 @@ public class Sweeper extends JPanel
         this.buttonList.forEach(butt ->
                 butt.setIcon(this.waterIcon));
         GUILogics.playSound("winning-bell.wav");
+    }
+
+    public void showPaths() {
+        if (this.playMode.equals(PlayModes.LABYRINTH)) {
+            PathCalculator calculator = new PathCalculator(this.util, this.labyrinth);
+            List<ButtonPoint> buttonList = new ArrayList<>();
+            for (PathResult pRecRes : calculator.calculateAllPaths()) {
+                List<ButtonPoint> pList = pRecRes.path();
+                buttonList.addAll(pList);
+            }
+            this.buttonList.forEach(butt -> {
+                switch (this.util.extractPointType(butt.getName())) {
+                    case STARTPOINT -> butt.setIcon(this.startIcon);
+                    case ENDPOINT -> butt.setIcon(this.endIcon);
+                    case FIRST_BASE -> butt.setIcon(this.baseoneIcon);
+                    case SECOND_BASE -> butt.setIcon(this.basetwoIcon);
+                    case NORMALPOINT -> {
+                        if (calculator.isPathPoint(buttonList,
+                                this.util.extractPointFromName(butt.getName()))) {
+                            butt.setIcon(this.pathIcon);
+                        } else {
+                            butt.setIcon(this.questionIcon);
+                        }
+                    }
+                    default -> butt.setIcon(this.questionIcon);
+                }
+            });
+            this.repaint();
+        }
     }
 
     /**

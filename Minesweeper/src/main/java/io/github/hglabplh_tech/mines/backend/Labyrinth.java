@@ -72,14 +72,18 @@ public class Labyrinth  {
     }
 
     public boolean checkCorrectPath() {
+        return reallyCheckCorrectPath(this.pathToNext);
+    }
+
+    public static boolean reallyCheckCorrectPath(List<ButtonPoint> pathToCheck) {
         boolean success = true;
-        Iterator<ButtonPoint> iterator = this.pathToNext.iterator();
+        Iterator<ButtonPoint> iterator = pathToCheck.iterator();
         if (iterator.hasNext()) {
             iterator.next();
         }
         int index = 0;
         while (iterator.hasNext() && success) {
-            ButtonPoint actualPoint = this.pathToNext.get(index);
+            ButtonPoint actualPoint = pathToCheck.get(index);
             ButtonPoint nextPoint = iterator.next();
             index++;
             if (actualPoint.myPoint().checkPointIsNeighbor(nextPoint.myPoint())) {
