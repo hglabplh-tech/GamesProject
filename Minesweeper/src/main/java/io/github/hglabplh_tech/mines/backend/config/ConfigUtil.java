@@ -31,7 +31,7 @@ import java.util.Properties;
 public class ConfigUtil {
 
     public static final String VER_KEY = "GPROP_VERKEY";
-    public static final String VER_VAL = "0.99";
+    public static final String VER_VAL = "1.00";
 
     public static String USER_DIR;
     public static String USER_PROPS;

@@ -26,6 +26,12 @@ import java.util.Optional;
 import java.util.Properties;
 
 public class Configuration {
+    public static final String LOG_CONFIG_PATH_KEY =   "log.config.path";
+    public static final String LOG_CONFIG_PATH_VAL = "";
+
+    public static final String LOG_MIN_LEVEL_KEY = "log.mindebug.level";
+    public static final String LOG_MIN_LEVEL_VAL = "debug";
+
     public static final String MINES_PLAYMODE_KEY =   "msweep.game.playmode";
     public static final String MINES_PLAYMODE_VAL = "normal";
 
@@ -51,6 +57,63 @@ public class Configuration {
             Configuration.configBean = new ConfigBean();
         }
         return Configuration.configBean;
+    }
+
+    public static class LogConfig {
+
+        private String configPath;
+
+        private String minLevel;
+
+        public LogConfig(String configPath, String minLevel) {
+            this.configPath = configPath;
+            this.minLevel = minLevel;
+        }
+
+        public LogConfig() {
+            Optional<Properties> props = ConfigUtil.loadUserProps();
+            Optional<String> optValue = ConfigUtil.getConfigValue(LOG_CONFIG_PATH_KEY, LOG_CONFIG_PATH_VAL);
+            this.configPath = optValue.orElse(LOG_CONFIG_PATH_VAL);
+
+            optValue = ConfigUtil.getConfigValue(LOG_MIN_LEVEL_KEY, LOG_MIN_LEVEL_VAL);
+            this.minLevel = optValue.orElse(LOG_MIN_LEVEL_VAL);
+        }
+
+        public String configPath() {
+            return configPath;
+        }
+
+        public String minLevel() {
+            return minLevel;
+        }
+
+        public LogConfigBuilder copyBuilder() {
+            return new LogConfigBuilder(this);
+        }
+
+        public static class LogConfigBuilder {
+
+            private LogConfig logConfig;
+
+            public LogConfigBuilder(LogConfig config) {
+                this.logConfig = new LogConfig(config.configPath(), config.minLevel());
+            }
+
+            public LogConfigBuilder configPath(String configPath) {
+                logConfig.configPath = configPath;
+                return this;
+            }
+
+            public LogConfigBuilder minLevel(String minLevel) {
+                logConfig.minLevel = minLevel;
+                return this;
+            }
+
+            public LogConfig build() {
+                return this.logConfig;
+            }
+
+        }
     }
 
 
@@ -144,6 +207,7 @@ public class Configuration {
         public static class MineConfigBuilder {
 
             private MineConfig mineConfig;
+
             public MineConfigBuilder(MineConfig config) {
                 this.mineConfig = new MineConfig(config.getPlayMode(), config.getGridCX(),
                         config.getGridCY(), config.getMinesCount(), config.getLevelUp(),
@@ -191,8 +255,15 @@ public class Configuration {
     public static class ConfigBean {
         private final MineConfig mineConfig;
 
+        private final LogConfig logConfig;
+
         public ConfigBean () {
+            this.logConfig = new LogConfig();
             this.mineConfig = new MineConfig();
+        }
+
+        public LogConfig getLogConfig() {
+            return logConfig;
         }
 
         public MineConfig getMineConfig() {

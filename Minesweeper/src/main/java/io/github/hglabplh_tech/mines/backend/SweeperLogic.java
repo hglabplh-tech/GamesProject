@@ -24,6 +24,8 @@ package io.github.hglabplh_tech.mines.backend;
 
 import io.github.hglabplh_tech.mines.backend.config.PlayModes;
 
+import io.github.hglabplh_tech.mines.backend.logexcp.GameLogger;
+import io.github.hglabplh_tech.mines.backend.logexcp.LoggingID;
 import io.github.hglabplh_tech.mines.backend.util.Point;
 
 import java.util.*;
@@ -31,6 +33,7 @@ import java.util.List;
 
 public class SweeperLogic {
 
+    private final GameLogger logger = GameLogger.logInstance();
     private final Integer numFields;
     private final Integer cx;
     private final Integer cy;
@@ -54,6 +57,9 @@ public class SweeperLogic {
         this.shadowArray = new Boolean[this.numFields];
         this.labArray = new Boolean[this.numFields];
         this.labyrinth = null;
+        logger.logDebug(LoggingID.MINELOG_ID_00001, this.numMines);
+        logger.logDebug(LoggingID.MINELOG_ID_00002, this.cx, this.cy);
+        logger.logDebug(LoggingID.MINELOG_ID_00003, this.playMode.getPlayModeName());
     }
 
     public List<List<ButtonStatus>> calculateMines() {
