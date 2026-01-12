@@ -96,6 +96,7 @@ public class Sweeper extends JPanel
         this.invalidate();
         this.removeAll();
         this.statusPanel.resetCounterValueAndScore(this.playMode);
+        this.statusPanel.switchShowButtonVisibility();
         this.util = new SweeperLogic(this.statusPanel.getPlayMode(),
                 configBean.getMineConfig().getGridCX(),
                 configBean.getMineConfig().getGridCY(),

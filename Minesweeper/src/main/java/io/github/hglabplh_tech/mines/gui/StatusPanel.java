@@ -112,8 +112,7 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.add(this.radioButtLab);
         this.add(this.radioButtEnhanced);
         this.add(showPathButton);
-        boolean pathButtonVisible = (this.playMode.equals(PlayModes.LABYRINTH));
-        this.showPathButton.setVisible(pathButtonVisible);
+        switchShowButtonVisibility();
         this.add(restartButton);
         this.add(saveButton);
         timerThread = new Thread(new TimerThread(this));
@@ -128,7 +127,12 @@ public class StatusPanel extends JPanel implements ActionListener {
         this.addMouseListener(new GameMouseListener(popupMenu));
 
     }
-    
+
+    public void switchShowButtonVisibility() {
+        boolean pathButtonVisible = (this.playMode.equals(PlayModes.LABYRINTH));
+        this.showPathButton.setVisible(pathButtonVisible);
+    }
+
     public JLabel getTimerLabel() {
         return this.timeValue;
     }
