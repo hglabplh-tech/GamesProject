@@ -34,7 +34,7 @@ import java.util.Properties;
 public class ConfigUtil {
 
     public static final String VER_KEY = "GPROP_VERKEY";
-    public static final String VER_VAL = "1.00";
+    public static final String VER_VAL = "1.00-SNAP";
 
     public static String USER_DIR;
     public static String USER_PROPS;
@@ -42,6 +42,10 @@ public class ConfigUtil {
     public static File PROP_FILE;
 
     public static File LOG_PROP_FILE;
+
+    public static String LOGGING_PATH_STRING;
+
+    public static File LOGGING_PATH;
 
 
     private static boolean userPropsLoaded = false;
@@ -57,8 +61,14 @@ public class ConfigUtil {
                 .append(USER_DIR)
                 .append("games.properties")
                 .toString();
+        LOGGING_PATH_STRING = USER_DIR + "/log";
+        LOGGING_PATH = new File(LOGGING_PATH_STRING);
+        if (!LOGGING_PATH.exists()) {
+            LOGGING_PATH.mkdirs();
+        }
         PROP_FILE = new File(USER_PROPS);
         String logPropFileFull = USER_DIR + "tinylog.properties";
+
         LOG_PROP_FILE = new File(logPropFileFull);
         if (!LOG_PROP_FILE.exists()) {
             URL logPropURL = ConfigUtil.class.getResource("/logging/tinylog.properties");

@@ -10,6 +10,7 @@ public class GameLogger {
 
     private GameLogger() {
         System.setProperty("tinylog.configuration", Configuration.getConfigBeanInstance().getLogConfig().configPath());
+        System.setProperty("tinylog.directory", Configuration.getConfigBeanInstance().getLogConfig().loggingPath());
     }
 
     public static GameLogger logInstance() {

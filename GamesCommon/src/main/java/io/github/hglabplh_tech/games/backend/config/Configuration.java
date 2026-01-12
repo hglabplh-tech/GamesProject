@@ -26,6 +26,8 @@ import java.util.Optional;
 import java.util.Properties;
 
 public class Configuration {
+    public static final String LOGGING_PATH_KEY =   "log.logging.path";
+    public static final String LOGGING_PATH_VAL;
     public static final String LOG_CONFIG_PATH_KEY =   "log.config.path";
     public static final String LOG_CONFIG_PATH_VAL;
 
@@ -55,6 +57,7 @@ public class Configuration {
 
     static {
         LOG_CONFIG_PATH_VAL =ConfigUtil.LOG_PROP_FILE.getAbsolutePath();
+        LOGGING_PATH_VAL = ConfigUtil.LOGGING_PATH.getAbsolutePath();
     }
     public static ConfigBean getConfigBeanInstance () {
         if (configBean == null) {
@@ -67,10 +70,13 @@ public class Configuration {
 
         private String configPath;
 
+        private String loggingPath;
+
         private String minLevel;
 
-        public LogConfig(String configPath, String minLevel) {
+        public LogConfig(String configPath, String loggingPath, String minLevel) {
             this.configPath = configPath;
+            this.loggingPath = loggingPath;
             this.minLevel = minLevel;
         }
 
@@ -78,16 +84,23 @@ public class Configuration {
             Optional<String> optValue = ConfigUtil.getConfigValue(LOG_CONFIG_PATH_KEY, LOG_CONFIG_PATH_VAL);
             this.configPath = optValue.orElse(LOG_CONFIG_PATH_VAL);
 
+            optValue = ConfigUtil.getConfigValue(LOGGING_PATH_KEY, LOGGING_PATH_VAL);
+            this.loggingPath = optValue.orElse(LOGGING_PATH_VAL);
+
             optValue = ConfigUtil.getConfigValue(LOG_MIN_LEVEL_KEY, LOG_MIN_LEVEL_VAL);
             this.minLevel = optValue.orElse(LOG_MIN_LEVEL_VAL);
         }
 
         public String configPath() {
-            return configPath;
+            return this.configPath;
+        }
+
+        public String loggingPath() {
+            return this.loggingPath;
         }
 
         public String minLevel() {
-            return minLevel;
+            return this.minLevel;
         }
 
         public LogConfigBuilder copyBuilder() {
@@ -99,11 +112,16 @@ public class Configuration {
             private LogConfig logConfig;
 
             public LogConfigBuilder(LogConfig config) {
-                this.logConfig = new LogConfig(config.configPath(), config.minLevel());
+                this.logConfig = new LogConfig(config.configPath(), config.loggingPath(), config.minLevel());
             }
 
             public LogConfigBuilder configPath(String configPath) {
                 logConfig.configPath = configPath;
+                return this;
+            }
+
+            public LogConfigBuilder loggingPath(String loggingPath) {
+                logConfig.loggingPath = loggingPath;
                 return this;
             }
 
@@ -264,6 +282,8 @@ public class Configuration {
             toSave.setProperty(MINES_LEVELUP_KEY, String.valueOf(mineConfig.getStopAfterPercent()));
 
             toSave.setProperty(LOG_CONFIG_PATH_KEY, String.valueOf(logConfig.configPath()));
+
+            toSave.setProperty(LOGGING_PATH_KEY, String.valueOf(logConfig.loggingPath()));
 
             toSave.setProperty(LOG_MIN_LEVEL_KEY, String.valueOf(logConfig.minLevel()));
 
