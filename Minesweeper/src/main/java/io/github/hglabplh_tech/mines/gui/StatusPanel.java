@@ -172,7 +172,7 @@ public class StatusPanel extends JPanel implements ActionListener {
                 sweeper = Sweeper.getSweeper(this.playMode); //TODO: change this
             } else if (command.equals("showPaths")) {
                 showPaths = (this.playMode.equals(PlayModes.LABYRINTH));
-                sweeper = Sweeper.getSweeper(this.playMode);
+                sweeper = Sweeper.getSweeperInst(this.playMode);
             }
             if (showPaths) {
                 sweeper.showPaths();

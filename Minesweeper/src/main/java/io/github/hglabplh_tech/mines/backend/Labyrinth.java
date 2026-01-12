@@ -31,7 +31,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Labyrinth  {
-    private GameLogger logger = GameLogger.logInstance();
+    private static GameLogger logger = GameLogger.logInstance();
 
     private final ButtonPoint startPoint;
     private final ButtonPoint firstBase;
@@ -92,8 +92,11 @@ public class Labyrinth  {
             ButtonPoint nextPoint = iterator.next();
             index++;
             if (actualPoint.myPoint().checkPointIsNeighbor(nextPoint.myPoint())) {
+
                 success = true;
             } else {
+                logger.logDebug(LoggingID.MINELOG_ID_00010,
+                        actualPoint.myPoint(), nextPoint.myPoint());
                 success = false;
             }
         }

@@ -31,10 +31,13 @@ public record Point(Integer x, Integer y) implements PointCompareIfc {
     public boolean checkPointIsNeighbor(Point other) {
         boolean success = false;
         if ((this.y() + 1) == other.y()) {
-            success = checkXCoord(this.x(), other.x());
+            success = true;
         } else if ((this.y() - 1) == other.y()) {
-            success = checkXCoord(this.x(), other.x());
+            success = true;
         } else if (this.y().equals(other.y())) {
+            success = true;
+        }
+        if (!success) {
             success = checkXCoord(this.x(), other.x());
         }
         return success;
@@ -46,7 +49,7 @@ public record Point(Integer x, Integer y) implements PointCompareIfc {
             success = true;
         } else if ((xOne - 1) == xTwo) {
             success = true;
-        } else if (xOne == xTwo) {
+        } else if (xOne.equals(xTwo)) {
             success = true;
         }
         return success;

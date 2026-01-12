@@ -11,6 +11,7 @@ public enum LoggingID {
     MINELOG_ID_00007(LogLevel.DEBUG, "MINES", "Entry --> %s"),
     MINELOG_ID_00008(LogLevel.DEBUG, "MINES", "Path calculated is correct"),
     MINELOG_ID_00009(LogLevel.DEBUG, "MINES", "Path calculated is NOT correct"),
+    MINELOG_ID_00010(LogLevel.DEBUG, "MINES", "Path calculated is NOT correct in points (%s --/-- %s)"),
 
 
     MINELOG_ID_01001(LogLevel.INFO, "MINES", "Initialize Playground start"),

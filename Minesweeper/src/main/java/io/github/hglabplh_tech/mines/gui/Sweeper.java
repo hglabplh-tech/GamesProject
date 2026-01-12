@@ -92,6 +92,11 @@ public class Sweeper extends JPanel
         return instance;
     }
 
+    public static Sweeper getSweeperInst(PlayModes mode) {
+
+        return instance;
+    }
+
     public void initButtons(Configuration.ConfigBean configBean) {
         this.invalidate();
         this.removeAll();
