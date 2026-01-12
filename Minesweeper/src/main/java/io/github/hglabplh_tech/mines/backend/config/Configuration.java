@@ -27,7 +27,7 @@ import java.util.Properties;
 
 public class Configuration {
     public static final String LOG_CONFIG_PATH_KEY =   "log.config.path";
-    public static final String LOG_CONFIG_PATH_VAL = "";
+    public static final String LOG_CONFIG_PATH_VAL;
 
     public static final String LOG_MIN_LEVEL_KEY = "log.mindebug.level";
     public static final String LOG_MIN_LEVEL_VAL = "debug";
@@ -52,6 +52,10 @@ public class Configuration {
 
     public static ConfigBean configBean = null;
 
+
+    static {
+        LOG_CONFIG_PATH_VAL =ConfigUtil.LOG_PROP_FILE.getAbsolutePath();
+    }
     public static ConfigBean getConfigBeanInstance () {
         if (configBean == null) {
             Configuration.configBean = new ConfigBean();
@@ -71,7 +75,6 @@ public class Configuration {
         }
 
         public LogConfig() {
-            Optional<Properties> props = ConfigUtil.loadUserProps();
             Optional<String> optValue = ConfigUtil.getConfigValue(LOG_CONFIG_PATH_KEY, LOG_CONFIG_PATH_VAL);
             this.configPath = optValue.orElse(LOG_CONFIG_PATH_VAL);
 
@@ -140,7 +143,6 @@ public class Configuration {
             this.stopAfterPercent = stopAfterPercent;
         }
         public MineConfig() {
-            Optional<Properties> props = ConfigUtil.loadUserProps();
             Optional<String> optValue = ConfigUtil.getConfigValue(MINES_PLAYMODE_KEY, MINES_PLAYMODE_VAL);
             this.playMode = PlayModes.getPlayModeByName(optValue.orElse(MINES_PLAYMODE_VAL));
 
@@ -159,21 +161,7 @@ public class Configuration {
             optValue = ConfigUtil.getConfigValue(MINES_READY_PERCENT_KEY, MINES_READY_PERCENT_VAL);
             this.stopAfterPercent = Boolean.valueOf(optValue.orElse(MINES_READY_PERCENT_VAL));
 
-            Properties toSave = props.orElse(new Properties());
 
-            toSave.setProperty(MINES_PLAYMODE_KEY,this.playMode.getPlayModeName());
-
-            toSave.setProperty(MINES_GRID_WIDTH_KEY,String.valueOf(this.gridCX));
-
-            toSave.setProperty(MINES_GRID_HEIGHT_KEY, String.valueOf(this.gridCY));
-
-            toSave.setProperty(MINES_COUNT_KEY, String.valueOf(this.minesCount));
-
-            toSave.setProperty(MINES_LEVELUP_KEY, String.valueOf(this.levelUp));
-
-            toSave.setProperty(MINES_LEVELUP_KEY, String.valueOf(this.stopAfterPercent));
-
-            ConfigUtil.saveUserPropsIfVerChanged(toSave);
         }
 
         public PlayModes getPlayMode() {
@@ -258,8 +246,28 @@ public class Configuration {
         private final LogConfig logConfig;
 
         public ConfigBean () {
+            Optional<Properties> props = ConfigUtil.loadUserProps();
             this.logConfig = new LogConfig();
             this.mineConfig = new MineConfig();
+            Properties toSave = props.orElse(new Properties());
+
+            toSave.setProperty(MINES_PLAYMODE_KEY, mineConfig.getPlayMode().getPlayModeName());
+
+            toSave.setProperty(MINES_GRID_WIDTH_KEY,String.valueOf(mineConfig.getGridCX()));
+
+            toSave.setProperty(MINES_GRID_HEIGHT_KEY, String.valueOf(mineConfig.getGridCY()));
+
+            toSave.setProperty(MINES_COUNT_KEY, String.valueOf(mineConfig.getMinesCount()));
+
+            toSave.setProperty(MINES_LEVELUP_KEY, String.valueOf(mineConfig.getLevelUp()));
+
+            toSave.setProperty(MINES_LEVELUP_KEY, String.valueOf(mineConfig.getStopAfterPercent()));
+
+            toSave.setProperty(LOG_CONFIG_PATH_KEY, String.valueOf(logConfig.configPath()));
+
+            toSave.setProperty(LOG_MIN_LEVEL_KEY, String.valueOf(logConfig.minLevel()));
+
+            ConfigUtil.saveUserPropsIfVerChanged(toSave);
         }
 
         public LogConfig getLogConfig() {

@@ -25,6 +25,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.ByteBuffer;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -37,6 +40,9 @@ public class ConfigUtil {
     public static String USER_PROPS;
 
     public static File PROP_FILE;
+
+    public static File LOG_PROP_FILE;
+
 
     private static boolean userPropsLoaded = false;
 
@@ -52,8 +58,30 @@ public class ConfigUtil {
                 .append("games.properties")
                 .toString();
         PROP_FILE = new File(USER_PROPS);
-
-
+        String logPropFileFull = USER_DIR + "tinylog.properties";
+        LOG_PROP_FILE = new File(logPropFileFull);
+        if (!LOG_PROP_FILE.exists()) {
+            URL logPropURL = ConfigUtil.class.getResource("/logging/tinylog.properties");
+            try {
+                File logPropFile = new File(logPropURL.toURI());
+                FileInputStream in = new FileInputStream(logPropFile);
+                ByteBuffer buffer = ByteBuffer.allocateDirect(8192 * 10);
+                buffer.clear();
+                in.getChannel().read(buffer);
+                in.getChannel().close();
+                in.close();
+                FileOutputStream out = new FileOutputStream(LOG_PROP_FILE);
+                buffer.rewind();
+                out.getChannel().write(buffer);
+                out.getChannel();
+                out.getChannel().close();
+                out.flush();
+                out.close();
+                buffer.clear();
+            } catch (URISyntaxException | IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     public static Optional<String> getConfigValue(String configKey, String defaultValue) {
