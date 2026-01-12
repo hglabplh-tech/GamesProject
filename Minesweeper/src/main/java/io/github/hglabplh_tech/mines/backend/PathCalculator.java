@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package io.github.hglabplh_tech.mines.backend;
 
+import io.github.hglabplh_tech.games.backend.logexcp.GameLogger;
+import io.github.hglabplh_tech.games.backend.logexcp.LoggingID;
 import io.github.hglabplh_tech.games.backend.util.Point;
 
 import java.util.*;
@@ -28,6 +30,8 @@ import java.util.function.IntBinaryOperator;
 import java.util.function.Predicate;
 
 public class PathCalculator {
+
+    private GameLogger logger = GameLogger.logInstance();
 
     public static final IntBinaryOperator plus = Integer::sum;
 
@@ -103,18 +107,18 @@ public class PathCalculator {
 
 
 
-        System.out.println("==== Print out path trials ====");
-        this.pathTrials.forEach(e -> System.out.println("entry: ->" + e));
+        logger.logDebug(LoggingID.MINELOG_ID_00005);
+        this.pathTrials.forEach(e -> logger.logDebug(LoggingID.MINELOG_ID_00007, e));
         List<ButtonPoint> resultPath = new ArrayList<>(path);
 
         resultPath.add(endPoint);
-        System.out.println("==== Print out path  ====");
-        resultPath.forEach(e -> System.out.println("entry: ->" + e));
+        logger.logDebug(LoggingID.MINELOG_ID_00006);
+        resultPath.forEach(e -> logger.logDebug(LoggingID.MINELOG_ID_00007, e));
         // TODO : change all this to LOGGING and throw Exceptions look for all occurrences of System/ println
         if(Labyrinth.reallyCheckCorrectPath(resultPath)) {
-            System.out.println("Path is correct");
+            logger.logDebug(LoggingID.MINELOG_ID_00008);
         } else {
-            System.out.println("Path is NOT correct");
+            logger.logDebug(LoggingID.MINELOG_ID_00009);
 
         }
 
@@ -143,7 +147,6 @@ public class PathCalculator {
                                                         ButtonPoint endPoint) {
         int nextX = 0;
         int nextY = 0;
-        System.out.println("The next point \n" + startPoint + "\n");
         addToSet(this.pathTrials, startPoint, false);
         this.mineAndTryCount++;
         int stepsX = endPoint.myPoint().x() - startPoint.myPoint().x();
@@ -196,7 +199,6 @@ public class PathCalculator {
                                                  IntBinaryOperator operatorY) {
 
         List<List<ButtonStatus>> fieldsList = this.getUtil().getFieldsList();
-        System.out.println("The next point \n" + startPoint + "\n");
         Point nextPoint = calcFun(startPoint.myPoint().x(),
                 startPoint.myPoint().y(),
                 this.util.getCx(), this.util.getCy(),
