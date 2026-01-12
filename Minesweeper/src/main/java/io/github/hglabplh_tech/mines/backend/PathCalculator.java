@@ -175,8 +175,6 @@ public class PathCalculator {
             for (FunTuple tuple : combinators) {
                 addToSet(this.pathTrials, resultButton, false);
                 this.mineAndTryCount++;
-                result = new BPointPlusIndicator(calculateNextPointIntern(lastButtonPoint, tuple.first(), tuple.second()),
-                        Indicator.FOUND_AFTER_ERROR, indicator);
                 resultButton = result.buttonPoint();
                 conditions = Conditions.instance(endPoint, lastButtonPoint, Indicator.FOUND_AFTER_ERROR);
                 indicator = conditions.testConditions(resultButton);
@@ -187,6 +185,8 @@ public class PathCalculator {
                     this.mineAndTryCount++;
                     break;
                 } else {
+                    result = new BPointPlusIndicator(calculateNextPointIntern(lastButtonPoint, tuple.first(), tuple.second()),
+                            Indicator.FOUND_AFTER_ERROR, indicator);
                     lastButtonPoint = resultButton;
                 }
             }
