@@ -21,7 +21,7 @@ SOFTWARE.
  */
 package io.github.hglabplh_tech.mines.backend;
 
-import io.github.hglabplh_tech.mines.backend.util.Point;
+import io.github.hglabplh_tech.games.backend.util.Point;
 
 import java.util.*;
 import java.util.function.IntBinaryOperator;

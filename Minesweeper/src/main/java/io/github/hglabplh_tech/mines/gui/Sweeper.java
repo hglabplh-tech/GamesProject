@@ -32,9 +32,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.hglabplh_tech.mines.backend.*;
-import io.github.hglabplh_tech.mines.backend.config.Configuration;
-import io.github.hglabplh_tech.mines.backend.config.PlayModes;
-import io.github.hglabplh_tech.mines.backend.util.Point;
+import io.github.hglabplh_tech.games.backend.config.Configuration;
+import io.github.hglabplh_tech.games.backend.config.PlayModes;
+import io.github.hglabplh_tech.games.backend.util.Point;
 
 import static io.github.hglabplh_tech.mines.backend.PathCalculator.*;
 import static io.github.hglabplh_tech.mines.gui.GUILogics.createPopupMenu;

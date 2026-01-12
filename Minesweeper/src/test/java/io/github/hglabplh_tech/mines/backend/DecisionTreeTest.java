@@ -1,6 +1,6 @@
 package io.github.hglabplh_tech.mines.backend;
 
-import io.github.hglabplh_tech.mines.backend.util.Point;
+import io.github.hglabplh_tech.games.backend.util.Point;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

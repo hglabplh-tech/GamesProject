@@ -20,14 +20,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonWriter;
-import io.github.hglabplh_tech.mines.backend.ButtonStatus;
 import io.github.hglabplh_tech.mines.backend.ButtonPoint;
+import io.github.hglabplh_tech.mines.backend.ButtonStatus;
 import io.github.hglabplh_tech.mines.backend.Labyrinth;
 import io.github.hglabplh_tech.mines.backend.SweeperLogic;
-import io.github.hglabplh_tech.mines.backend.util.Point;
+import io.github.hglabplh_tech.games.backend.util.Point;
 
 import java.io.Reader;
 import java.io.Writer;

@@ -2,7 +2,7 @@ package io.github.hglabplh_tech.mines.backend.jsonstore;
 
 import io.github.hglabplh_tech.mines.backend.Labyrinth;
 import io.github.hglabplh_tech.mines.backend.SweeperLogic;
-import io.github.hglabplh_tech.mines.backend.config.PlayModes;
+import io.github.hglabplh_tech.games.backend.config.PlayModes;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

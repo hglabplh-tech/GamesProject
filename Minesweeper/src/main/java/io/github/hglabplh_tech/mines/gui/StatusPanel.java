@@ -21,8 +21,8 @@ SOFTWARE.
  */
 package io.github.hglabplh_tech.mines.gui;
 
-import io.github.hglabplh_tech.mines.backend.config.Configuration;
-import io.github.hglabplh_tech.mines.backend.config.PlayModes;
+import io.github.hglabplh_tech.games.backend.config.Configuration;
+import io.github.hglabplh_tech.games.backend.config.PlayModes;
 
 import javax.print.attribute.standard.JobName;
 import javax.swing.*;

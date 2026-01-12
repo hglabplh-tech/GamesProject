@@ -1,6 +1,6 @@
 package io.github.hglabplh_tech.mines.gui.config;
 
-import io.github.hglabplh_tech.mines.backend.config.Configuration;
+import io.github.hglabplh_tech.games.backend.config.Configuration;
 
 import javax.swing.*;
 import java.awt.*;

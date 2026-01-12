@@ -1,4 +1,4 @@
-package io.github.hglabplh_tech.mines.backend.util;
+package io.github.hglabplh_tech.games.backend.util;
 /*
 Copyright (c) 2025 Harald Glab-Plhak
 

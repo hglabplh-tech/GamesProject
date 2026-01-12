@@ -21,7 +21,9 @@ SOFTWARE.
  */
 package io.github.hglabplh_tech.mines.backend;
 
-import io.github.hglabplh_tech.mines.backend.util.Point;
+import io.github.hglabplh_tech.games.backend.logexcp.GameLogger;
+import io.github.hglabplh_tech.games.backend.logexcp.LoggingID;
+import io.github.hglabplh_tech.games.backend.util.Point;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +31,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Labyrinth  {
+    private GameLogger logger = GameLogger.logInstance();
+
     private final ButtonPoint startPoint;
     private final ButtonPoint firstBase;
     private final ButtonPoint secondBase;
@@ -48,6 +52,7 @@ public class Labyrinth  {
         this.pointsOrder = Arrays.asList(startPoint, firstBase, secondBase, endPoint);
         this.nextPoint = pointsOrder.get(this.nextIndex);
         this.actPoint = pointsOrder.get(0);
+        logger.logDebug(LoggingID.MINELOG_ID_00004, startPoint, firstBase, secondBase, endPoint);
     }
 
     public void addXYToPath(Integer x, Integer y, ButtonStatus description) {

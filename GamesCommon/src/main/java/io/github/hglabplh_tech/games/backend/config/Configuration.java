@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-package io.github.hglabplh_tech.mines.backend.config;
+package io.github.hglabplh_tech.games.backend.config;
 
 import java.util.Optional;
 import java.util.Properties;

@@ -1,6 +1,7 @@
-package io.github.hglabplh_tech.mines.backend.logexcp;
+package io.github.hglabplh_tech.games.backend.logexcp;
 
-import io.github.hglabplh_tech.mines.backend.config.Configuration;
+
+import io.github.hglabplh_tech.games.backend.config.Configuration;
 import org.tinylog.Logger;
 
 public class GameLogger {
@@ -30,4 +31,12 @@ public class GameLogger {
     public void logError(LoggingID logMSG, Object... params) {
         Logger.error(logMSG.formattedMessage(params));
     }
+    public void logTrace(LoggingID logMSG, Object... params) {
+        Logger.trace(logMSG.formattedMessage(params));
+    }
+
+    public void logWarn(LoggingID logMSG, Object... params) {
+        Logger.warn(logMSG.formattedMessage(params));
+    }
+
 }

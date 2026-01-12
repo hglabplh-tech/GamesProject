@@ -2,8 +2,6 @@ package io.github.hglabplh_tech.mines.test.utils;
 
 import io.github.hglabplh_tech.mines.backend.Labyrinth;
 import io.github.hglabplh_tech.mines.backend.SweeperLogic;
-import io.github.hglabplh_tech.mines.backend.jsonstore.JSONUtil;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;

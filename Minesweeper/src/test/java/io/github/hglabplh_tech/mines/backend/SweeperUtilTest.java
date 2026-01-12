@@ -4,7 +4,7 @@
 
 package io.github.hglabplh_tech.mines.backend;
 
-import io.github.hglabplh_tech.mines.backend.config.PlayModes;
+import io.github.hglabplh_tech.games.backend.config.PlayModes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -22,11 +22,11 @@ SOFTWARE.
 
 package io.github.hglabplh_tech.mines.backend;
 
-import io.github.hglabplh_tech.mines.backend.config.PlayModes;
+import io.github.hglabplh_tech.games.backend.config.PlayModes;
 
-import io.github.hglabplh_tech.mines.backend.logexcp.GameLogger;
-import io.github.hglabplh_tech.mines.backend.logexcp.LoggingID;
-import io.github.hglabplh_tech.mines.backend.util.Point;
+import io.github.hglabplh_tech.games.backend.logexcp.GameLogger;
+import io.github.hglabplh_tech.games.backend.logexcp.LoggingID;
+import io.github.hglabplh_tech.games.backend.util.Point;
 
 import java.util.*;
 import java.util.List;
