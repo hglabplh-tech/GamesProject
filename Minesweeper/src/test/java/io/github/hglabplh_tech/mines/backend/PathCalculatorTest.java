@@ -5,6 +5,7 @@ import io.github.hglabplh_tech.games.backend.util.Point;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static io.github.hglabplh_tech.mines.backend.PathCalculator.*;
@@ -58,29 +59,23 @@ class PathCalculatorTest {
     @Test
     void calculateNextPointIntern() {
         ButtonPoint buttonPoint = new ButtonPoint(new Point(3,3), new ButtonStatus(false, SweepPointType.NORMALPOINT));
-        ButtonPoint firstRes = new ButtonPoint(new Point(4,4), new ButtonStatus(false, SweepPointType.NORMALPOINT));
-        ButtonPoint secondRes = new ButtonPoint(new Point(4,3), new ButtonStatus(false, SweepPointType.NORMALPOINT));
-        ButtonPoint thirdRes = new ButtonPoint(new Point(2,3), new ButtonStatus(false, SweepPointType.NORMALPOINT));
-        ButtonPoint fourthRes = new ButtonPoint(new Point(3,4), new ButtonStatus(false, SweepPointType.NORMALPOINT));
-        ButtonPoint fivRes = new ButtonPoint(new Point(3,2), new ButtonStatus(false, SweepPointType.NORMALPOINT));
-        ButtonPoint sixthRes = new ButtonPoint(new Point(2,2), new ButtonStatus(false, SweepPointType.NORMALPOINT));
-        ButtonPoint seventhRes = new ButtonPoint(new Point(2,4), new ButtonStatus(false, SweepPointType.NORMALPOINT));
-        ButtonPoint eighthRes = new ButtonPoint(new Point(4,2), new ButtonStatus(false, SweepPointType.NORMALPOINT));
-        ButtonPoint result = this.pathCalculator.calculateNextPointIntern(buttonPoint, plus, plus);
-        assertTrue(firstRes.equalsInPoint(result.myPoint()), "Points must fit");
-        result = this.pathCalculator.calculateNextPointIntern(buttonPoint, plus, mul);
-        assertTrue(secondRes.equalsInPoint(result.myPoint()), "Points must fit");
-        result = this.pathCalculator.calculateNextPointIntern(buttonPoint, minus, mul);
-        assertTrue(thirdRes.equalsInPoint(result.myPoint()), "Points must fit");
-        result = this.pathCalculator.calculateNextPointIntern(buttonPoint, mul, plus);
-        assertTrue(fourthRes.equalsInPoint(result.myPoint()), "Points must fit");
-        result = this.pathCalculator.calculateNextPointIntern(buttonPoint, mul, minus);
-        assertTrue(fivRes.equalsInPoint(result.myPoint()), "Points must fit");
-        result = this.pathCalculator.calculateNextPointIntern(buttonPoint, minus, minus);
-        assertTrue(sixthRes.equalsInPoint(result.myPoint()), "Points must fit");
-        result = this.pathCalculator.calculateNextPointIntern(buttonPoint, minus, plus);
-        assertTrue(seventhRes.equalsInPoint(result.myPoint()), "Points must fit");
-        result = this.pathCalculator.calculateNextPointIntern(buttonPoint, plus, minus);
-        assertTrue(eighthRes.equalsInPoint(result.myPoint()), "Points must fit");
+
+        List<ButtonPoint> pointsList = new ArrayList<>();
+        for (BinaryFunDef binaryFunDef: combinators) {
+            FunTuple tuple = binaryFunDef.tuple();
+            int x = buttonPoint.myPoint().x();
+            int y = buttonPoint.myPoint().y();
+            ButtonPoint actPoint = new ButtonPoint(new Point(tuple.first().applyAsInt(x, 1),
+                    tuple.second().applyAsInt(y, 1)),
+                    new ButtonStatus(false, SweepPointType.NORMALPOINT));
+            pointsList.add(actPoint);
+        }
+        int index = 0;
+        for (ButtonPoint actPoint : pointsList) {
+            FunTuple calcTuple = combinators.get(index).tuple();
+            ButtonPoint result = this.pathCalculator.calculateNextPointIntern(buttonPoint, combinators.get(index));
+            assertTrue(actPoint.equalsInPoint(result.myPoint()), "Points must fit");
+            index++;
+        }
     }
 }

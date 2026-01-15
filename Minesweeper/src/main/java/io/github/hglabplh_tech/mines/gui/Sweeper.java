@@ -30,7 +30,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import io.github.hglabplh_tech.games.backend.logexcp.GameLogger;
+import io.github.hglabplh_tech.games.backend.logexcp.LoggingID;
 import io.github.hglabplh_tech.mines.backend.*;
 import io.github.hglabplh_tech.games.backend.config.Configuration;
 import io.github.hglabplh_tech.games.backend.config.PlayModes;
@@ -47,6 +50,8 @@ import static io.github.hglabplh_tech.mines.gui.GUILogics.createPopupMenu;
  */
 public class Sweeper extends JPanel
         implements ActionListener {
+    private static GameLogger logger = GameLogger.logInstance();
+
     private SweeperLogic util;
     private final ImageIcon mineIcon;
     private final ImageIcon bangIcon;
@@ -100,6 +105,7 @@ public class Sweeper extends JPanel
     public void initButtons(Configuration.ConfigBean configBean) {
         this.invalidate();
         this.removeAll();
+        this.buttonList.clear();
         this.statusPanel.resetCounterValueAndScore(this.playMode);
         this.statusPanel.switchShowButtonVisibility();
         this.util = new SweeperLogic(this.statusPanel.getPlayMode(),
@@ -111,7 +117,7 @@ public class Sweeper extends JPanel
         grid.setVgap(3);
         grid.setHgap(3);
 
-        grid.setRows(this.util.getCy() + 1);
+        grid.setRows(this.util.getCy());
         grid.setColumns(this.util.getCx());
         this.setLayout(grid);
         for (int y = 0; y < this.util.getCy(); y++) {
@@ -197,11 +203,13 @@ public class Sweeper extends JPanel
     public void showPaths() {
         if (this.playMode.equals(PlayModes.LABYRINTH)) {
             PathCalculator calculator = new PathCalculator(this.util, this.labyrinth);
-            List<ButtonPoint> buttonList = new ArrayList<>();
+            List<ButtonPoint> pathList = new ArrayList<>();
             for (PathResult pRecRes : calculator.calculateAllPaths()) {
                 List<ButtonPoint> pList = pRecRes.path();
-                buttonList.addAll(pList);
+                pathList.addAll(pList);
             }
+            AtomicInteger foundCount = new AtomicInteger(0);
+            logger.logDebug(LoggingID.MINELOG_DEB_ID_00006);
             this.buttonList.forEach(butt -> {
                 switch (this.util.extractPointType(butt.getName())) {
                     case STARTPOINT -> butt.setIcon(this.startIcon);
@@ -209,9 +217,13 @@ public class Sweeper extends JPanel
                     case FIRST_BASE -> butt.setIcon(this.baseoneIcon);
                     case SECOND_BASE -> butt.setIcon(this.basetwoIcon);
                     case NORMALPOINT -> {
-                        if (calculator.isPathPoint(buttonList,
-                                this.util.extractPointFromName(butt.getName()))) {
+
+
+                        ButtonPoint actPoint = this.util.extractPointFromName(butt.getName());
+                        if (calculator.isPathPoint(pathList, actPoint)) {
+                            foundCount.getAndIncrement();
                             butt.setIcon(this.pathIcon);
+                            logger.logDebug(LoggingID.MINELOG_DEB_ID_00007, actPoint);
                         } else {
                             butt.setIcon(this.questionIcon);
                         }
@@ -219,6 +231,7 @@ public class Sweeper extends JPanel
                     default -> butt.setIcon(this.questionIcon);
                 }
             });
+            logger.logDebug(LoggingID.MINELOG_DEB_ID_00011, pathList.size(), foundCount.get());
             this.repaint();
         }
     }

@@ -29,19 +29,26 @@ import java.util.*;
 import java.util.function.IntBinaryOperator;
 import java.util.function.Predicate;
 
+import static io.github.hglabplh_tech.games.backend.logexcp.LoggingID.MINELOG_TRC_ID_00501;
+import static io.github.hglabplh_tech.games.backend.logexcp.LoggingID.MINELOG_TRC_ID_00502;
+
 public class PathCalculator {
 
     private GameLogger logger = GameLogger.logInstance();
 
+    public static final String plusName = "plus";
     public static final IntBinaryOperator plus = Integer::sum;
 
+    public static final String minusName = "minus";
     public static final IntBinaryOperator minus = (a, b) -> a - b;
 
+    public static final String mulName = "mul";
     public static final IntBinaryOperator mul = (a, b) -> a * b;
 
+    public static final String divName = "div";
     public static final IntBinaryOperator div = (a, b) -> a / b;
 
-    public static final List<FunTuple> combinators = new ArrayList<>();
+    public static final List<BinaryFunDef> combinators = new ArrayList<>();
 
 
     private final SweeperLogic util;
@@ -53,14 +60,14 @@ public class PathCalculator {
 
 
     static {
-        combinators.add(new FunTuple(plus, minus));
-        combinators.add(new FunTuple(minus, plus));
-        combinators.add(new FunTuple(plus, plus));
-        combinators.add(new FunTuple(minus, minus));
-        combinators.add(new FunTuple(minus, mul));
-        combinators.add(new FunTuple(mul, minus));
-        combinators.add(new FunTuple(plus, mul));
-        combinators.add(new FunTuple(mul, plus));
+        combinators.add(new BinaryFunDef(plusName, minusName, new FunTuple(plus, minus)));
+        combinators.add(new BinaryFunDef(minusName, plusName, new FunTuple(minus, plus)));
+        combinators.add(new BinaryFunDef(plusName, plusName, new FunTuple(plus, plus)));
+        combinators.add(new BinaryFunDef(minusName, minusName, new FunTuple(minus, minus)));
+        combinators.add(new BinaryFunDef(minusName, mulName, new FunTuple(minus, mul)));
+        combinators.add(new BinaryFunDef(mulName, minusName, new FunTuple(mul, minus)));
+        combinators.add(new BinaryFunDef(plusName, mulName, new FunTuple(plus, mul)));
+        combinators.add(new BinaryFunDef(mulName, plusName, new FunTuple(mul, plus)));
     }
 
 
@@ -96,6 +103,7 @@ public class PathCalculator {
         while (!finish) {
             if (success) {
                 addToSet(path, result.buttonPoint(), true);
+                logger.logTrace(MINELOG_TRC_ID_00502, result.buttonPoint());
 
             }
             result = this.calculateAndSetNextPoint(nextPoint, endPoint);
@@ -107,30 +115,26 @@ public class PathCalculator {
 
 
 
-        logger.logDebug(LoggingID.MINELOG_ID_00005);
-        this.pathTrials.forEach(e -> logger.logDebug(LoggingID.MINELOG_ID_00007, e));
+        logger.logDebug(LoggingID.MINELOG_DEB_ID_00005);
+        this.pathTrials.forEach(e -> logger.logDebug(LoggingID.MINELOG_DEB_ID_00007, e));
         List<ButtonPoint> resultPath = new ArrayList<>(path);
 
         resultPath.add(endPoint);
-        logger.logDebug(LoggingID.MINELOG_ID_00006);
-        resultPath.forEach(e -> logger.logDebug(LoggingID.MINELOG_ID_00007, e));
+        logger.logDebug(LoggingID.MINELOG_DEB_ID_00006);
+        resultPath.forEach(e -> logger.logDebug(LoggingID.MINELOG_DEB_ID_00007, e));
         // TODO : change all this to LOGGING and throw Exceptions look for all occurrences of System/ println
         if(Labyrinth.reallyCheckCorrectPath(resultPath)) {
-            logger.logDebug(LoggingID.MINELOG_ID_00008);
+            logger.logDebug(LoggingID.MINELOG_DEB_ID_00008);
         } else {
-            logger.logDebug(LoggingID.MINELOG_ID_00009);
+            logger.logDebug(LoggingID.MINELOG_DEB_ID_00009);
 
         }
 
         return new PathResult(resultPath, this.mineAndTryCount, this.pathTrials);
     }
     public boolean isPathPoint(List<ButtonPoint> pointList, ButtonPoint compare) {
-        for (ButtonPoint point: pointList) {
-            if (point.equalsInPoint(compare.myPoint())) {
-                return true;
-            }
-        }
-        return false;
+        long count = pointList.stream().filter(e -> e.equalsInPoint(compare.myPoint())).count();
+        return (count > 0);
     }
 
 
@@ -172,11 +176,12 @@ public class PathCalculator {
         BPointPlusIndicator result = new BPointPlusIndicator(resultButton, Indicator.FOUND_NEXT, indicator);
 
         if (!indicator.success() && !this.pathTrials.contains(resultButton)) {
-            for (FunTuple tuple : combinators) {
+            for (BinaryFunDef binaryFunDef : combinators) {
+                FunTuple tuple = binaryFunDef.tuple();
                 addToSet(this.pathTrials, resultButton, false);
                 this.mineAndTryCount++;
                 resultButton = result.buttonPoint();
-                conditions = Conditions.instance(endPoint, lastButtonPoint, Indicator.FOUND_AFTER_ERROR);
+                conditions = Conditions.instance(endPoint,lastButtonPoint, Indicator.FOUND_AFTER_ERROR);
                 indicator = conditions.testConditions(resultButton);
                 if (indicator.success() && !this.pathTrials.contains(resultButton)) {
                     result = new BPointPlusIndicator(resultButton,
@@ -185,9 +190,9 @@ public class PathCalculator {
                     this.mineAndTryCount++;
                     break;
                 } else {
-                    result = new BPointPlusIndicator(calculateNextPointIntern(lastButtonPoint, tuple.first(), tuple.second()),
+                    result = new BPointPlusIndicator(calculateNextPointIntern(lastButtonPoint, binaryFunDef),
                             Indicator.FOUND_AFTER_ERROR, indicator);
-                    lastButtonPoint = resultButton;
+                    //lastButtonPoint = resultButton;
                 }
             }
         }
@@ -195,16 +200,18 @@ public class PathCalculator {
     }
 
     public ButtonPoint calculateNextPointIntern(ButtonPoint startPoint,
-                                                 IntBinaryOperator operatorX,
-                                                 IntBinaryOperator operatorY) {
+                                                BinaryFunDef operatorDef) {
 
+        // FunTuple operatorTuple = operatorDef.tuple();
         List<List<ButtonStatus>> fieldsList = this.getUtil().getFieldsList();
         Point nextPoint = calcFun(startPoint.myPoint().x(),
                 startPoint.myPoint().y(),
                 this.util.getCx(), this.util.getCy(),
-                operatorX, operatorY);
+                operatorDef);
+
         ButtonStatus description = fieldsList.get(nextPoint.y()).get(nextPoint.x());
         ButtonPoint resultButton = new ButtonPoint(nextPoint, description);
+        logger.logTrace(MINELOG_TRC_ID_00501, resultButton, startPoint, operatorDef);
         return resultButton;
     }
 
@@ -221,7 +228,10 @@ public class PathCalculator {
 
     }
 
-    public Point calcFun(int x, int y, int upperX, int upperY, IntBinaryOperator opX, IntBinaryOperator opY) {
+    public Point calcFun(int x, int y, int upperX, int upperY, BinaryFunDef funTupleDef) {
+        FunTuple funTuple = funTupleDef.tuple();
+        IntBinaryOperator opX = funTuple.first();
+        IntBinaryOperator opY = funTuple.second();
         int xResult;
         int yResult;
         if (opX.applyAsInt(x, 1) >= 0 && opX.applyAsInt(x, 1) < upperX) {
@@ -416,15 +426,17 @@ public class PathCalculator {
 
     }
 
+    public record BinaryFunDef(String firstOpName, String secondOpName, FunTuple tuple) {
+
+    }
+
     public record BPointPlusIndicator(ButtonPoint buttonPoint, Indicator indicator, SuccessIndicator successIndicator) {
 
     }
 
-    public record PathResult (List<ButtonPoint> path, Integer mineAndTryCount, List<ButtonPoint> pathTrials
+    public record PathResult (List<ButtonPoint> path, Integer mineAndTryCount, List<ButtonPoint> pathTrials) {
 
 
-
-    ) {
 
     }
 

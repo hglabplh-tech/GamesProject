@@ -52,7 +52,7 @@ public class Labyrinth  {
         this.pointsOrder = Arrays.asList(startPoint, firstBase, secondBase, endPoint);
         this.nextPoint = pointsOrder.get(this.nextIndex);
         this.actPoint = pointsOrder.get(0);
-        logger.logDebug(LoggingID.MINELOG_ID_00004, startPoint, firstBase, secondBase, endPoint);
+        logger.logDebug(LoggingID.MINELOG_DEB_ID_00004, startPoint, firstBase, secondBase, endPoint);
     }
 
     public void addXYToPath(Integer x, Integer y, ButtonStatus description) {
@@ -95,7 +95,7 @@ public class Labyrinth  {
 
                 success = true;
             } else {
-                logger.logDebug(LoggingID.MINELOG_ID_00010,
+                logger.logDebug(LoggingID.MINELOG_DEB_ID_00010,
                         actualPoint.myPoint(), nextPoint.myPoint());
                 success = false;
             }
