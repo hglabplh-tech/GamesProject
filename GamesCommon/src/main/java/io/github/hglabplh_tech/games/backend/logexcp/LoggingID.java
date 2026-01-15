@@ -16,6 +16,7 @@ public enum LoggingID {
 
     MINELOG_TRC_ID_00501(LogLevel.TRACE, "MINES", "Path trial at: %s // calculated from %s with %s"),
     MINELOG_TRC_ID_00502(LogLevel.TRACE, "MINES", "Path trial %s stored in path chain"),
+    MINELOG_TRC_ID_00503(LogLevel.TRACE, "MINES", "Path trial at: %s // calculated from %s"),
 
     MINELOG_TRC_ID_00511(LogLevel.TRACE, "MINES", "Path broken at %s"),
 

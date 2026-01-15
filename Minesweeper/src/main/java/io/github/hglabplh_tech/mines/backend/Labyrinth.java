@@ -50,7 +50,7 @@ public class Labyrinth  {
         this.secondBase = secondBase;
         this.endPoint = endPoint;
         this.pointsOrder = Arrays.asList(startPoint, firstBase, secondBase, endPoint);
-        this.nextPoint = pointsOrder.get(this.nextIndex);
+        this.nextPoint = calculateNextPoint();
         this.actPoint = pointsOrder.get(0);
         logger.logDebug(LoggingID.MINELOG_DEB_ID_00004, startPoint, firstBase, secondBase, endPoint);
     }
@@ -63,8 +63,12 @@ public class Labyrinth  {
         this.pathToNext.add(point);
     }
 
-    public void calculateNextPoint() {
-        this.nextPoint = this.pointsOrder.get(++this.nextIndex);
+    public ButtonPoint calculateNextPoint() {
+        if (this.nextIndex < pointsOrder.size() - 1) {
+            this.nextIndex++;
+            this.nextPoint = this.pointsOrder.get(this.nextIndex);
+        }
+        return this.nextPoint;
     }
 
     public ButtonPoint switchToNextBase(Integer x, Integer y) {
@@ -92,7 +96,6 @@ public class Labyrinth  {
             ButtonPoint nextPoint = iterator.next();
             index++;
             if (actualPoint.myPoint().checkPointIsNeighbor(nextPoint.myPoint())) {
-
                 success = true;
             } else {
                 logger.logDebug(LoggingID.MINELOG_DEB_ID_00010,

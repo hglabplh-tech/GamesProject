@@ -40,6 +40,7 @@ import io.github.hglabplh_tech.games.backend.config.PlayModes;
 import io.github.hglabplh_tech.games.backend.util.Point;
 
 import static io.github.hglabplh_tech.mines.backend.PathCalculator.*;
+import static io.github.hglabplh_tech.mines.backend.SweepPointType.*;
 import static io.github.hglabplh_tech.mines.gui.GUILogics.createPopupMenu;
 
 /*
@@ -217,8 +218,6 @@ public class Sweeper extends JPanel
                     case FIRST_BASE -> butt.setIcon(this.baseoneIcon);
                     case SECOND_BASE -> butt.setIcon(this.basetwoIcon);
                     case NORMALPOINT -> {
-
-
                         ButtonPoint actPoint = this.util.extractPointFromName(butt.getName());
                         if (calculator.isPathPoint(pathList, actPoint)) {
                             foundCount.getAndIncrement();
@@ -233,6 +232,9 @@ public class Sweeper extends JPanel
             });
             logger.logDebug(LoggingID.MINELOG_DEB_ID_00011, pathList.size(), foundCount.get());
             this.repaint();
+            DrawBackLabyrinth runnable = new DrawBackLabyrinth(this);
+            Thread drawBack = new Thread(runnable);
+            drawBack.start();
         }
     }
 
@@ -317,6 +319,48 @@ public class Sweeper extends JPanel
             this.statusPanel.incrementScoreValueBy(1);
         }
 
+    }
+
+    public static class DrawBackLabyrinth implements Runnable {
+
+        public static final String TEST_PATH_PROP = "skipDrawBack";
+
+        private final Sweeper sweeper;
+        private final ImageIcon startIcon;
+        private final ImageIcon endIcon;
+        private final ImageIcon baseoneIcon;
+        private final ImageIcon basetwoIcon;
+        private final ImageIcon questionIcon;
+        private final List<JButton> buttonList;
+        private final SweeperLogic util;
+
+        public DrawBackLabyrinth(Sweeper sweeper) {
+
+            this.sweeper = sweeper;
+            this.startIcon = sweeper.startIcon;
+            this.endIcon = sweeper.endIcon;
+            this.baseoneIcon = sweeper.baseoneIcon;
+            this.basetwoIcon = sweeper.basetwoIcon;
+            this.questionIcon = sweeper.questionIcon;
+            this.buttonList = sweeper.buttonList;
+            this.util = sweeper.util;
+        }
+
+        public void run() {
+            GUILogics.waitSeconds(7.7f);
+            if (!System.getProperty(TEST_PATH_PROP, "false").equals("true")) {
+                this.buttonList.forEach(butt -> {
+                    switch (this.util.extractPointType(butt.getName())) {
+                        case STARTPOINT -> butt.setIcon(this.startIcon);
+                        case ENDPOINT -> butt.setIcon(this.endIcon);
+                        case FIRST_BASE -> butt.setIcon(this.baseoneIcon);
+                        case SECOND_BASE -> butt.setIcon(this.basetwoIcon);
+                        default -> butt.setIcon(this.questionIcon);
+                    }
+                });
+                this.sweeper.repaint();
+            }
+        }
     }
 
 }

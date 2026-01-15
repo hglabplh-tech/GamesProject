@@ -29,8 +29,7 @@ import java.util.*;
 import java.util.function.IntBinaryOperator;
 import java.util.function.Predicate;
 
-import static io.github.hglabplh_tech.games.backend.logexcp.LoggingID.MINELOG_TRC_ID_00501;
-import static io.github.hglabplh_tech.games.backend.logexcp.LoggingID.MINELOG_TRC_ID_00502;
+import static io.github.hglabplh_tech.games.backend.logexcp.LoggingID.*;
 
 public class PathCalculator {
 
@@ -170,24 +169,24 @@ public class PathCalculator {
         ButtonStatus description = this.getUtil().getFieldsList().get(nextY).get(nextX);
         ButtonPoint lastButtonPoint = startPoint;
         ButtonPoint resultButton = new ButtonPoint(new Point(nextX, nextY), description);
+        logger.logTrace(MINELOG_TRC_ID_00503, resultButton, startPoint);
 
         Conditions conditions = Conditions.instance(endPoint, startPoint, Indicator.FOUND_NEXT);
         SuccessIndicator indicator = conditions.testConditions(resultButton);
         BPointPlusIndicator result = new BPointPlusIndicator(resultButton, Indicator.FOUND_NEXT, indicator);
 
         if (!indicator.success() && !this.pathTrials.contains(resultButton)) {
+            result = new BPointPlusIndicator(resultButton, Indicator.FOUND_AFTER_ERROR, indicator);
             for (BinaryFunDef binaryFunDef : combinators) {
                 FunTuple tuple = binaryFunDef.tuple();
                 addToSet(this.pathTrials, resultButton, false);
                 this.mineAndTryCount++;
                 resultButton = result.buttonPoint();
                 conditions = Conditions.instance(endPoint,lastButtonPoint, Indicator.FOUND_AFTER_ERROR);
-                indicator = conditions.testConditions(resultButton);
-                if (indicator.success() && !this.pathTrials.contains(resultButton)) {
+                if (correctPointCondition(startPoint, resultButton, conditions)) {
                     result = new BPointPlusIndicator(resultButton,
                             Indicator.FOUND_AFTER_ERROR, indicator);
                     addToSet(this.pathTrials, resultButton, false);
-                    this.mineAndTryCount++;
                     break;
                 } else {
                     result = new BPointPlusIndicator(calculateNextPointIntern(lastButtonPoint, binaryFunDef),
@@ -253,12 +252,14 @@ public class PathCalculator {
 
 
     // TODO: think about correctness
-    public boolean correctPointCondition(ButtonPoint startButton, ButtonPoint resultButton, Conditions conditions) {
-
+    public boolean correctPointCondition(ButtonPoint startButton,
+                                         ButtonPoint resultButton,
+                                         Conditions conditions) {
         SuccessIndicator indicator = conditions.testConditions(resultButton);
-        BPointPlusIndicator result = new BPointPlusIndicator(resultButton, Indicator.FOUND_NEXT, indicator);
-
-        return (!indicator.success() && (!this.pathTrials.contains(resultButton) || !resultButton.equalsInPoint(startButton.myPoint())));
+        return (indicator.success()
+                && (!this.labyrinth.getPointsOrder().contains(resultButton))
+                && (!this.pathTrials.contains(resultButton)
+                        || (!resultButton.equalsInPoint(startButton.myPoint()))));
     }
 
     public static class Conditions {
@@ -316,11 +317,7 @@ public class PathCalculator {
                                 && (e.myPoint()
                                 .compareNearerToEnd(pointNext.myPoint(),
                                         endPoint.myPoint())
-                                .xOtherNearer())
-                                || (e.myPoint()
-                                .compareNearerToEnd(pointNext.myPoint(),
-                                        endPoint.myPoint())
-                                .yOtherNearer())))),
+                                .bothNearer())))),
                         null,
                         (e -> !e.buttonStatus().isMine() && e.buttonStatus().pointType()
                                 .equals(endPoint.buttonStatus().pointType())
@@ -396,10 +393,10 @@ public class PathCalculator {
         @Override
         public boolean equals(Object o) {
             if (o == null || getClass() != o.getClass()) return false;
-            DecisionTree.SuccessIndicator that = (DecisionTree.SuccessIndicator) o;
-            return Objects.equals(success, that.success())
-                    && Objects.equals(finished, that.finished())
-                    && Objects.equals(indicator, that.indicator());
+            SuccessIndicator that = (SuccessIndicator) o;
+            return Objects.equals(this.success(), that.success())
+                    && Objects.equals(this.finished(), that.finished())
+                    && Objects.equals(this.indicator(), that.indicator());
         }
 
         @Override
@@ -410,9 +407,9 @@ public class PathCalculator {
         @Override
         public String toString() {
             return "SuccessIndicator{" +
-                    "success=" + success +
-                    ", finished=" + finished +
-                    ", indicator=" + indicator +
+                    "success=" + this.success() +
+                    ", finished=" + this.finished() +
+                    ", indicator=" + this.indicator() +
                     '}';
         }
     }
