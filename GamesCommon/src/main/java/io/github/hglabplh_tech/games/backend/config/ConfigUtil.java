@@ -97,17 +97,17 @@ public class ConfigUtil {
     public static Optional<String> getConfigValue(String configKey, String defaultValue) {
         Optional<Properties> userPropsOpt = loadUserProps();
         Optional<String> valOpt = Optional.empty();
-        if (userPropsOpt.isPresent()) {
-            Properties userProps = userPropsOpt.get();
-            valOpt = (userProps.getProperty(configKey) != null)
-                    ? Optional.of(userProps.getProperty(configKey))
-                    : Optional.empty();
+        if (System.getenv(configKey) != null){
+            valOpt = Optional.of(System.getenv(configKey));
         }
         if (System.getProperty(configKey) != null && valOpt.isEmpty()) {
             valOpt = Optional.of(System.getProperty(configKey));
         }
-        if (System.getenv(configKey) != null && valOpt.isEmpty()){
-                valOpt = Optional.of(System.getenv(configKey));
+        if (userPropsOpt.isPresent() && valOpt.isEmpty()) {
+            Properties userProps = userPropsOpt.get();
+            valOpt = (userProps.getProperty(configKey) != null)
+                    ? Optional.of(userProps.getProperty(configKey))
+                    : Optional.empty();
         }
         if (valOpt.isPresent()) {
             return valOpt;

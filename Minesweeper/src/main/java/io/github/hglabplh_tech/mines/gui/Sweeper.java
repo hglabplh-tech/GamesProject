@@ -74,7 +74,7 @@ public class Sweeper extends JPanel
 
     public Sweeper(Configuration.ConfigBean configBean, StatusPanel panel) {
         instance = this;
-        this.playMode = configBean.getMineConfig().getPlayMode();
+        this.playMode = configBean.mineConfig().getPlayMode();
         this.statusPanel = panel;
         this.mineIcon = GUILogics.createIcon("mine.png");
         this.bangIcon = GUILogics.createIcon("bang.png");
@@ -110,9 +110,9 @@ public class Sweeper extends JPanel
         this.statusPanel.resetCounterValueAndScore(this.playMode);
         this.statusPanel.switchShowButtonVisibility();
         this.util = new SweeperLogic(this.statusPanel.getPlayMode(),
-                configBean.getMineConfig().getGridCX(),
-                configBean.getMineConfig().getGridCY(),
-                configBean.getMineConfig().getMinesCount());
+                configBean.mineConfig().getGridCX(),
+                configBean.mineConfig().getGridCY(),
+                configBean.mineConfig().getMinesCount());
         List<List<ButtonStatus>> fieldsArray = buildFieldsArray();
         GridLayout grid = new GridLayout();
         grid.setVgap(3);

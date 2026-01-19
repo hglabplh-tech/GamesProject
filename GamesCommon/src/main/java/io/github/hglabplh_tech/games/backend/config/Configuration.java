@@ -28,6 +28,7 @@ import java.util.Properties;
 public class Configuration {
     public static final String LOGGING_PATH_KEY =   "log.logging.path";
     public static final String LOGGING_PATH_VAL;
+
     public static final String LOG_CONFIG_PATH_KEY =   "log.config.path";
     public static final String LOG_CONFIG_PATH_VAL;
 
@@ -53,6 +54,8 @@ public class Configuration {
     public static final String MINES_READY_PERCENT_VAL = "false";
 
     public static ConfigBean configBean = null;
+
+
 
 
     static {
@@ -116,17 +119,17 @@ public class Configuration {
             }
 
             public LogConfigBuilder configPath(String configPath) {
-                logConfig.configPath = configPath;
+                this.logConfig.configPath = configPath;
                 return this;
             }
 
             public LogConfigBuilder loggingPath(String loggingPath) {
-                logConfig.loggingPath = loggingPath;
+                this.logConfig.loggingPath = loggingPath;
                 return this;
             }
 
             public LogConfigBuilder minLevel(String minLevel) {
-                logConfig.minLevel = minLevel;
+                this.logConfig.minLevel = minLevel;
                 return this;
             }
 
@@ -263,39 +266,47 @@ public class Configuration {
 
         private final LogConfig logConfig;
 
+        private  Properties beanProperties;
+
         public ConfigBean () {
             Optional<Properties> props = ConfigUtil.loadUserProps();
             this.logConfig = new LogConfig();
             this.mineConfig = new MineConfig();
-            Properties toSave = props.orElse(new Properties());
+            beanProperties = props.orElse(new Properties());
 
-            toSave.setProperty(MINES_PLAYMODE_KEY, mineConfig.getPlayMode().getPlayModeName());
+            beanProperties.setProperty(MINES_PLAYMODE_KEY, mineConfig.getPlayMode().getPlayModeName());
 
-            toSave.setProperty(MINES_GRID_WIDTH_KEY,String.valueOf(mineConfig.getGridCX()));
+            beanProperties.setProperty(MINES_GRID_WIDTH_KEY,String.valueOf(mineConfig.getGridCX()));
 
-            toSave.setProperty(MINES_GRID_HEIGHT_KEY, String.valueOf(mineConfig.getGridCY()));
+            beanProperties.setProperty(MINES_GRID_HEIGHT_KEY, String.valueOf(mineConfig.getGridCY()));
 
-            toSave.setProperty(MINES_COUNT_KEY, String.valueOf(mineConfig.getMinesCount()));
+            beanProperties.setProperty(MINES_COUNT_KEY, String.valueOf(mineConfig.getMinesCount()));
 
-            toSave.setProperty(MINES_LEVELUP_KEY, String.valueOf(mineConfig.getLevelUp()));
+            beanProperties.setProperty(MINES_LEVELUP_KEY, String.valueOf(mineConfig.getLevelUp()));
 
-            toSave.setProperty(MINES_LEVELUP_KEY, String.valueOf(mineConfig.getStopAfterPercent()));
+            beanProperties.setProperty(MINES_LEVELUP_KEY, String.valueOf(mineConfig.getStopAfterPercent()));
 
-            toSave.setProperty(LOG_CONFIG_PATH_KEY, String.valueOf(logConfig.configPath()));
+            beanProperties.setProperty(LOG_CONFIG_PATH_KEY, String.valueOf(logConfig.configPath()));
 
-            toSave.setProperty(LOGGING_PATH_KEY, String.valueOf(logConfig.loggingPath()));
+            beanProperties.setProperty(LOGGING_PATH_KEY, String.valueOf(logConfig.loggingPath()));
 
-            toSave.setProperty(LOG_MIN_LEVEL_KEY, String.valueOf(logConfig.minLevel()));
+            beanProperties.setProperty(LOG_MIN_LEVEL_KEY, String.valueOf(logConfig.minLevel()));
 
-            ConfigUtil.saveUserPropsIfVerChanged(toSave);
+            ConfigUtil.saveUserPropsIfVerChanged(beanProperties);
         }
 
-        public LogConfig getLogConfig() {
+        public MineConfig mineConfig() {
+            return mineConfig;
+        }
+
+        public LogConfig logConfig() {
             return logConfig;
         }
 
-        public MineConfig getMineConfig() {
-            return mineConfig;
+        public Properties beanProperties() {
+            return beanProperties;
         }
+
+
     }
 }

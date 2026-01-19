@@ -53,7 +53,7 @@ public class StatusPanel extends JPanel implements ActionListener {
 
     public StatusPanel(Configuration.ConfigBean configBean) {
 
-        this.playMode = configBean.getMineConfig().getPlayMode();
+        this.playMode = configBean.mineConfig().getPlayMode();
 
         JLabel timerLabel = new JLabel("Time elapsed: ");
         this.timeValue = new JLabel("00");
@@ -62,7 +62,7 @@ public class StatusPanel extends JPanel implements ActionListener {
         JLabel scoreLabel = new JLabel("Score: ");
         this.scoreValue = new JLabel("0");
         JLabel minesCountLabel = new JLabel("Mines count: ");
-        this.minesCountValue = new JLabel(configBean.getMineConfig().getMinesCount().toString());
+        this.minesCountValue = new JLabel(configBean.mineConfig().getMinesCount().toString());
 
         this.restartButton = new JButton("Restart Game");
         this.restartButton.setBackground(Color.green);
