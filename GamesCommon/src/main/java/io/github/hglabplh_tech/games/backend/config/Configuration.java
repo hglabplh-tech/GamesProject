@@ -272,39 +272,39 @@ public class Configuration {
             Optional<Properties> props = ConfigUtil.loadUserProps();
             this.logConfig = new LogConfig();
             this.mineConfig = new MineConfig();
-            beanProperties = props.orElse(new Properties());
+            this.beanProperties = props.orElse(new Properties());
 
-            beanProperties.setProperty(MINES_PLAYMODE_KEY, mineConfig.getPlayMode().getPlayModeName());
+            this.beanProperties().setProperty(MINES_PLAYMODE_KEY, mineConfig.getPlayMode().getPlayModeName());
 
-            beanProperties.setProperty(MINES_GRID_WIDTH_KEY,String.valueOf(mineConfig.getGridCX()));
+            this.beanProperties().setProperty(MINES_GRID_WIDTH_KEY,String.valueOf(mineConfig.getGridCX()));
 
-            beanProperties.setProperty(MINES_GRID_HEIGHT_KEY, String.valueOf(mineConfig.getGridCY()));
+            this.beanProperties().setProperty(MINES_GRID_HEIGHT_KEY, String.valueOf(mineConfig.getGridCY()));
 
-            beanProperties.setProperty(MINES_COUNT_KEY, String.valueOf(mineConfig.getMinesCount()));
+            this.beanProperties().setProperty(MINES_COUNT_KEY, String.valueOf(mineConfig.getMinesCount()));
 
-            beanProperties.setProperty(MINES_LEVELUP_KEY, String.valueOf(mineConfig.getLevelUp()));
+            this.beanProperties().setProperty(MINES_LEVELUP_KEY, String.valueOf(mineConfig.getLevelUp()));
 
-            beanProperties.setProperty(MINES_LEVELUP_KEY, String.valueOf(mineConfig.getStopAfterPercent()));
+            this.beanProperties().setProperty(MINES_LEVELUP_KEY, String.valueOf(mineConfig.getStopAfterPercent()));
 
-            beanProperties.setProperty(LOG_CONFIG_PATH_KEY, String.valueOf(logConfig.configPath()));
+            this.beanProperties().setProperty(LOG_CONFIG_PATH_KEY, String.valueOf(logConfig.configPath()));
 
-            beanProperties.setProperty(LOGGING_PATH_KEY, String.valueOf(logConfig.loggingPath()));
+            this.beanProperties().setProperty(LOGGING_PATH_KEY, String.valueOf(logConfig.loggingPath()));
 
-            beanProperties.setProperty(LOG_MIN_LEVEL_KEY, String.valueOf(logConfig.minLevel()));
+            this.beanProperties().setProperty(LOG_MIN_LEVEL_KEY, String.valueOf(logConfig.minLevel()));
 
-            ConfigUtil.saveUserPropsIfVerChanged(beanProperties);
+            ConfigUtil.saveUserPropsIfVerChanged(this.beanProperties());
         }
 
         public MineConfig mineConfig() {
-            return mineConfig;
+            return this.mineConfig;
         }
 
         public LogConfig logConfig() {
-            return logConfig;
+            return this.logConfig;
         }
 
         public Properties beanProperties() {
-            return beanProperties;
+            return this.beanProperties;
         }
 
 

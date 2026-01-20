@@ -142,11 +142,12 @@ public class ConfigDialog extends JTabbedPane implements ActionListener, Propert
                     this.setAllFieldsEditability(true);
                 } else if (command.equals("saveconfig")) {
                     this.setAllFieldsEditability(false);
-                    ConfigUtil.saveUserProps(this.configBean.beanProperties());
+                    ConfigUtil.saveUserProps(this.configBean().beanProperties());
                 } else if (command.equals("cancelchangeconfig")) {
                     this.setAllFieldsEditability(false);
                 }
             }
+
         }
 
         private void setAllFieldsEditability(boolean editable) {
@@ -156,5 +157,20 @@ public class ConfigDialog extends JTabbedPane implements ActionListener, Propert
             this.minesCountValue().setEditable(editable);
         }
 
+        public JButton changeButton() {
+            return changeButton;
+        }
+
+        public JButton saveButton() {
+            return saveButton;
+        }
+
+        public JButton cancelChangeButton() {
+            return cancelChangeButton;
+        }
+    }
+
+    public BaseTab baseTab() {
+        return baseTab;
     }
 }
