@@ -401,7 +401,7 @@ public class DecisionTree {
         public static final Integer FINISHED = 0x02;
         public static final Integer FIN_SUCCESS = SUCCESSFUL + FINISHED;
         public static final Integer NOK = 0x10;
-
+        public static final Integer SUCCESSFUL_SECOND = 0x11;
 
         public SuccessIndicator(Boolean success, Boolean finished, Integer indicator) {
             this.success = success;

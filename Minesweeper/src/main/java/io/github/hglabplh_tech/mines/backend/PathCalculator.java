@@ -96,7 +96,7 @@ public class PathCalculator {
         List<ButtonPoint> path = new ArrayList<>();
         ButtonPoint nextPoint = startPoint;
         BPointPlusIndicator result = new BPointPlusIndicator(startPoint, Indicator.FOUND_NEXT,
-               new SuccessIndicator(true, false, SuccessIndicator.SUCCESSFUL));
+                new SuccessIndicator(true, false, SuccessIndicator.SUCCESSFUL));
         boolean finish = false;
         boolean success = true;
         while (!finish) {
@@ -113,7 +113,6 @@ public class PathCalculator {
         }
 
 
-
         logger.logDebug(LoggingID.MINELOG_DEB_ID_00005);
         this.pathTrials.forEach(e -> logger.logDebug(LoggingID.MINELOG_DEB_ID_00007, e));
         List<ButtonPoint> resultPath = new ArrayList<>(path);
@@ -122,7 +121,7 @@ public class PathCalculator {
         logger.logDebug(LoggingID.MINELOG_DEB_ID_00006);
         resultPath.forEach(e -> logger.logDebug(LoggingID.MINELOG_DEB_ID_00007, e));
         // TODO : change all this to LOGGING and throw Exceptions look for all occurrences of System/ println
-        if(Labyrinth.reallyCheckCorrectPath(resultPath)) {
+        if (Labyrinth.reallyCheckCorrectPath(resultPath)) {
             logger.logDebug(LoggingID.MINELOG_DEB_ID_00008);
         } else {
             logger.logDebug(LoggingID.MINELOG_DEB_ID_00009);
@@ -131,6 +130,7 @@ public class PathCalculator {
 
         return new PathResult(resultPath, this.mineAndTryCount, this.pathTrials);
     }
+
     public boolean isPathPoint(List<ButtonPoint> pointList, ButtonPoint compare) {
         long count = pointList.stream().filter(e -> e.equalsInPoint(compare.myPoint())).count();
         return (count > 0);
@@ -171,7 +171,7 @@ public class PathCalculator {
         ButtonPoint resultButton = new ButtonPoint(new Point(nextX, nextY), description);
         logger.logTrace(MINELOG_TRC_ID_00503, resultButton, startPoint);
 
-        Conditions conditions = Conditions.instance(endPoint, startPoint, Indicator.FOUND_NEXT);
+        Conditions conditions = Conditions.instance(startPoint, endPoint);
         SuccessIndicator indicator = conditions.testConditions(resultButton);
         BPointPlusIndicator result = new BPointPlusIndicator(resultButton, Indicator.FOUND_NEXT, indicator);
 
@@ -182,7 +182,7 @@ public class PathCalculator {
                 addToSet(this.pathTrials, resultButton, false);
                 this.mineAndTryCount++;
                 resultButton = result.buttonPoint();
-                conditions = Conditions.instance(endPoint,lastButtonPoint, Indicator.FOUND_AFTER_ERROR);
+                conditions = Conditions.instance(lastButtonPoint, endPoint);
                 if (correctPointCondition(startPoint, resultButton, conditions)) {
                     result = new BPointPlusIndicator(resultButton,
                             Indicator.FOUND_AFTER_ERROR, indicator);
@@ -257,9 +257,10 @@ public class PathCalculator {
                                          Conditions conditions) {
         SuccessIndicator indicator = conditions.testConditions(resultButton);
         return (indicator.success()
-                && (!this.labyrinth.getPointsOrder().contains(resultButton))
-                && (!this.pathTrials.contains(resultButton)
-                        || (!resultButton.equalsInPoint(startButton.myPoint()))));
+                && ((!this.labyrinth.getPointsOrder().contains(resultButton))
+                && (!this.pathTrials.contains(resultButton)))
+                || ((this.pathTrials.contains(resultButton)
+                && (resultButton.equalsInPoint(startButton.myPoint())))));
     }
 
     public static class Conditions {
@@ -290,14 +291,18 @@ public class PathCalculator {
 
         public SuccessIndicator testConditions(ButtonPoint value) {
             Boolean success = false;
+            int stepCount = 0;
             if (value != null) {
                 if (this.endCond() != null && this.nextOKCond() != null) {
                     success = this.nextOKCond().test(value);
-                } else if (this.endCond() != null && this.nextNotOKCond() != null) {
+                    stepCount++;
+                }
+                if (!success && this.endCond() != null && this.nextNotOKCond() != null) {
                     success = this.nextNotOKCond().test(value);
+                    stepCount++;
                 }
                 Boolean finished = this.endCond().test(value);
-                Integer indicator = findIndicator(success, finished);
+                Integer indicator = findIndicator(success, finished, stepCount);
                 return new SuccessIndicator(success,
                         finished, indicator);
             } else {
@@ -306,37 +311,28 @@ public class PathCalculator {
             }
         }
 
-        public static Conditions instance(ButtonPoint endPoint,
-                                          ButtonPoint pointNext, Indicator indicator) {
-            Conditions inst;
-            if (indicator == Indicator.FOUND_NEXT) {
-                inst = new Conditions((e ->
-                        (!e.buttonStatus().isMine()
-                                && (e.myPoint()
-                                .checkPointIsNeighbor(pointNext.myPoint())
-                                && (e.myPoint()
-                                .compareNearerToEnd(pointNext.myPoint(),
-                                        endPoint.myPoint())
-                                .bothNearer())))),
-                        null,
-                        (e -> !e.buttonStatus().isMine() && e.buttonStatus().pointType()
-                                .equals(endPoint.buttonStatus().pointType())
-                                && e.equals(endPoint)));
-            } else {
-                inst = new Conditions(null,
-                        (e -> !e.buttonStatus().isMine()
-                                && e.myPoint().checkPointIsNeighbor(pointNext.myPoint())),
+        public static Conditions instance(ButtonPoint pointNext, ButtonPoint endPoint) {
 
-                        (e -> !e.buttonStatus().isMine() && e.buttonStatus().pointType()
-                                .equals(endPoint.buttonStatus().pointType())
-                                && e.equals(endPoint)));
-            }
-            return inst;
+            return new Conditions((e ->
+                    (!e.buttonStatus().isMine()
+                            && (e.myPoint()
+                            .checkPointIsNeighbor(pointNext.myPoint())
+                            && (e.myPoint()
+                            .compareNearerToEnd(pointNext.myPoint(),
+                                    endPoint.myPoint())
+                            .bothNearer())))),
+
+                    (e -> !e.buttonStatus().isMine()
+                            && e.myPoint().checkPointIsNeighbor(pointNext.myPoint())),
+
+                    (e -> !e.buttonStatus().isMine() && e.buttonStatus().pointType()
+                            .equals(endPoint.buttonStatus().pointType())
+                            && e.equals(endPoint)));
         }
 
 
-        private Integer findIndicator(Boolean success, Boolean finished) {
-            Integer indicator = DecisionTree.SuccessIndicator.NOK;
+        private Integer findIndicator(Boolean success, Boolean finished, int stepCount) {
+            Integer indicator = 0;
             if (!success && finished) {
                 indicator = DecisionTree.SuccessIndicator.FINISHED;
             } else {
@@ -344,8 +340,16 @@ public class PathCalculator {
                     if (finished) {
                         indicator = DecisionTree.SuccessIndicator.FIN_SUCCESS;
                     } else {
-                        indicator = DecisionTree.SuccessIndicator.SUCCESSFUL;
+                        if (stepCount == 1) {
+                            indicator = DecisionTree.SuccessIndicator.SUCCESSFUL;
+                        } else if (stepCount == 2) {
+                            indicator = DecisionTree.SuccessIndicator.SUCCESSFUL_SECOND;
+                        } else {
+                            indicator = DecisionTree.SuccessIndicator.NOK;
+                        }
                     }
+                } else {
+                    indicator = DecisionTree.SuccessIndicator.NOK;
                 }
             }
             return indicator;
@@ -431,12 +435,10 @@ public class PathCalculator {
 
     }
 
-    public record PathResult (List<ButtonPoint> path, Integer mineAndTryCount, List<ButtonPoint> pathTrials) {
-
+    public record PathResult(List<ButtonPoint> path, Integer mineAndTryCount, List<ButtonPoint> pathTrials) {
 
 
     }
-
 
 
 }
