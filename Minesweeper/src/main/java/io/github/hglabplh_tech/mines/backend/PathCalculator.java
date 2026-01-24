@@ -96,13 +96,13 @@ public class PathCalculator {
         List<ButtonPoint> path = new ArrayList<>();
         ButtonPoint nextPoint = startPoint;
         BPointPlusIndicator result = new BPointPlusIndicator(startPoint, Indicator.FOUND_NEXT,
-                new SuccessIndicator(true, false, SuccessIndicator.SUCCESSFUL));
+                new SuccessIndicator(true, false, SuccessIndicator.SUCCESSFUL, 1));
         boolean finish = false;
         boolean success = true;
         while (!finish) {
             if (success) {
                 addToSet(path, result.buttonPoint(), true);
-                logger.logTrace(MINELOG_TRC_ID_00502, result.buttonPoint());
+                logger.logTrace(MINELOG_TRC_ID_00502, result.buttonPoint(), result.successIndicator().getSuccessCounter());
 
             }
             result = this.calculateAndSetNextPoint(nextPoint, endPoint);
@@ -304,10 +304,10 @@ public class PathCalculator {
                 Boolean finished = this.endCond().test(value);
                 Integer indicator = findIndicator(success, finished, stepCount);
                 return new SuccessIndicator(success,
-                        finished, indicator);
+                        finished, indicator, stepCount);
             } else {
                 return new SuccessIndicator(Boolean.FALSE,
-                        Boolean.FALSE, SuccessIndicator.NOK);
+                        Boolean.FALSE, SuccessIndicator.NOK, stepCount);
             }
         }
 
@@ -366,16 +366,19 @@ public class PathCalculator {
 
         private final Integer indicator;
 
+        private final Integer successCounter;
+
         public static final Integer SUCCESSFUL = 0x01;
         public static final Integer FINISHED = 0x02;
         public static final Integer FIN_SUCCESS = SUCCESSFUL + FINISHED;
         public static final Integer NOK = 0x10;
 
 
-        public SuccessIndicator(Boolean success, Boolean finished, Integer indicator) {
+        public SuccessIndicator(Boolean success, Boolean finished, Integer indicator, Integer successCounter) {
             this.success = success;
             this.finished = finished;
             this.indicator = indicator;
+            this.successCounter = successCounter;
         }
 
         public Boolean success() {
@@ -388,6 +391,18 @@ public class PathCalculator {
 
         public Boolean finished() {
             return this.finished;
+        }
+
+        public Integer getSuccessCounter() {
+            return this.successCounter;
+        }
+
+        public Boolean firstClassSuccess() {
+            return (success && (successCounter.equals(1)));
+        }
+
+        public Boolean secondClassSuccess() {
+            return (success && (successCounter.equals(2)));
         }
 
         public Boolean isFinishItem() {
