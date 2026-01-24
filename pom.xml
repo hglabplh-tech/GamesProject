@@ -11,6 +11,7 @@
     <modules>
         <module>GamesCommon</module>
         <module>Minesweeper</module>
+        <module>SinkingShips</module>
         <module>HTMLControls</module>
         <module>GamesGUI</module>
     </modules>
