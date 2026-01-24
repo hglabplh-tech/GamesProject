@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package io.github.hglabplh_tech.mines.gui;
 
+import io.github.hglabplh_tech.games.backend.util.ResourceHandler;
+
 import javax.swing.*;
 
 public class TimerThread implements Runnable {
@@ -32,7 +34,7 @@ public class TimerThread implements Runnable {
     }
     public void run() {
         while (true) {
-            GUILogics.waitSeconds(1.0f);
+            ResourceHandler.waitSeconds(1.0f);
             TimerThread.seconds--;
             timerLabel.setText(String.valueOf(getTheSeconds()));
         }

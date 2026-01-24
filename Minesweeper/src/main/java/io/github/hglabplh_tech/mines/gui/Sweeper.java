@@ -34,6 +34,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import io.github.hglabplh_tech.games.backend.logexcp.GameLogger;
 import io.github.hglabplh_tech.games.backend.logexcp.LoggingID;
+import io.github.hglabplh_tech.games.backend.util.ResourceHandler;
 import io.github.hglabplh_tech.mines.backend.*;
 import io.github.hglabplh_tech.games.backend.config.Configuration;
 import io.github.hglabplh_tech.games.backend.config.PlayModes;
@@ -76,16 +77,16 @@ public class Sweeper extends JPanel
         instance = this;
         this.playMode = configBean.mineConfig().getPlayMode();
         this.statusPanel = panel;
-        this.mineIcon = GUILogics.createIcon("mine.png");
-        this.bangIcon = GUILogics.createIcon("bang.png");
-        this.questionIcon = GUILogics.createIcon("question.png");
-        this.waterIcon = GUILogics.createIcon("ok.png");
-        this.startIcon = GUILogics.createIcon("start.png");
-        this.baseoneIcon = GUILogics.createIcon("baseone.png");
-        this.basetwoIcon = GUILogics.createIcon("basetwo.png");
-        this.endIcon = GUILogics.createIcon("finish.png");
-        this.purpleIcon = GUILogics.createIcon("crazy.png");
-        this.pathIcon = GUILogics.createIcon("path.png");
+        this.mineIcon = ResourceHandler.createIcon("mine.png");
+        this.bangIcon = ResourceHandler.createIcon("bang.png");
+        this.questionIcon = ResourceHandler.createIcon("question.png");
+        this.waterIcon =ResourceHandler.createIcon("ok.png");
+        this.startIcon = ResourceHandler.createIcon("start.png");
+        this.baseoneIcon = ResourceHandler.createIcon("baseone.png");
+        this.basetwoIcon = ResourceHandler.createIcon("basetwo.png");
+        this.endIcon = ResourceHandler.createIcon("finish.png");
+        this.purpleIcon = ResourceHandler.createIcon("crazy.png");
+        this.pathIcon = ResourceHandler.createIcon("path.png");
         JPopupMenu popupMenu = createPopupMenu();
         this.add(popupMenu);
         this.addMouseListener(new GameMouseListener(popupMenu));
@@ -183,7 +184,7 @@ public class Sweeper extends JPanel
                 }
             }
         });
-        GUILogics.playSound("the-explosion.wav");
+        ResourceHandler.playSound("the-explosion.wav");
     }
 
     private void labTimerOutThread(JButton source) {
@@ -198,7 +199,7 @@ public class Sweeper extends JPanel
         StatusPanel.getTimerThread().stop();
         this.buttonList.forEach(butt ->
                 butt.setIcon(this.waterIcon));
-        GUILogics.playSound("winning-bell.wav");
+        ResourceHandler.playSound("winning-bell.wav");
     }
 
     public void showPaths() {
@@ -281,9 +282,9 @@ public class Sweeper extends JPanel
                 if (!labyrinth.checkStepOrder()) {
                     source.setIcon(this.purpleIcon);
                     source.invalidate();
-                    GUILogics.playSound("alarm.wav");
-                    GUILogics.playSound("the-explosion.wav");
-                    GUILogics.waitSeconds(5L);
+                    ResourceHandler.playSound("alarm.wav");
+                    ResourceHandler.playSound("the-explosion.wav");
+                    ResourceHandler.waitSeconds(5L);
                     negativeEnd(name);
                 } else {
                     source.setIcon(this.waterIcon);
@@ -292,7 +293,7 @@ public class Sweeper extends JPanel
             } else {
                 source.setIcon(this.waterIcon);
             }
-            GUILogics.playSound("the-bell.wav");
+            ResourceHandler.playSound("the-bell.wav");
         }
         boolean positiveEnd = false;
         if (this.playMode.equals(PlayModes.NORMAL)) {
@@ -347,7 +348,7 @@ public class Sweeper extends JPanel
         }
 
         public void run() {
-            GUILogics.waitSeconds(7.7f);
+            ResourceHandler.waitSeconds(7.7f);
             if (!System.getProperty(TEST_PATH_PROP, "false").equals("true")) {
                 this.buttonList.forEach(butt -> {
                     switch (this.util.extractPointType(butt.getName())) {
