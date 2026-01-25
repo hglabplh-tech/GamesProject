@@ -1,4 +1,5 @@
 package io.github.hglabplh_tech.sinking.backend;
+import io.github.hglabplh_tech.games.backend.config.ShipPlayerMode;
 import io.github.hglabplh_tech.games.backend.logexcp.GameLogger;
 import io.github.hglabplh_tech.games.backend.logexcp.LoggingID;
 

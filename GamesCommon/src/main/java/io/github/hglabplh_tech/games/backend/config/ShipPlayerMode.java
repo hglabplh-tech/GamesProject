@@ -1,4 +1,4 @@
-package io.github.hglabplh_tech.sinking.backend;
+package io.github.hglabplh_tech.games.backend.config;
 
 public enum ShipPlayerMode {
     MACHINE_MACHINE("Machine against Machine"),
