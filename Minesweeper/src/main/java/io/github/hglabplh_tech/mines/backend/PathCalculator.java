@@ -29,7 +29,8 @@ import java.util.*;
 import java.util.function.IntBinaryOperator;
 import java.util.function.Predicate;
 
-import static io.github.hglabplh_tech.games.backend.logexcp.LoggingID.*;
+import static io.github.hglabplh_tech.games.backend.logexcp.LoggingID.MINELOG_TRC_ID_00501;
+import static io.github.hglabplh_tech.games.backend.logexcp.LoggingID.MINELOG_TRC_ID_00503;
 
 public class PathCalculator {
 
@@ -102,7 +103,7 @@ public class PathCalculator {
         while (!finish) {
             if (success) {
                 addToSet(path, result.buttonPoint(), true);
-                logger.logTrace(MINELOG_TRC_ID_00502, result.buttonPoint(), result.successIndicator().getSuccessCounter());
+                logger.logTrace(LoggingID.MINELOG_TRC_ID_00502, result.buttonPoint(), result.successIndicator().getSuccessCounter());
 
             }
             result = this.calculateAndSetNextPoint(nextPoint, endPoint);

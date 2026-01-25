@@ -19,32 +19,41 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package io.github.hglabplh_tech.mines.gui;
+package io.github.hglabplh_tech.sinking.backend;
 
-import io.github.hglabplh_tech.games.backend.util.GeneralUtils;
 
-import javax.swing.*;
+import io.github.hglabplh_tech.games.backend.util.Point;
 
-public class TimerThread implements Runnable {
-    private static long seconds = resetTimer();
-    private final JLabel timerLabel;
+import java.util.Objects;
 
-    public TimerThread(StatusPanel panel) {
-        this.timerLabel = panel.getTimerLabel();
-    }
-    public void run() {
-        while (true) {
-            GeneralUtils.waitSeconds(1.0f);
-            TimerThread.seconds--;
-            timerLabel.setText(String.valueOf(getTheSeconds()));
-        }
+public record ButtonPoint(Point myPoint, ButtonStatus buttonStatus)  {
+
+    @Override
+    public ButtonStatus buttonStatus() {
+        return buttonStatus;
     }
 
-    public static long resetTimer() {
-        TimerThread.seconds = 115;
-        return TimerThread.seconds;
+    public boolean equalsInPoint(Point point) {
+        return Objects.equals(myPoint(), point);
     }
-    public static long getTheSeconds() {
-        return TimerThread.seconds;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ButtonPoint that = (ButtonPoint) o;
+        return Objects.equals(myPoint(), that.myPoint()) && Objects.equals(buttonStatus(), that.buttonStatus());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(myPoint(), buttonStatus());
+    }
+
+    @Override
+    public String toString() {
+        return "ButtonPoint{" +
+                "myPoint=" + myPoint +
+                ", buttonStatus=" + buttonStatus +
+                '}';
     }
 }

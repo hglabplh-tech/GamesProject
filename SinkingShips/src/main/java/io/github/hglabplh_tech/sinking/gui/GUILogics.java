@@ -24,10 +24,7 @@ package io.github.hglabplh_tech.sinking.gui;
 import io.github.hglabplh_tech.games.backend.config.PlayModes;
 
 
-import javax.sound.sampled.*;
 import javax.swing.*;
-import java.io.File;
-import java.net.URL;
 
 import static java.awt.event.KeyEvent.*;
 

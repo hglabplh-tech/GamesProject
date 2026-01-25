@@ -1,4 +1,4 @@
-package io.github.hglabplh_tech.games.backend.config;
+package io.github.hglabplh_tech.backend.config;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

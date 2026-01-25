@@ -23,14 +23,8 @@ package io.github.hglabplh_tech.mines.gui;
 
 import io.github.hglabplh_tech.games.backend.config.Configuration;
 import io.github.hglabplh_tech.games.backend.config.PlayModes;
-import io.github.hglabplh_tech.mines.backend.SweeperLogic;
 
-import javax.sound.sampled.*;
 import javax.swing.*;
-import java.awt.*;
-
-import java.io.File;
-import java.net.URL;
 
 
 import static java.awt.event.KeyEvent.*;

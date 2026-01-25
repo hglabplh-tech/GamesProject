@@ -26,7 +26,7 @@ import javax.swing.*;
 import java.io.File;
 import java.net.URL;
 
-public class ResourceHandler {
+public class GeneralUtils {
 
     /**
      * This method creates an ImageIcon out of a given valid graphics file like PNG,JPG,GIF
@@ -34,7 +34,7 @@ public class ResourceHandler {
      * @return returns the loaded image-icon
      */
     public static ImageIcon createIcon(String fname) {
-        URL imgURL = ResourceHandler.class.getResource("/images/" + fname);
+        URL imgURL = GeneralUtils.class.getResource("/images/" + fname);
         if (imgURL != null) {
             ImageIcon icon = new ImageIcon(imgURL);
             return icon;
@@ -53,7 +53,7 @@ public class ResourceHandler {
         // Po0sted by tschwab, modified by community. See post 'Timeline' for change history
         // Retrieved 2025-11-29, License - CC BY-SA 3.0 - used with changes
         try {
-            URL wavURL = ResourceHandler.class.getResource("/sounds/" + fname);
+            URL wavURL = GeneralUtils.class.getResource("/sounds/" + fname);
             File yourFile = new File(wavURL.toURI());
             AudioInputStream stream;
             AudioFormat format;

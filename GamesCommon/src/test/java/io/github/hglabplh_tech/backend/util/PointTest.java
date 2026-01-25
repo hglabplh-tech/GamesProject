@@ -1,5 +1,6 @@
-package io.github.hglabplh_tech.games.backend.util;
+package io.github.hglabplh_tech.backend.util;
 
+import io.github.hglabplh_tech.games.backend.util.Point;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

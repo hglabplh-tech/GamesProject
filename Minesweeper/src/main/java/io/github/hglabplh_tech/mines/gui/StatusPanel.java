@@ -23,9 +23,8 @@ package io.github.hglabplh_tech.mines.gui;
 
 import io.github.hglabplh_tech.games.backend.config.Configuration;
 import io.github.hglabplh_tech.games.backend.config.PlayModes;
-import io.github.hglabplh_tech.games.backend.util.ResourceHandler;
+import io.github.hglabplh_tech.games.backend.util.GeneralUtils;
 
-import javax.print.attribute.standard.JobName;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -153,7 +152,7 @@ public class StatusPanel extends JPanel implements ActionListener {
             this.getCounterValue().setText("0");
             timerThread.stop();
             timerThread = new Thread(new TimerThread(this));
-            ResourceHandler.waitSeconds(1);
+            GeneralUtils.waitSeconds(1);
             TimerThread.resetTimer();
             timerThread.start();
             String command = e.getActionCommand();
